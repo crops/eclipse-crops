@@ -18,19 +18,31 @@ If a given project (module in the parent pom) has sub-children, they would each 
 4. Click next
 5. Select "Github projects".
 6. Click the "plus" icon to add a project file.
-7. Enter "http://github.com/crops:8888/todor/eclipse-crops/blob/timo/eclipse-crops-maven/releng/CROPS.setup" into the Resource URI box.
-8. A new "CROPS" project should now be added under ```<User>```. Click on it and install.
-9. The Ooomp installer will now download and install all the required plugins and jar files and create an eclipse instance to run it.
-10. If you deselected "Bundle Pools", you would also get your own "p2" repository in the newly created environment. This allows you to develop in more than one version of Eclipse.
+7. Click on the Browse... button and enter "https://raw.githubusercontent.com/crops/eclipse-crops/deprecated-eclipse-crops-mars/releng/CROPS.setup" into the File box.
+8. Wait a little bit while Oomph scans the file.
+9. Click Ok to exit the file browser dialog.
+10. A new "CROPS" project should now be added under ```<User>```. Select it and click Next.
+11. The Ooomp installer will now download and install all the required plugins and jar files and create an eclipse instance.
+12. Click Finish to launch it.
+
+> NOTE: If you deselected "Bundle Pools", you would also get your own "p2" repository in the newly created environment. This allows you to develop in more than one version of Eclipse.
 
 Once the installer has finished downloading, it should launch the new Eclipse environment for you. If we had it all figured out already, it would also have downloaded the ```eclipse-crops``` plugin source and imported the projects into your workspace. We don't have it all figured out already.
 
 ### How to import the projects into your workspace (the semi-automatic Egit way)
-1. Click on Workbench in the start up splash screen.
-2. In the Perspective menu, choose Git.
-3. In the Git Explorer view, choose "Clone a git respository and add it to this view"
-4. <Do the thing that makes Egit import the projects for you>
-5. In the Perspective menu, choose Plug-in Development.
+1. Choose a workspace.
+2. Enjoy the splash screen.
+3. Click on Workbench in the start up Welcome screen.
+4. In the Perspective menu, choose Git.
+5. In the Git Explorer view, choose "Clone a git respository"
+6. In the dialog box, enter "https://github.com/crops/eclipse-crops.git"
+7. It should also populate your credentials if you have Git configured to do so in your environment.
+8. Click next. Click deselect all. Click checkbox to choose the branch you want (currently ```timo/eclipse-crops-maven```)
+9. Choose a location to clone into. In the Projects group, click the checkbox for "Import all existing Eclipse projects after clone finishes"
+10. Egit will clone the repository and Eclipse will import the projects and build the workspace. Magic.
+11. In the Perspective menu, choose Plug-in Development.
+12. Bask in the glory of your new workspace.
+
 
 ### How to build the projects using m2e/Tycho inside Eclipse
 
