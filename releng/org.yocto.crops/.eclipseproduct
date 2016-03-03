@@ -1,0 +1,4 @@
+name=CROPS Development System
+id=org.yocto.crops
+version=0.2.0
+feature.default.id=org.yocto.crops

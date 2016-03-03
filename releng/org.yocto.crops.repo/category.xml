@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <category-def name="main" label="CROPS Main Features"/>
+   <category-def name="extra" label="CROPS Optional Features"/>
+   <category-def name="preview" label="CROPS Preview Features"/>
+   <feature url="features/org.yocto.crops_0.0.0.qualifier.jar" id="org.yocto.crops" version="0.0.0">
+      <category name="main"/>
+   </feature>
+   <feature url="features/org.yocto.crops.core_0.0.0.qualifier.jar" id="org.yocto.crops.core" version="0.0.0">
+      <category name="main"/>
+   </feature>
+   <feature url="features/org.yocto.crops.core.source_0.0.0.qualifier.jar" id="org.yocto.crops.core.source" version="0.0.0">
+      <category name="main"/>
+   </feature>
+   <feature url="features/org.yocto.crops.docker.launcher_0.0.0.qualifier.jar" id="org.yocto.crops.docker.launcher" version="0.0.0">
+      <category name="main"/>
+   </feature>
+   <feature url="features/org.yocto.crops.docker.launcher.source_0.0.0.qualifier.jar" id="org.yocto.crops.docker.launcher.source" version="0.0.0">
+      <category name="main"/>
+   </feature>
+   <feature url="features/org.yocto.crops.dsf.gdb_0.0.0.qualifier.jar" id="org.yocto.crops.dsf.gdb" version="0.0.0">
+      <category name="main"/>
+   </feature>
+   <feature url="features/org.yocto.crops.dsf.gdb.source_0.0.0.qualifier.jar" id="org.yocto.crops.dsf.gdb.source" version="0.0.0">
+      <category name="main"/>
+   </feature>
+   <feature url="features/org.yocto.crops.zephyr_0.0.0.qualifier.jar" id="org.yocto.crops.zephyr" version="0.0.0">
+      <category name="extra"/>
+   </feature>
+   <feature url="features/org.yocto.crops.zephyr.source_0.0.0.qualifier.jar" id="org.yocto.crops.zephyr.source" version="0.0.0">
+      <category name="extra"/>
+   </feature>
+</site>

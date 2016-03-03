@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.yocto.crops</groupId>
+		<artifactId>crops-parent</artifactId>
+		<version>0.2.0-SNAPSHOT</version>
+		<relativePath>../../pom.xml</relativePath>
+	</parent>
+
+	<version>0.2.0-SNAPSHOT</version>
+	<artifactId>org.yocto.crops.repo</artifactId>
+	<packaging>eclipse-repository</packaging>
+	
+	<build>
+		<finalName>${project.artifactId}</finalName>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>production</id>
+			<properties>
+				<crops-download-dir>/store/crops/eclipse-plugin/${repo-path}</crops-download-dir>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.8</version>
+						<executions>
+							<execution>
+								<phase>verify</phase>
+								<configuration>
+									<target>
+										<!-- first modify the artifacts.jar file -->
+										<!-- note that our zip file is already generated and won't have nor needs this change -->
+										<copy file="p2.xsl" todir="${project.build.directory}"/>
+										<copy file="antArtifactsUpdater.xml" todir="${project.build.directory}"/>
+										<ant antfile="${project.build.directory}/antArtifactsUpdater.xml"/>
+
+										<!-- now promote the update build to our download area -->
+									 	<delete dir="${crops-download-dir}"/>
+										<copy includeemptydirs="false" todir="${crops-download-dir}">
+											<fileset dir="target/repository">
+												<include name="**" />
+											</fileset>
+										</copy>
+
+										<!-- remove the packed files from the zip file to make it smaller -->
+										<unzip src="target/org.yocto.crops.repo.zip" dest="target/tmp"/>
+										<delete file="target/org.yocto.crops.repo.zip"/>
+										<delete>
+											<fileset dir="target/tmp">
+												<include name="plugins/*.pack.gz"/>
+											</fileset>
+										</delete>
+										<zip destfile="target/org.yocto.crops.repo.zip">
+											<fileset dir="target/tmp">
+												<include name="**"/>
+											</fileset>
+										</zip>
+									 	<delete dir="target/tmp"/>
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

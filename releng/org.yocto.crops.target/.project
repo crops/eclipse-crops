@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>org.yocto.crops.target</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.m2e.core.maven2Builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.m2e.core.maven2Nature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>CROPS.setup</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/CROPS.setup</locationURI>
+		</link>
+		<link>
+			<name>parent-pom.xml</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/pom.xml</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>

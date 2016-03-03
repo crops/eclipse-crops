@@ -1,0 +1,9 @@
+a#crops img { background-image : url(graphics/obj_48/crops_logo_icon.png); }
+a#crops:hover img { background-image : url(graphics/obj_48/crops_logo_icon.png); }
+
+a#hello-world-crops img { background-image : url(graphics/obj_48/crops_logo_icon.png); }
+a#hello-world-crops:hover img { background-image : url(graphics/obj_48/crops_logo_icon.png); }
+
+body {
+	background-image : url(../../org.eclipse.platform/css/graphics/contentpage/overview_wtr.jpg);
+}
