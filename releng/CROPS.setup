@@ -143,11 +143,11 @@
         <repositoryList
             name="Mars">
           <repository
-              url="http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository/"/>
+              url="http://download.eclipse.org/tools/orbit/downloads/drops/R20160221192158/repository/"/>
           <repository
               url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
           <repository
-              url="http://download.eclipse.org/tm/updates/3.6milestones"/>
+              url="http://download.eclipse.org/tm/updates/2.0/"/>
           <repository
               url="http://download.eclipse.org/eclipse/updates/4.5/"/>
           <repository
