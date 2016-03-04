@@ -67,7 +67,7 @@
       name="CROPS"
       version="0.2"
       location="${workspace.location/../api.baseline}"
-      remoteURI="http://github.com/crops/eclipse-crops/releases/0.2/eclipse-crops-0.2.0.zip"/>
+      remoteURI="https://crops.github.io/eclipse-crops/releases/0.2/eclipse-crops-0.2.0.zip"/>
   <setupTask
       xsi:type="setup:VariableTask"
       id="git.clone.crops.location"

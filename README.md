@@ -21,13 +21,14 @@ If a given project (module in the parent pom) has sub-children, they would each 
 7. Click on the Browse... button and enter "https://raw.githubusercontent.com/crops/eclipse-crops/deprecated-eclipse-crops-mars/releng/CROPS.setup" into the File box.
 8. Wait a little bit while Oomph scans the file.
 9. Click Ok to exit the file browser dialog.
-10. A new "CROPS" project should now be added under ```<User>```. Select it and click Next.
-11. The Ooomp installer will now download and install all the required plugins and jar files and create an eclipse instance.
-12. Click Finish to launch it.
+10. A new "CROPS" project should now be added under ```<User>```. Either select it and click on the down arrow in the Catalog box below or double-click on it.
+11. Click Finish.
+12. The Ooomp installer will now download and install all the required plugins and jar files and create an eclipse instance.
+13. It will also create a new workspace and perform a git clone of the CROPS plugin projects and import them.
 
 > NOTE: If you deselected "Bundle Pools", you would also get your own "p2" repository in the newly created environment. This allows you to develop in more than one version of Eclipse.
 
-Once the installer has finished downloading, it should launch the new Eclipse environment for you. If we had it all figured out already, it would also have downloaded the ```eclipse-crops``` plugin source and imported the projects into your workspace. We don't have it all figured out already.
+Once the installer has finished downloading, it should launch the new Eclipse environment for you. It should also download the ```eclipse-crops``` plugin source and import the projects into your workspace. At the bottom of the eclipse window that launched you should see a green and yellow arrows that look like a yin-yang. They will spin while it is updating/downloading. If all goes well you should see a green check mark. If there is a problem with the *.setup file or the downloads or your proxies, you will instead see a red 'X'.
 
 ### How to import the projects into your workspace (the semi-automatic Egit way)
 1. Choose a workspace.
