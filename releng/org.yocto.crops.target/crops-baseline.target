@@ -3,8 +3,7 @@
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.yocto.crops.feature.group" version="0.0.0"/>
-<unit id="org.yocto.crops.docker.launcher.feature.group" version="0.0.0"/>
-<repository location="http://github.com/crops/eclipse-plugin/latest/"/>
+<repository location="https://crops.github.io/eclipse-crops/latest"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <repository location="http://download.eclipse.org/releases/mars"/>

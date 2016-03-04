@@ -61,7 +61,6 @@
       name="eclipse.target.platform"
       defaultValue="Mars"
       storageURI="scope://Workspace"/>
-<!--
   <setupTask
       xsi:type="pde:APIBaselineTask"
       id="baseline"
@@ -69,7 +68,6 @@
       version="0.2"
       location="${workspace.location/../api.baseline}"
       remoteURI="http://github.com/crops/eclipse-crops/releases/0.2/eclipse-crops-0.2.0.zip"/>
--->
   <setupTask
       xsi:type="setup:VariableTask"
       id="git.clone.crops.location"
