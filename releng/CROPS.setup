@@ -135,6 +135,24 @@
             name="org.eclipse.remote.feature.group"/>
         <requirement
             name="org.eclipse.license.feature.group"/>
+	<requirement
+	    name="com.google.gson" />
+	<requirement
+	    name="org.eclipse.remote.serial.feature.group" />
+        <requirement
+	    name="org.eclipse.remote.console.feature.group" />
+	<requirement
+	    name="org.eclipse.tm.terminal.control" />
+	<requirement
+	    name="org.eclipse.launchbar.feature.group" />
+	<requirement
+	    name="org.eclipse.linuxtools.docker.feature.feature.group" />
+<!--
+	<requirement
+	    name="org.freemarker" />
+-->
+	<requirement
+	    name="org.antlr.runtime" />
         <sourceLocator
             rootFolder="${git.clone.crops.location}"
             locateNestedProjects="true"/>
@@ -145,13 +163,19 @@
           <repository
               url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
           <repository
-              url="http://download.eclipse.org/tm/updates/2.0/"/>
+              url="http://download.eclipse.org/tm/updates/4.0/"/>
+	  <repository
+	      url="http://download.eclipse.org/releases/mars/"/>
           <repository
               url="http://download.eclipse.org/eclipse/updates/4.5/"/>
           <repository
               url="http://download.eclipse.org/tools/ptp/builds/remote/2.0.0"/>
           <repository
               url="http://download.eclipse.org/cbi/updates/license"/>
+	  <repository
+	      url="http://download.eclipse.org/tm/terminal/builds/development/nightly/" />
+	  <repository
+              url="https://hudson.eclipse.org/cdt/job/launchbar-master/lastSuccessfulBuild/artifact/repo/target/repository/"/>
         </repositoryList>
       </targlet>
     </setupTask>
