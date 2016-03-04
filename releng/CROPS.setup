@@ -61,6 +61,7 @@
       name="eclipse.target.platform"
       defaultValue="Mars"
       storageURI="scope://Workspace"/>
+<!--
   <setupTask
       xsi:type="pde:APIBaselineTask"
       id="baseline"
@@ -68,17 +69,18 @@
       version="0.2"
       location="${workspace.location/../api.baseline}"
       remoteURI="http://github.com/crops/eclipse-crops/releases/0.2/eclipse-crops-0.2.0.zip"/>
+-->
   <setupTask
       xsi:type="setup:VariableTask"
       id="git.clone.crops.location"
-      name="git.clone.crops.location"
-      defaultValue="http://github.com/crops/eclipse-crops.git"/>
-  <stream name="master">
+      name="Git Clone Location"
+      defaultValue="${workspace.location/../git}"/>
+  <stream name="timo/eclipse-crops-maven">
     <setupTask
         xsi:type="git:GitCloneTask"
         id="git.clone.crops"
         remoteURI="eclipse-crops"
-        checkoutBranch="zephyr-demo">
+        checkoutBranch="timo/eclipse-crops-maven">
       <annotation
           source="http://www.eclipse.org/oomph/setup/InducedChoices">
         <detail
