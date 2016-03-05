@@ -136,17 +136,19 @@
         <requirement
             name="org.eclipse.license.feature.group"/>
 	<requirement
-	    name="com.google.gson" />
+	    name="com.google.gson"/>
 	<requirement
-	    name="org.eclipse.remote.serial.feature.group" />
+	    name="org.eclipse.remote.serial.feature.group"/>
         <requirement
-	    name="org.eclipse.remote.console.feature.group" />
+	    name="org.eclipse.remote.console.feature.group"/>
 	<requirement
-	    name="org.eclipse.tm.terminal.control" />
+	    name="org.eclipse.tm.terminal.control"/>
 	<requirement
-	    name="org.eclipse.launchbar.feature.group" />
+	    name="org.eclipse.launchbar.feature.group"/>
 	<requirement
-	    name="org.eclipse.linuxtools.docker.feature.feature.group" />
+	    name="org.eclipse.linuxtools.docker.feature.feature.group"/>
+	<requirement
+	    name="org.eclipse.m2e.feature.feature.group"/>
 <!--
 	<requirement
 	    name="org.freemarker" />

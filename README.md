@@ -21,7 +21,8 @@ If a given project (module in the parent pom) has sub-children, they would each 
 7. Click on the Browse... button and enter "https://raw.githubusercontent.com/crops/eclipse-crops/deprecated-eclipse-crops-mars/releng/CROPS.setup" into the File box.
 8. Wait a little bit while Oomph scans the file.
 9. Click Ok to exit the file browser dialog.
-10. A new "CROPS" project should now be added under ```<User>```. Either select it and click on the down arrow in the Catalog box below or double-click on it.
+10. A new "CROPS" project should now be added under ```<User>```. Either select it and ***click on the down arrow in the Catalog box below*** or double-click on it.
+10. *** Click on the Show All Variables checkbox and verify the URI for the Git repo is correct ***
 11. Click Finish.
 12. The Ooomp installer will now download and install all the required plugins and jar files and create an eclipse instance.
 13. It will also create a new workspace and perform a git clone of the CROPS plugin projects and import them.
@@ -30,6 +31,7 @@ If a given project (module in the parent pom) has sub-children, they would each 
 
 Once the installer has finished downloading, it should launch the new Eclipse environment for you. It should also download the ```eclipse-crops``` plugin source and import the projects into your workspace. At the bottom of the eclipse window that launched you should see a green and yellow arrows that look like a yin-yang. They will spin while it is updating/downloading. If all goes well you should see a green check mark. If there is a problem with the *.setup file or the downloads or your proxies, you will instead see a red 'X'.
 
+*** You shouldn't need to do the following, but keep it for info ***
 ### How to import the projects into your workspace (the semi-automatic Egit way)
 1. Choose a workspace.
 2. Enjoy the splash screen.
