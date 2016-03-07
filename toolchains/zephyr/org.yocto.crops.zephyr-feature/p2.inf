@@ -1,0 +1,3 @@
+instructions.configure=\
+org.eclipse.equinox.p2.touchpoint.eclipse.addRepository(location:https${#58}//crops.github.io/eclipse-crops/releases/0.2,type:0,name:CROPS,enabled:false); \
+org.eclipse.equinox.p2.touchpoint.eclipse.addRepository(location:https${#58}//crops.github.io/eclipse-crops/releases/0.2,type:1,name:CROPS,enabled:false); 

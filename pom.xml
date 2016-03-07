@@ -276,6 +276,10 @@
 		<module>remote/org.eclipse.cdt.remote-feature</module>
 	-->
 				
+		<module>toolchains/zephyr/org.yocto.crops.zephyr</module>
+		<module>toolchains/zephyr/org.yocto.crops.zephyr.source-feature</module>
+		<module>toolchains/zephyr/org.yocto.crops.zephyr-feature</module>
+
 	<!--		
 		<module>toolchains/arduino/org.eclipse.cdt.arduino.core</module>
 		<module>toolchains/arduino/org.eclipse.cdt.arduino.ui</module>

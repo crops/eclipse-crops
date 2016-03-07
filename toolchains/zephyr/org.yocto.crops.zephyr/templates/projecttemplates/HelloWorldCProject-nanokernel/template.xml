@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<template type="ProjTempl" version="1.0" supplier="Intel" revision="1.0" author="Zephyr contributors"
+		copyright="Copyright (c) 2016 Intel Corporation and others. All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available athttp://www.eclipse.org/legal/epl-v10.html"
+		id="HelloWorldCProject-nanokernel" label="%HelloWorld.CNanokerneltemplate.label" description="%HelloWorld.CNanokerneltemplate.description"
+		 help="help.html">
+
+	<property-group id="basics" label="%HelloWorld.basics.label" description="%HelloWorld.basics.description" type="PAGES-ONLY" help="help.html">
+		<property id="author"
+			label="%HelloWorld.author.label"
+			description="%HelloWorld.author.description"
+			type="input"
+			pattern=".*"
+			default="$(user.name)"
+			hidden="false"
+			persist="true"/>
+		<property id="copyright"
+			label="%HelloWorld.copyright.label"
+			description="%HelloWorld.copyright.description"
+			type="input"
+			pattern=".*"
+			default="%HelloWorld.copyright.default"
+			hidden="false"
+			persist="true"/>
+		<property id="message"
+			label="%HelloWorld.message.label"
+			description="%HelloWorld.message.description"
+			type="input"
+			pattern=".*"
+			default="%HelloWorld.message.default"
+			hidden="false"
+			persist="true"/>
+		<property id="sourceDir" label="%HelloWorld.sourceDir.label"
+			description="%HelloWorld.sourceDir.description" type="input"
+			default="%HelloWorld.sourceDir.default" pattern="[a-zA-Z0-9]+"
+			mandatory="false" persist="true" hidden="true" />
+	</property-group>
+	
+<!-- 	<property-group id="crops" label="%HelloWorld.crops.label" description="%HelloWorld.crops.description" type="PAGES-ONLY" help="help.html">
+		<property 	id="ceedExec"
+			      	label="%HelloWorld.ceedExec.label"
+			      	description="%HelloWorld.ceedExec.description"
+			      	type="input"
+			      	default="${ceed}"
+			      	pattern=".*"
+			      	mandatory="false"
+			      	persist="true"
+			      	/>
+		<property	id="cropsRoot"
+	  				label="%HelloWorld.cropsRoot.label"
+					description="%HelloWorld.cropsRoot.description"
+					type="input"
+					default="${crops_root}"
+					pattern=".*"
+					/>
+	 	<property 	id="toolchainContainerId"
+	 				label="%HelloWorld.toolchainContainerId.label"
+					description="%HelloWorld.toolchainContainerId.description"
+					type="select"
+					default="0">
+					TODO: inject these dynamically from 'ceed -l'
+					<item value="crops/zephyr:0.7.1"
+						  label="crops/zephyr:0.7.1"
+					/>
+					<item value="crops/toolchain:i586"
+						  label="crops/toolchain:i586"
+					/>
+		</property>
+	</property-group>
+ -->
+	<process type="org.eclipse.cdt.core.CreateSourceFolder">
+		<simple name="projectName" value="$(projectName)"/>
+		<simple name="path" value="$(sourceDir)"/>
+	</process>
+
+	<process type="org.eclipse.cdt.core.AddFiles">
+		<simple name="projectName" value="$(projectName)"/>
+		<complex-array name="files">
+ 			<element>
+				<simple name="source" value="src/main.c"/>
+				<simple name="target" value="$(sourceDir)/$(projectName).c"/>
+				<simple name="replaceable" value="true"/>
+			</element>
+			<element>
+				<simple name="source" value="src/Makefile"/>
+				<simple name="target" value="$(sourceDir)/Makefile"/>
+				<simple name="replaceable" value="true"/>
+			</element>
+			<element>
+				<simple name="source" value="Makefile"/>
+				<simple name="target" value="Makefile"/>
+				<simple name="replaceable" value="true"/>
+			</element>
+			<element>
+				<simple name="source" value="prj.conf"/>
+				<simple name="target" value="prj.conf"/>
+				<simple name="replaceable" value="true"/>
+			</element>
+			<element>
+				<simple name="source" value="README.txt"/>
+				<simple name="target" value="README.txt"/>
+				<simple name="replaceable" value="true"/>
+			</element>
+		</complex-array>
+	</process>
+	
+	<!-- prefix is the bundle name, not the fully qualified class name -->
+	<!-- Always triple check the spelling... there is no validation check -->
+	<process type="org.yocto.crops.zephyr.CeedGitCloneZephyrSourceFolder">
+		<simple name="projectName" value="$(projectName)" />
+		<simple name="location" value="$(location)" /> 
+		<simple name="gitURI" value="/zephyr-src/" />
+		<simple name="gitBranch" value="v0.8.0-ln-s" />
+	</process>
+	
+</template>
+
