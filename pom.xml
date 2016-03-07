@@ -104,6 +104,10 @@
 		<module>debug/org.eclipse.cdt.gdb.source-feature</module>
 	-->
 	
+		<module>launch/org.yocto.crops.docker.launcher</module>
+		<module>launch/org.yocto.crops.docker.launcher.source-feature</module>
+		<module>launch/org.yocto.crops.docker.launcher-feature</module>
+
 	<!--
 		<module>debug/org.eclipse.cdt.debug.mi.core</module>
 		<module>debug/org.eclipse.cdt.debug.mi.ui</module>

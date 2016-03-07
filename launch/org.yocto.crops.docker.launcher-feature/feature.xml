@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.yocto.crops.docker.launcher"
+      label="%featureName"
+      version="0.1.0.qualifier"
+      provider-name="%provider"
+      license-feature="org.eclipse.license"
+      license-feature-version="0.0.0">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <requires>
+      <import plugin="org.eclipse.linuxtools.docker.core"/>
+      <import plugin="org.eclipse.linuxtools.docker.ui"/>
+	  <import plugin="org.eclipse.cdt.docker.launcher"/>
+   </requires>
+
+   <plugin
+         id="org.yocto.crops.docker.launcher"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
