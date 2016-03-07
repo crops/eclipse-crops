@@ -66,6 +66,9 @@
 		<module>releng/org.yocto.crops</module>
 		<module>releng/org.yocto.crops-feature</module>
 		
+		<module>core/org.yocto.crops.core</module>
+		<module>core/org.yocto.crops.core.source-feature</module>
+		<module>core/org.yocto.crops.core-feature</module>
 	<!--
 		<module>core/org.eclipse.cdt.core</module>
 		<module>codan/org.eclipse.cdt.codan.core</module>

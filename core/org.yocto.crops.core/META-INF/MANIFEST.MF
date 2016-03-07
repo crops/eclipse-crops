@@ -1,0 +1,37 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Crops Core
+Bundle-SymbolicName: org.yocto.crops.core;singleton:=true
+Bundle-Version: 0.2.0.qualifier
+Bundle-Activator: org.yocto.crops.core.CropsCorePlugin
+Bundle-Vendor: Yocto Project
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.cdt,
+ org.eclipse.cdt.core,
+ org.eclipse.cdt.managedbuilder.core,
+ org.eclipse.cdt.managedbuilder.ui,
+ org.eclipse.jgit,
+ org.eclipse.ui.ide;bundle-version="3.11.0",
+ com.google.gson;bundle-version="2.2.4",
+ org.eclipse.e4.ui.di;bundle-version="1.1.0",
+ org.eclipse.e4.core.di.annotations;bundle-version="1.4.0",
+ org.eclipse.e4.ui.model.workbench;bundle-version="1.1.100",
+ org.eclipse.cdt.ui
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Export-Package: org.yocto.crops.core;
+  uses:="org.osgi.framework,
+   org.eclipse.osgi.util,
+   org.eclipse.core.runtime,
+   org.eclipse.jface.resource,
+   org.eclipse.ui.plugin",
+ org.yocto.crops.core.builder;
+  uses:="org.eclipse.core.runtime,
+   org.eclipse.cdt.core,
+   org.eclipse.core.resources,
+   org.eclipse.cdt.managedbuilder.core,
+   org.eclipse.cdt.managedbuilder.envvar",
+ org.yocto.crops.core.preferences;uses:="org.eclipse.ui,org.eclipse.jface.preference,org.eclipse.core.runtime.preferences",
+ org.yocto.crops.core.properties;uses:="org.eclipse.swt.widgets,org.eclipse.ui.dialogs"
