@@ -97,6 +97,10 @@
 		<module>build/org.eclipse.cdt.gnu.build.source-feature</module>
 	-->
 
+		<module>debug/org.yocto.crops.dsf.gdb</module>
+		<module>debug/org.yocto.crops.dsf.gdb.source-feature</module>
+		<module>debug/org.yocto.crops.dsf.gdb-feature</module>
+
 	<!--
 		<module>debug/org.eclipse.cdt.gdb</module>
 		<module>debug/org.eclipse.cdt.gdb.ui</module>
