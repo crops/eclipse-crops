@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup:Product
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
+    name="eclipse.crops.plugin.development.environment"
+    label="Eclipse Crops Plugin Development Environment">
+  <annotation
+      source="http://www.eclipse.org/oomph/setup/BrandingInfo">
+    <detail
+        key="folderName">
+      <value>eclipse</value>
+    </detail>
+    <detail
+        key="folderName.macosx">
+      <value>Eclipse</value>
+    </detail>
+  </annotation>
+  <setupTask
+      xsi:type="setup:InstallationTask"
+      id="installation"/>
+  <version name="mars"
+      label="Mars"
+      requiredJavaVersion="1.7">
+    <setupTask
+        xsi:type="setup.p2:P2Task"
+        label="${scope.product.label} (${scope.product.version.label})">
+      <requirement
+          name="epp.package.committers"/>
+      <requirement
+          name="org.eclipse.platform.ide"/>
+      <requirement
+          name="org.eclipse.platform.feature.group"/>
+      <requirement
+          name="org.eclipse.rcp.feature.group"/>
+      <requirement
+          name="org.eclipse.platform.sdk"
+          versionRange="4.5.2.M20160212-1500"/>
+      <requirement
+          name="org.eclipse.ui"/>
+      <requirement
+          name="org.eclipse.core.runtime"/>
+      <requirement
+          name="org.eclipse.core.resources"/>
+      <requirement
+          name="org.eclipse.cdt"
+          versionRange="8.8.0"/>
+      <requirement
+          name="org.eclipse.cdt.core"
+          versionRange="5.11.0"/>
+      <requirement
+          name="org.eclipse.cdt.managedbuilder.core"
+          versionRange="8.3.0"/>
+      <requirement
+          name="org.eclipse.cdt.managedbuilder.ui"
+          versionRange="8.2.2"/>
+      <requirement
+          name="org.sonatype.tycho.m2e.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.m2e.feature.feature.group"/>
+      <repository
+          url="http://download.eclipse.org/technology/m2e/milestones/1.6/"/>
+      <repository
+          url="http://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-tycho/0.8.0/N/0.8.0.201409231215/"/>
+      <repository
+          url="http://download.eclipse.org/releases/mars"/>
+    </setupTask>
+    <description>Eclipse Crops Plugin Development Environment for Mars.</description>
+  </version>
+  <description>Eclipse Crops Plugin Development Environment provides an environment to develop the plugin itself.</description>
+</setup:Product>

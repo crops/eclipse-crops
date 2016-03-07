@@ -14,18 +14,24 @@ If a given project (module in the parent pom) has sub-children, they would each 
 ### How to setup your development environment (to develop the plugin itself)
 1. Download and launch the eclipse-installer
 2. Click on the "menu" icon in the upper righthand corner and change to Advanced mode.
-3. Under "Eclipse.org" choose "Eclipse IDE for Eclipse Commiters", as this will include many of the needed tools
-4. Click next
-5. Select "Github projects".
-6. Click the "plus" icon to add a project file.
-7. Click on the Browse... button and enter "https://raw.githubusercontent.com/crops/eclipse-crops/deprecated-eclipse-crops-mars/releng/CROPS.setup" into the File box.
-8. Wait a little bit while Oomph scans the file.
-9. Click Ok to exit the file browser dialog.
-10. A new "CROPS" project should now be added under ```<User>```. Either select it and ***click on the down arrow in the Catalog box below*** or double-click on it.
-10. *** Click on the Show All Variables checkbox and verify the URI for the Git repo is correct ***
-11. Click Finish.
-12. The Ooomp installer will now download and install all the required plugins and jar files and create an eclipse instance.
-13. It will also create a new workspace and perform a git clone of the CROPS plugin projects and import them.
+3. Select "Eclipse.org" on the Product page.
+4. Click the "plus" icon to add a product file.
+5. Click on the Browse... button and enter "http://github.com/crops:8888/todor/eclipse-crops/raw/timo/eclipse-cros-maven/releng/CROPS-dev-env.setup" into the File box.
+6. Wait a little bit for Oomph to scan the file.
+6. Uncheck the "Bundle Pool" checkbox.
+6. Click Next >
+7. Select "Eclipse Projects".
+8. Click the "plus" icon to add a project file.
+9. Click on the Browse... button and enter "https://raw.githubusercontent.com/crops/eclipse-crops/deprecated-eclipse-crops-mars/releng/CROPS.setup" into the File box.
+10. Wait a little bit while Oomph scans the file.
+11. Click Ok to exit the file browser dialog.
+12. A new "CROPS" project should now be added under ```<User>```. Either select it and ***click on the down arrow in the Catalog box below*** or double-click on it.
+13. ***Click on the Show All Variables checkbox and verify the URI for the Git repo is correct***. It should say "https://github.com/crops/eclipse-crops.git"
+14. Click Next >. 
+14. Review the Confirmation page.
+14. Click Finish.
+15. The Oomph installer will now download and install all the required plugins and jar files and create an Eclipse instance (aka the "product").
+16. It will also create a new workspace and perform a git clone of the CROPS plugin projects and import them. It will also attempt to build all the projects.
 
 > NOTE: If you deselected "Bundle Pools", you would also get your own "p2" repository in the newly created environment. This allows you to develop in more than one version of Eclipse.
 
