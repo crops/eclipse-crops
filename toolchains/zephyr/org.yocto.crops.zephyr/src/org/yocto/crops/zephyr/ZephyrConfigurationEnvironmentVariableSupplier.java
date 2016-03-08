@@ -25,16 +25,16 @@ public class ZephyrConfigurationEnvironmentVariableSupplier extends CropsConfigu
 	@Override
 	public IBuildEnvironmentVariable getVariable(String variableName, IConfiguration configuration,
 			IEnvironmentVariableProvider provider) {
-//		if (PathEnvironmentVariable.isVar(variableName))
-//			return PathEnvironmentVariable.create(configuration);
-//		if (CropsRootEnvironmentVariable.isVar(variableName))
-//			return CropsRootEnvironmentVariable.create(configuration);
-//		if (ContainerDispatcherIPAddressEnvironmentVariable.isVar(variableName))
-//			return ContainerDispatcherIPAddressEnvironmentVariable.create(configuration);
-//		if (ContainerDispatcherSocketEnvironmentVariable.isVar(variableName))
-//			return ContainerDispatcherSocketEnvironmentVariable.create(configuration);
-//		if (ToolchainContainerIDEnvironmentVariable.isVar(variableName))
-//			return ToolchainContainerIDEnvironmentVariable.create(configuration);
+		if (PathEnvironmentVariable.isVar(variableName))
+			return PathEnvironmentVariable.create(configuration);
+		if (CropsRootEnvironmentVariable.isVar(variableName))
+			return CropsRootEnvironmentVariable.create(configuration);
+		if (ContainerDispatcherIPAddressEnvironmentVariable.isVar(variableName))
+			return ContainerDispatcherIPAddressEnvironmentVariable.create(configuration);
+		if (ContainerDispatcherSocketEnvironmentVariable.isVar(variableName))
+			return ContainerDispatcherSocketEnvironmentVariable.create(configuration);
+		if (ToolchainContainerIDEnvironmentVariable.isVar(variableName))
+			return ToolchainContainerIDEnvironmentVariable.create(configuration);
 		
 		/* zephyr specific environment variables */
 		if (ZephyrBoardEnvironmentVariable.isVar(variableName))
@@ -66,11 +66,11 @@ public class ZephyrConfigurationEnvironmentVariableSupplier extends CropsConfigu
 	public IBuildEnvironmentVariable[] getVariables(IConfiguration configuration,
 			IEnvironmentVariableProvider provider) {
 		
-//		IBuildEnvironmentVariable ceed = PathEnvironmentVariable.create(configuration);
-//		IBuildEnvironmentVariable crops_root = CropsRootEnvironmentVariable.create(configuration);
-//		IBuildEnvironmentVariable codi_ip_addr = ContainerDispatcherIPAddressEnvironmentVariable.create(configuration);
-//		IBuildEnvironmentVariable codi_socket = ContainerDispatcherSocketEnvironmentVariable.create(configuration);
-//		IBuildEnvironmentVariable toolchain_container_id = ToolchainContainerIDEnvironmentVariable.create(configuration);
+		IBuildEnvironmentVariable ceed = PathEnvironmentVariable.create(configuration);
+		IBuildEnvironmentVariable crops_root = CropsRootEnvironmentVariable.create(configuration);
+		IBuildEnvironmentVariable codi_ip_addr = ContainerDispatcherIPAddressEnvironmentVariable.create(configuration);
+		IBuildEnvironmentVariable codi_socket = ContainerDispatcherSocketEnvironmentVariable.create(configuration);
+		IBuildEnvironmentVariable toolchain_container_id = ToolchainContainerIDEnvironmentVariable.create(configuration);
 		IBuildEnvironmentVariable board = ZephyrBoardEnvironmentVariable.create(configuration);
 		IBuildEnvironmentVariable install_dir = ZephyrSdkInstallDirEnvironmentVariable.create(configuration);
 		IBuildEnvironmentVariable gcc_variant = ZephyrGccVariantEnvironmentVariable.create(configuration);
@@ -81,16 +81,16 @@ public class ZephyrConfigurationEnvironmentVariableSupplier extends CropsConfigu
 //		IBuildEnvironmentVariable prj_mdef = ProjectMDefFilenameEnvironmentVariable.create(configuration);
 		
 		List<IBuildEnvironmentVariable> variables = new ArrayList<IBuildEnvironmentVariable>();
-//		if (ceed != null)
-//			variables.add(ceed);
-//		if (crops_root != null)
-//			variables.add(crops_root);
-//		if (codi_ip_addr != null)
-//			variables.add(codi_ip_addr);
-//		if (codi_socket != null)
-//			variables.add(codi_socket);
-//		if (toolchain_container_id != null)
-//			variables.add(toolchain_container_id);
+		if (ceed != null)
+			variables.add(ceed);
+		if (crops_root != null)
+			variables.add(crops_root);
+		if (codi_ip_addr != null)
+			variables.add(codi_ip_addr);
+		if (codi_socket != null)
+			variables.add(codi_socket);
+		if (toolchain_container_id != null)
+			variables.add(toolchain_container_id);
 		if (board != null)
 			variables.add(board);
 		if (install_dir != null)
