@@ -149,6 +149,14 @@
 	    name="org.eclipse.linuxtools.docker.feature.feature.group"/>
 	<requirement
 	    name="org.eclipse.m2e.feature.feature.group"/>
+	<requirement
+	    name="org.eclipse.jgit.feature.group"/>
+        <requirement
+            name="org.eclipse.jgit.source.feature.group"/>
+	<requirement
+	    name="org.eclipse.cdt.feature.group"/>
+	<requirement
+	    name="org.eclipse.cdt.sdk.feature.group"/>
 <!--
 	<requirement
 	    name="org.freemarker" />
