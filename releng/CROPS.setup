@@ -50,10 +50,12 @@
       encoding="UTF-8">
     <description>Initialize JDT's package explorer to show working sets as its root objects</description>
   </setupTask>
+  <!-- Mac and Ubuntu 14.04 are JRE-1.7 by default.
+       Eclipse Neon (4.6) will require JRE-1.8. Wait until then to bump. -->
   <setupTask
       xsi:type="jdt:JRETask"
-      version="JavaSE-1.8"
-      location="${jre.location-1.8}">
+      version="JavaSE-1.7"
+      location="${jre.location-1.7}">
     <description>Define the JRE needed to compile and run the Java projects of ${scope.project.label}</description>
   </setupTask>
   <setupTask

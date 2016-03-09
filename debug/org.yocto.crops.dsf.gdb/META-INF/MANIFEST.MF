@@ -16,9 +16,9 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.cdt.debug.core,
  org.eclipse.cdt.debug.ui,
  org.eclipse.cdt.launch;bundle-version="7.3.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
-Bundle-Vendor: Eclipse CDT
+Bundle-Vendor: Yocto Project
 Export-Package: org.yocto.crops.dsf.gdb;x-internal:=true,
  org.yocto.crops.dsf.gdb.launch;x-internal:=true;
  org.yocto.crops.dsf.gdb.service;x-internal:=true,

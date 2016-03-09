@@ -16,7 +16,7 @@ If a given project (module in the parent pom) has sub-children, they would each 
 2. Click on the "menu" icon in the upper righthand corner and change to Advanced mode.
 3. Select "Eclipse.org" on the Product page.
 4. Click the "plus" icon to add a product file.
-5. Click on the Browse... button and enter "http://github.com/crops:8888/todor/eclipse-crops/raw/timo/eclipse-cros-maven/releng/CROPS-dev-env.setup" into the File box.
+5. Click on the Browse... button and enter "https://raw.githubusercontent.com/crops/eclipse-crops/deprecated-eclipse-crops-mars/releng/CROPS-dev-env.setup" into the File box.
 6. Wait a little bit for Oomph to scan the file.
 6. Uncheck the "Bundle Pool" checkbox.
 6. Click Next >
