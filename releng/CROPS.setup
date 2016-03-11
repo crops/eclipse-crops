@@ -16,6 +16,271 @@
     name="crops"
     label="CROPS">
   <setupTask
+      xsi:type="setup:CompoundTask"
+      name="Global Variables">
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="git.user.id"
+        defaultValue="anonymous"
+        label="CROPS Git/Gerrit user ID"
+        documentation="The Gitlab user ID for Git/Gerrit commits.  Use 'anonymous' if you have no Gitlab user ID.">
+      <description>The user ID of the CROPS Gitlab Git/Gerrit account</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="git.author.name"
+        label="CROPS author name for Git/Gerrit"
+        documentation="The CROPS author name for Git/Gerrit commits.  Use 'Anonymous' if you're not a registered CROPS Git author or don't plan to commit to Git.">
+      <description>The author name used for Git/Gerrit commits</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="git.author.email"
+        label="CROPS author email for Git/Gerrit"
+        documentation="The CROPS author email for Git/Gerrit commits.  Use 'anonymous@example.com' if you're not a registered CROPS Git author or don't plan to commit to Git.">
+      <description>The email address associated with Git/Gerrit commits</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="bugzilla.id"
+        defaultValue="anonymous"
+        label="CROPS user ID for Bugzilla/Hudson"
+        documentation="The CROPS user ID for Bugzilla/Hudson.  Leave empty if you don't have an account or don't plan to submit bugs.">
+      <description>The email associated with the CROPS Bugzilla/Hudson account</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        type="PASSWORD"
+        name="crops.user.password"
+        label="CROPS password for Bugzilla/Hudson"
+        documentation="The CROPS password for Bugzilla/Hudson.  Leave empty if you don't have an account or don't plan to submit bugs.">
+      <annotation
+          source="https://github.com/crops/eclipse-crops/??????">
+        <detail
+            key="type">
+          <value>form</value>
+        </detail>
+        <detail
+            key="form.url">
+          <value>https://github.com/crops/eclipse-crops/users/sign_in</value>
+        </detail>
+        <detail
+            key="form.cookie">
+          <value>_gitlab_session</value>
+        </detail>
+        <detail
+            key="form.parameters">
+          <value>username password submit</value>
+        </detail>
+        <detail
+            key="form.secure.parameters">
+          <value>password</value>
+        </detail>
+        <detail
+            key="form.filter">
+          <value>username=anonymous\&amp;.*</value>
+        </detail>
+        <detail
+            key="form.parameter.username">
+          <value>$${bugzilla.id}</value>
+        </detail>
+        <detail
+            key="form.parameter.password">
+          <value>$${value}</value>
+        </detail>
+        <detail
+            key="form.parameter.submit">
+          <value>Login</value>
+        </detail>
+        <detail
+            key="form.ok">
+          <value>Valid password for $${form.parameter.username} at $${form.url}.</value>
+        </detail>
+        <detail
+            key="form.info">
+          <value>Validate the password for $${form.parameter.username} at $${form.url}.</value>
+        </detail>
+        <detail
+            key="form.warning">
+          <value>Unable to validate the password for $${form.parameter.username} because $${form.url} is unreachable.</value>
+        </detail>
+        <detail
+            key="form.error">
+          <value>Invalid password for $${form.parameter.username} at $${form.url}.</value>
+        </detail>
+      </annotation>
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/PasswordVerification">
+        <detail
+            key="type">
+          <value>form</value>
+        </detail>
+        <detail
+            key="form.url">
+          <value>https://github.com/crops/eclipse-crops/users/sign_in</value>
+        </detail>
+        <detail
+            key="form.parameters">
+          <value>username password submit</value>
+        </detail>
+        <detail
+            key="form.secure.parameters">
+          <value>password</value>
+        </detail>
+        <detail
+            key="form.filter">
+          <value>username=anonymous\&amp;.*</value>
+        </detail>
+        <detail
+            key="form.parameter.username">
+          <value>$${bugzilla.id}</value>
+        </detail>
+        <detail
+            key="form.parameter.password">
+          <value>$${value}</value>
+        </detail>
+        <detail
+            key="form.parameter.submit">
+          <value>Sign In</value>
+        </detail>
+        <detail
+            key="form.verification.url">
+          <value>https://github.com/crops/eclipse-crops/u/$${git.user.id|username}</value>
+        </detail>
+        <detail
+            key="form.verification.matches">
+          <value>.*&quot;email&quot;: &quot;$${form.parameter.username}&quot;.*</value>
+        </detail>
+        <detail
+            key="form.ok">
+          <value>Valid password for account $${git.user.id} of $${form.parameter.username} at $${form.url}.</value>
+        </detail>
+        <detail
+            key="form.info">
+          <value>Validate the password for account $${git.user.id} of $${form.parameter.username} at $${form.url}.</value>
+        </detail>
+        <detail
+            key="form.warning">
+          <value>Unable to validate the password for account $${git.user.id} of $${form.parameter.username} because $${form.url} is unreachable.</value>
+        </detail>
+        <detail
+            key="form.error">
+          <value>Invalid password for account $${git.user.id} of $${form.parameter.username} at $${form.url}.</value>
+        </detail>
+      </annotation>
+    </setupTask>
+	<!--
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="eclipse.gerrit.uri.pattern"
+        value="(https|ssh)://([^@/]+@)?(git.eclipse.org:29418/.*|git.eclipse.org/r/.*)"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="eclipse.gerrit.remoteURIs"
+        label="Eclipse Gerrit Repository">
+      <choice
+          value="https://git.eclipse.org/r/@{remoteURI}"
+          label="HTTPS (read-only, anonymous, Gerrit)"/>
+      <choice
+          value="ssh://${git.user.id|username}@git.eclipse.org:29418/@{remoteURI}"
+          label="SSH (read-write, Gerrit)">
+        <annotation
+            source="http://www.eclipse.org/oomph/setup/MatchChoice"/>
+      </choice>
+      <choice
+          value="https://${git.user.id|username}@git.eclipse.org/r/@{remoteURI}"
+          label="HTTPS (read-write, Gerrit)">
+        <annotation
+            source="http://www.eclipse.org/oomph/setup/MatchChoice"/>
+      </choice>
+      <description>Choose from the available remote Gerrit URIs</description>
+    </setupTask>
+	-->
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="crops.git.remoteURIs"
+        label="CROPS Git Repository">
+      <choice
+          value="https://github.com/eclipse-crops/@{remoteURI}.git"
+          label="HTTP (read-only, anonymous, direct)"/>
+      <choice
+          value="ssh://${git.user.id|username}@github.com/crops:@{remoteURI}.git"
+          label="SSH (read-write, direct)">
+        <annotation
+            source="http://www.eclipse.org/oomph/setup/MatchChoice"/>
+      </choice>
+      <description>Choose from the available Git URIs</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="crops.git.gerrit.remoteURIs"
+        label="CROPS Gerrit or Git Repository">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/InheritedChoices">
+        <detail
+            key="inherit">
+          <value>crops.gerrit.remoteURIs crops.git.remoteURIs</value>
+        </detail>
+      </annotation>
+      <description>Choose from the available Gerrit or Git URIs</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="eclipse.target.platform"
+        defaultValue="None"
+        storageURI="scope://Workspace"
+        label="Target Platform">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/GlobalVariable"/>
+      <choice
+          value="Neon"
+          label="Eclipse Neon - 4.6"/>
+      <choice
+          value="Mars"
+          label="Eclipse Mars - 4.5"/>
+      <choice
+          value="Luna"
+          label="Eclipse Luna - 4.4"/>
+      <choice
+          value="None"
+          label="None"/>
+      <description>Choose the compatibility level of the target platform</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="Github">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="github.user.id"
+          label="Github user ID">
+        <description>The Github user ID</description>
+      </setupTask>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="github.author.name"
+          label="Github author name"/>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="github.author.email"
+          label="Github author email"/>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="github.remoteURIs"
+          label="Github repository">
+        <choice
+            value="git@github.com:@{remoteURI}.git"
+            label="Git (read-write)"/>
+        <choice
+            value="https://${github.user.id|username}@github.com/@{remoteURI}.git"
+            label="HTTPS (read-write)"/>
+        <choice
+            value="https://github.com/@{remoteURI}.git"
+            label="HTTPS (read-only, anonymous)"/>
+        <description>Choose from the available Github URIs</description>
+      </setupTask>
+    </setupTask>
+  </setupTask>
+  <setupTask
       xsi:type="setup.p2:P2Task">
     <requirement
         name="org.eclipse.pde.api.tools.ee.feature.feature.group"/>
@@ -79,13 +344,13 @@
     <setupTask
         xsi:type="git:GitCloneTask"
         id="git.clone.crops"
-        remoteURI="eclipse-crops"
+        remoteURI="todor/eclipse-crops"
         checkoutBranch="timo/eclipse-crops-maven">
       <annotation
           source="http://www.eclipse.org/oomph/setup/InducedChoices">
         <detail
             key="inherit">
-          <value>eclipse.git.gerrit.remoteURIs</value>
+          <value>crops.git.gerrit.remoteURIs</value>
         </detail>
         <detail
             key="label">
