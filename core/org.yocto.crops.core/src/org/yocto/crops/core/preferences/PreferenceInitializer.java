@@ -29,7 +29,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		if(CropsUtils.isWin()) {
 			String USER_HOME = System.getenv("USERPROFILE"); // C:/Users/<username>
 			try {
-				store.setDefault(PreferenceConstants.P_CEED_PATH, Paths.get(USER_HOME).resolve(".crops").resolve("ceed").resolve("ceed.exe").toRealPath(LinkOption.NOFOLLOW_LINKS).toString());
+				store.setDefault(PreferenceConstants.P_CEED_PATH, Paths.get(USER_HOME).resolve(".crops").resolve("ceed").resolve("ceed").toRealPath(LinkOption.NOFOLLOW_LINKS).toString());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

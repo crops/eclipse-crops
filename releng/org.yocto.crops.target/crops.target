@@ -64,7 +64,8 @@
 <unit id="javax.ws.rs" version="2.0.1.v201504171603"/>
 <unit id="org.glassfish.jersey.core.jersey-client" version="2.14.0.v201504211925"/>
 <unit id="org.bouncycastle.bcpkix" version="1.51.0.v201505131810"/>
-<unit id="com.spotify.docker.client" version="3.1.10.v20151113-2033"/>
+<unit id="com.spotify.docker.client" version="3.1.1.v201508201820"/>
+<unit id="com.spotify.docker.client.source" version="3.1.1.v201508201820"/>
 <unit id="org.glassfish.jersey.media.jersey-media-json-jackson" version="2.14.0.v201504171603"/>
 <unit id="com.google.guava" version="15.0.0.v201403281430"/>
 <unit id="com.fasterxml.jackson.core.jackson-annotations" version="2.5.0.v201504151636"/>
@@ -84,7 +85,6 @@
 <unit id="com.fasterxml.jackson.module.jackson-module-jaxb-annotations" version="2.5.0.v201504151636"/>
 <unit id="org.slf4j.api" version="1.7.2.v20121108-1250"/>
 <unit id="com.kenai.jffi" version="1.2.7.v201505052040"/>
-<unit id="com.spotify.docker.client.source" version="3.1.10.v20151113-2033"/>
 <unit id="jnr.x86asm" version="1.0.2.v201505052040"/>
 <unit id="org.glassfish.jersey.apache.connector" version="2.14.0.v201504171603"/>
 <unit id="org.glassfish.hk2.osgi-resource-locator" version="2.3.0.b10_v201508191500"/>
