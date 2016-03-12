@@ -73,7 +73,7 @@
       <repository
           url="http://download.eclipse.org/releases/mars"/>
 	  <repository
-	      url="http://download.eclipse.org/tools/orbit/downloads/drops/R20151221205849/repository/"/>
+	      url="http://download.eclipse.org/linuxtools/update-docker/"/>
     </setupTask>
     <description>Eclipse Crops Plugin Development Environment for Mars.</description>
   </version>
