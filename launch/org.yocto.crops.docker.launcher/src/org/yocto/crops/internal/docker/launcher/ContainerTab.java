@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.yocto.crops.docker.launcher.DockerLaunchUIPlugin;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -22,6 +23,8 @@ import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
 import org.eclipse.linuxtools.docker.core.DockerConnectionManager;
 import org.eclipse.linuxtools.docker.core.IDockerConnection;
 import org.eclipse.linuxtools.docker.core.IDockerConnectionManagerListener;
+import org.eclipse.linuxtools.docker.core.IDockerContainer;
+import org.eclipse.linuxtools.docker.core.IDockerContainerListener;
 import org.eclipse.linuxtools.docker.core.IDockerImage;
 import org.eclipse.linuxtools.docker.core.IDockerImageListener;
 import org.eclipse.swt.SWT;
@@ -47,26 +50,30 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.Text;
 import org.osgi.service.prefs.Preferences;
 
 public class ContainerTab extends AbstractLaunchConfigurationTab implements
-		IDockerConnectionManagerListener, IDockerImageListener {
+		IDockerConnectionManagerListener, /* IDockerImageListener, */ IDockerContainerListener {
 
+	private Text workspaceDirectory;
+	private Text cropsBindMount;
 	private List directoriesList;
-	private String imageName;
+	private String containerName;
 	private String connectionName;
 	private String connectionUri;
 	private Boolean keepValue;
 	private Boolean stdinValue;
 	private IDockerConnection connection;
 	private IDockerConnection[] connections;
-	private IDockerImageListener containerTab;
+	private IDockerContainerListener containerTab;
+	//private IDockerImageListener containerTab;
 
 	private Button newButton;
 	private Button removeButton;
 	private Button keepButton;
 	private Button stdinButton;
-	private Combo imageCombo;
+	private Combo containerCombo;
 	private Combo connectionSelector;
 
 	private ModifyListener connectionModifyListener = new ModifyListener() {
@@ -75,13 +82,13 @@ public class ContainerTab extends AbstractLaunchConfigurationTab implements
 		public void modifyText(ModifyEvent e) {
 			int index = connectionSelector.getSelectionIndex();
 			if (connection != null)
-				connection.removeImageListener(containerTab);
+				connection.removeContainerListener(containerTab);
 			connection = connections[index];
 			if (!connectionName.equals(connection.getName()))
 				updateLaunchConfigurationDialog();
 			connectionName = connection.getName();
 			connectionUri = connection.getUri();
-			connection.addImageListener(containerTab);
+			connection.addContainerListener(containerTab);
 		}
 
 	};
@@ -119,20 +126,20 @@ public class ContainerTab extends AbstractLaunchConfigurationTab implements
 		gd.horizontalSpan = 2;
 		connectionSelector.setLayoutData(gd);
 
-		Label imageSelectorLabel = new Label(mainComposite, SWT.NULL);
-		imageSelectorLabel.setText(Messages.ContainerTab_Image_Selector_Label);
-		imageCombo = new Combo(mainComposite, SWT.DROP_DOWN);
-		imageCombo.setLayoutData(gd);
+		Label containerSelectorLabel = new Label(mainComposite, SWT.NULL);
+		containerSelectorLabel.setText(Messages.ContainerTab_Container_Selector_Label);
+		containerCombo = new Combo(mainComposite, SWT.DROP_DOWN);
+		containerCombo.setLayoutData(gd);
 
-		initializeImageCombo();
+		initializeContainerCombo();
 
-		imageCombo.addSelectionListener(new SelectionListener() {
+		containerCombo.addSelectionListener(new SelectionListener() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				if (!imageName.equals(imageCombo.getText()))
+				if (!containerName.equals(containerCombo.getText()))
 					updateLaunchConfigurationDialog();
-				imageName = imageCombo.getText();
+				containerName = containerCombo.getText();
 			}
 
 			@Override
@@ -141,13 +148,57 @@ public class ContainerTab extends AbstractLaunchConfigurationTab implements
 
 		});
 
+		createWorkspaceToCropsDirectoryBindMount(mainComposite);
 		createDirectoryList(mainComposite);
 		createButtons(mainComposite);
 		createOptions(mainComposite);
 	}
 
+	/**
+	 * CROPS relies on the toolchain container having a bind mount
+	 * from the host workspace to the "/crops" directory as seen
+	 * by the container.
+	 * 
+	 * @param parent
+	 */
+	private void createWorkspaceToCropsDirectoryBindMount(Composite parent) {
+		Composite comp = createComposite(parent, 1, 3, GridData.FILL_BOTH);
+		/* Host workspace path -> Container bind mount path */
+		Group group = new Group(comp, SWT.NONE);
+		Font font = parent.getFont();
+		group.setFont(font);
+		group.setText(Messages.ContainerTab_BindMount_Group_Name);
+		
+		GridData gd = new GridData(GridData.FILL_BOTH);
+		gd.grabExcessHorizontalSpace = true;
+		GridLayout layout = new GridLayout();
+		layout.numColumns = 2;
+		group.setLayoutData(gd);
+		group.setLayout(layout);
+		
+		Label label = new Label(group, SWT.NULL);
+		label.setFont(font);
+		label.setText(Messages.ContainerTab_Host_Path_Label);
+		label.setLayoutData(new GridData());
+		workspaceDirectory = new Text(group, SWT.SINGLE | SWT.BORDER);
+		workspaceDirectory.setFont(font);
+		workspaceDirectory.setText( ResourcesPlugin
+				.getWorkspace().getRoot().getRawLocation().toOSString() );
+		workspaceDirectory.setLayoutData(new GridData());
+		
+		label = new Label(group, SWT.NULL);
+		label.setFont(font);
+		label.setText(Messages.ContainerTab_Container_Path_Label);
+		label.setLayoutData(new GridData(SWT.LEAD, SWT.CENTER, false, false, 1, 1));
+		cropsBindMount = new Text(group, SWT.SINGLE | SWT.BORDER);
+		cropsBindMount.setFont(font);
+		cropsBindMount.setText( ILaunchConstants.ATTR_CROPS_DIRECTORY_DEFAULT);
+		cropsBindMount.setLayoutData(new GridData(SWT.NONE, SWT.CENTER, true, false, 1, 1));
+		
+	}
+	
 	private void createDirectoryList(Composite parent) {
-		Composite comp = createComposite(parent, 1, 2, GridData.FILL_BOTH);
+		Composite comp = createComposite(parent, 2, 2, GridData.FILL_BOTH);
 
 		Group group = new Group(comp, SWT.NONE);
 		Font font = parent.getFont();
@@ -334,28 +385,29 @@ public class ContainerTab extends AbstractLaunchConfigurationTab implements
 		}
 	}
 
-	private void initializeImageCombo() {
+	private void initializeContainerCombo() {
 		if (connection != null) {
-			java.util.List<IDockerImage> images = connection.getImages();
-			if (images == null || images.size() == 0) {
-				setErrorMessage(Messages.ContainerTab_Error_No_Images);
+			java.util.List<IDockerContainer> containers = connection.getContainers();
+			if (containers == null || containers.size() == 0) {
+				setErrorMessage(Messages.ContainerTab_Error_No_Containers);
 				return;
 			}
-			connection.removeImageListener(containerTab);
-			ArrayList<String> imageNames = new ArrayList<String>();
-			for (IDockerImage image : images) {
-				java.util.List<String> tags = image.repoTags();
+			connection.removeContainerListener(containerTab);
+			ArrayList<String> containerNames = new ArrayList<String>();
+			for (IDockerContainer container : containers) {
+				// java.util.List<String> tags = image.repoTags();
+				java.util.List<String> tags = container.names();
 				if (tags != null) {
 					for (String tag : tags) {
 						if (!tag.equals("<none>:<none>")) //$NON-NLS-1$
-							imageNames.add(tag);
+							containerNames.add(tag);
 					}
 				}
 			}
-			imageCombo.setItems(imageNames.toArray(new String[0]));
-			if (imageName != null)
-				imageCombo.setText(imageName);
-			connection.addImageListener(containerTab);
+			containerCombo.setItems(containerNames.toArray(new String[0]));
+			if (containerName != null)
+				containerCombo.setText(containerName);
+			connection.addContainerListener(containerTab);
 		}
 	}
 
@@ -426,9 +478,9 @@ public class ContainerTab extends AbstractLaunchConfigurationTab implements
 					connectionUri = connections[0].getUri();
 				}
 			}
-			imageName = configuration.getAttribute(ILaunchConstants.ATTR_IMAGE,
+			containerName = configuration.getAttribute(ILaunchConstants.ATTR_IMAGE,
 					"");
-			imageCombo.setText(imageName);
+			containerCombo.setText(containerName);
 			keepValue = configuration.getAttribute(
 					ILaunchConstants.ATTR_KEEP_AFTER_LAUNCH, false);
 			keepButton.setSelection(keepValue);
@@ -448,8 +500,8 @@ public class ContainerTab extends AbstractLaunchConfigurationTab implements
 		String[] dirs = directoriesList.getItems();
 		configuration.setAttribute(ILaunchConstants.ATTR_ADDITIONAL_DIRS,
 				Arrays.asList(dirs));
-		String image = imageCombo.getText();
-		configuration.setAttribute(ILaunchConstants.ATTR_IMAGE, image);
+		String container = containerCombo.getText();
+		configuration.setAttribute(ILaunchConstants.ATTR_CONTAINER, container);
 		configuration.setAttribute(ILaunchConstants.ATTR_CONNECTION_URI,
 				connectionUri);
 		configuration.setAttribute(ILaunchConstants.ATTR_KEEP_AFTER_LAUNCH,
@@ -511,26 +563,28 @@ public class ContainerTab extends AbstractLaunchConfigurationTab implements
 		connectionSelector.addModifyListener(connectionModifyListener);
 	}
 
+	@Override
 	public void listChanged(IDockerConnection c,
-			java.util.List<IDockerImage> list) {
-		final IDockerImage[] finalList = list.toArray(new IDockerImage[0]);
+			java.util.List<IDockerContainer> list) {
+		final IDockerContainer[] finalList = list.toArray(new IDockerContainer[0]);
 		if (c.getName().equals(connection.getName())) {
 			Display.getDefault().syncExec(new Runnable() {
 				@Override
 				public void run() {
-					connection.removeImageListener(containerTab);
-					ArrayList<String> imageNames = new ArrayList<String>();
-					for (IDockerImage image : finalList) {
-						java.util.List<String> tags = image.repoTags();
+					connection.removeContainerListener(containerTab);
+					ArrayList<String> containerNames = new ArrayList<String>();
+					for (IDockerContainer container : finalList) {
+						//java.util.List<String> tags = image.repoTags();
+						java.util.List<String> tags = container.names();
 						if (tags != null) {
 							for (String tag : tags) {
-								imageNames.add(tag);
+								containerNames.add(tag);
 							}
 						}
 					}
-					if (!imageCombo.isDisposed())
-						imageCombo.setItems(imageNames.toArray(new String[0]));
-					connection.addImageListener(containerTab);
+					if (!containerCombo.isDisposed())
+						containerCombo.setItems(containerNames.toArray(new String[0]));
+					connection.addContainerListener(containerTab);
 				}
 
 			});
@@ -540,7 +594,8 @@ public class ContainerTab extends AbstractLaunchConfigurationTab implements
 	@Override
 	public void dispose() {
 		if (connection != null)
-			connection.removeImageListener(containerTab);
+			connection.removeContainerListener(containerTab);
 		super.dispose();
 	}
+
 }

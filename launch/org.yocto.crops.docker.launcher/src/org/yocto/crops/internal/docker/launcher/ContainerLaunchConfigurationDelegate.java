@@ -39,12 +39,56 @@ import org.eclipse.linuxtools.docker.core.IDockerContainerInfo;
 import org.eclipse.linuxtools.docker.core.IDockerNetworkSettings;
 import org.eclipse.linuxtools.docker.ui.launch.ContainerLauncher;
 import org.eclipse.linuxtools.docker.ui.launch.IContainerLaunchListener;
+import org.eclipse.linuxtools.internal.docker.core.DockerContainer;
 
+@SuppressWarnings("restriction")
 public class ContainerLaunchConfigurationDelegate extends GdbLaunchDelegate
 		implements ILaunchConfigurationDelegate {
 
 	private ContainerLauncher launcher;
+/*	private DockerContainer container;
 
+
+	private class StartOpenOcdJob extends Job {
+
+		private boolean started;
+		private boolean done;
+		
+		public StartOpenOcdJob(String name) {
+			super(name);
+		}
+	
+		@Override
+		protected IStatus run(IProgressMonitor monitor) {
+			monitor.beginTask(getName(), IProgressMonitor.UNKNOWN);
+		
+			while (!done) {
+				if (monitor.isCanceled()) {
+					return Status.CANCEL_STATUS;
+				}
+				if (started && getIpAddress() != null)
+					done = true;
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					monitor.done();
+					return Status.CANCEL_STATUS;
+				}
+			}
+			monitor.done();
+			return Status.OK_STATUS;
+		}
+		
+		public String getIpAddress() {
+			if (info != null) {
+				IDockerNetworkSettings networkSettings = info.networkSettings();
+				return networkSettings.ipAddress();
+			}
+			return null;
+		}
+		
+	}
+*/
 	private class StartGdbServerJob extends Job implements
 			IContainerLaunchListener {
 
@@ -110,7 +154,11 @@ public class ContainerLaunchConfigurationDelegate extends GdbLaunchDelegate
 
 	public ContainerLaunchConfigurationDelegate() {
 		super();
-		launcher = new ContainerLauncher();
+		/* This will try to launch with -v <workspace>:<workspace>:Z
+		 * which is hard-coded by org.eclipse.linuxtools.docker.ui.ContainerLauncher
+		 */
+		 launcher = new ContainerLauncher();
+		//container = connect to the container
 	}
 
 	@Override
@@ -184,8 +232,9 @@ public class ContainerLaunchConfigurationDelegate extends GdbLaunchDelegate
 
 				StringBuffer b = new StringBuffer();
 
-				b.append(gdbserverCommand + " " + commandArguments); //$NON-NLS-1$
-
+				//b.append(gdbserverCommand + " " + commandArguments); //$NON-NLS-1$
+				b.append("/opt/zephyr-sdk/sysroots/i686-pokysdk-linux/arc-poky-elf/arc-poky-elf-gdb");
+				
 				String arguments = getProgramArguments(configuration);
 				if (arguments.trim().length() > 0) {
 					b.append(" "); //$NON-NLS-1$
@@ -221,6 +270,7 @@ public class ContainerLaunchConfigurationDelegate extends GdbLaunchDelegate
 				boolean supportStdin = configuration.getAttribute(
 						ILaunchConstants.ATTR_STDIN_SUPPORT, false);
 
+//				StartOpenOcdJob job = new StartOpenOcdJob(Message.OpenOcd_start);
 				StartGdbServerJob job = new StartGdbServerJob(
 						Messages.Gdbserver_start);
 				job.schedule();

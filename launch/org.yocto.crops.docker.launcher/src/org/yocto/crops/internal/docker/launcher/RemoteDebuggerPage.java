@@ -42,7 +42,7 @@ public class RemoteDebuggerPage extends GdbDebuggerPage {
 
 	@Override
 	public String getName() {
-		return Messages.Remote_GDB_Debugger_Options;
+		return Messages.Container_GDB_Debugger_Options;
 	}
 
 	@Override

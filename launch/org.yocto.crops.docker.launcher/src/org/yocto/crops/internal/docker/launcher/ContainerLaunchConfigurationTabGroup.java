@@ -35,9 +35,17 @@ public class ContainerLaunchConfigurationTabGroup extends
 		tabs.add(new ContainerTab());
 		tabs.add(new EnvironmentTab());
 
-		if (mode.equals(ILaunchManager.DEBUG_MODE))
+		if (mode.equals(ILaunchManager.DEBUG_MODE)) {
+			tabs.add(new LocalDebuggerTab());
 			tabs.add(new RemoteDebuggerTab());
+		}
 
+		/* TODO: do we want to set up the flash tool here?
+		 * pseudo code:
+		 */
+		// if (target is zephyr)
+		// 		tabs.add(new FlashToolTab());
+		
 		tabs.add(new SourceLookupTab());
 		tabs.add(new CommonTab());
 

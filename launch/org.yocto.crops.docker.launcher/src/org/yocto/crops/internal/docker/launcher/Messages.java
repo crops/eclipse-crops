@@ -32,6 +32,9 @@ public class Messages extends NLS {
 	public static String Default_Image;
 	public static String Keep_Container_After_Launch;
 	public static String ContainerTab_Name;
+	public static String ContainerTab_BindMount_Group_Name;
+	public static String ContainerTab_Host_Path_Label;
+	public static String ContainerTab_Container_Path_Label;
 	public static String ContainerTab_Group_Name;
 	public static String ContainerTab_Option_Group_Name;
 	public static String ContainerTab_New_Button;
@@ -40,11 +43,19 @@ public class Messages extends NLS {
 	public static String ContainerTab_Stdin_Support_Label;
 	public static String ContainerTab_Error_Reading_Configuration;
 	public static String ContainerTab_Connection_Selector_Label;
-	public static String ContainerTab_Image_Selector_Label;
+	public static String ContainerTab_Container_Selector_Label;
 	public static String ContainerTab_Error_No_Connections;
+	public static String ContainerTab_Error_No_Containers;
 	public static String ContainerTab_Error_No_Images;
 	public static String ContainerTab_Warning_Connection_Not_Found;
 
+	public static String Container_GDB_Debugger_Options;
+	public static String Gdb_Settings_Tab_Name;
+	public static String Sysroots_path_textfield_label;
+	public static String Usr_bin_path_textfield_label;
+	public static String Arch_prefix_textfield_label;
+	public static String Gdb_name_textfield_label;
+		
 	public static String Remote_GDB_Debugger_Options;
 	public static String Gdbserver_Settings_Tab_Name;
 	public static String Gdbserver_name_textfield_label;

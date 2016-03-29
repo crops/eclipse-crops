@@ -1,16 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2010, 2015 Mentor Graphics Corporation and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- * Anna Dushistova (Mentor Graphics) - initial API and implementation
- * Anna Dushistova (Mentor Graphics) - moved to org.eclipse.cdt.launch.remote.tabs
- * Red Hat Inc. - modified to use in CDT Docker Launcher
- *******************************************************************************/
-
 package org.yocto.crops.internal.docker.launcher;
 
 import org.eclipse.cdt.debug.ui.ICDebuggerPage;
@@ -23,14 +10,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 
 @SuppressWarnings("restriction")
-public class RemoteDebuggerTab extends CDebuggerTab {
+public class LocalDebuggerTab extends CDebuggerTab {
+	
+	private final static String DEFAULTS_SET = "org.yocto.crops.docker.launcher.LocalDebuggerTab.DEFAULTS_SET"; //$NON-NLS-1$
 
-	private final static String DEFAULTS_SET = "org.eclipse.cdt.docker.launcher.RemoteDebuggerTab.DEFAULTS_SET"; //$NON-NLS-1$
-
-	public RemoteDebuggerTab() {
-		super(SessionType.REMOTE, false);
+	public LocalDebuggerTab() {
+		super(SessionType.LOCAL, false);
 	}
-
 	/*
 	 * When the launch configuration is created for Run mode, this Debugger tab
 	 * is not created because it is not used for Run mode but only for Debug
@@ -38,7 +24,7 @@ public class RemoteDebuggerTab extends CDebuggerTab {
 	 * configuration already exists and initializeFrom() is called instead of
 	 * setDefaults(). We therefore call setDefaults() ourselves and update the
 	 * configuration. If we don't then the user will be required to press Apply
-	 * to get the default settings saved. Bug 281970
+	 * to get the default settings saved.
 	 */
 	@Override
 	public void setDefaults(ILaunchConfigurationWorkingCopy config) {
@@ -69,7 +55,7 @@ public class RemoteDebuggerTab extends CDebuggerTab {
 		for (int i = 0; i < children.length; i++) {
 			children[i].dispose();
 		}
-		setDynamicTab(new RemoteDebuggerPage());
+		setDynamicTab(new ContainerGdbDebuggerPage());
 
 		ICDebuggerPage debuggerPage = getDynamicTab();
 		if (debuggerPage == null) {
@@ -86,7 +72,7 @@ public class RemoteDebuggerTab extends CDebuggerTab {
 
 	@Override
 	public String getId() {
-		return "org.eclipse.cdt.docker.launch.debug.RemoteCDSFDebuggerTab"; //$NON-NLS-1$
+		return "org.yocto.crops.docker.launch.debug.LocalCDSFDebuggerTab"; //$NON-NLS-1$
 	}
 
 }

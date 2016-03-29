@@ -45,10 +45,12 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
+import org.yocto.crops.internal.docker.launcher.ui.preferences.IContainerGdbDebugPreferenceConstants;
 
 /**
  * The dynamic tab for gdb-based debugger implementations.
  */
+@SuppressWarnings("restriction")
 public class GdbDebuggerPage extends AbstractCDebuggerPage implements Observer {
 	protected TabFolder fTabFolder;
 	protected Text fGDBCommandText;
@@ -86,6 +88,10 @@ public class GdbDebuggerPage extends AbstractCDebuggerPage implements Observer {
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
 		IPreferenceStore preferenceStore = GdbUIPlugin.getDefault()
 				.getPreferenceStore();
+		configuration.setAttribute(
+				ILaunchConstants.ATTR_ARCH_PREFIX,
+				preferenceStore.getString(
+						IContainerGdbDebugPreferenceConstants.PREF_DEFAULT_ARCH_PREFIX));
 		configuration.setAttribute(
 				IGDBLaunchConfigurationConstants.ATTR_DEBUG_NAME,
 				preferenceStore.getString(
