@@ -19,9 +19,9 @@
             superClass="org.yocto.crops.core.toolchain"
             supportsManagedBuild="true">
          <builder
-               arguments="-d ${toolchain_container_id} -g  &quot;BOARD=${board} ZEPHYR_GCC_VARIANT=${zephyr_gcc_variant} ZEPHYR_SDK_INSTALL_DIR=${zephyr_install_dir} ZEPHYR_BASE=${zephyr_base} make -C ${crops_root}/${ProjName}&quot;"
-               cleanBuildTarget="-r pristine"
-               command="${ceed}"
+               arguments=" exec -i ${toolchain_container_id} /bin/bash -c  &quot;export BOARD=${board} &amp;&amp; export ZEPHYR_GCC_VARIANT=${zephyr_gcc_variant}  &amp;&amp; export ZEPHYR_SDK_INSTALL_DIR=${zephyr_install_dir} &amp;&amp; export ZEPHYR_BASE=${zephyr_base} &amp;&amp; make -C ${crops_root}/${ProjName} ${clean}&quot;"
+               cleanBuildTarget=" pristine"
+               command="docker"
                id="org.yocto.crops.zephyr.MakefileBuilder"
                isAbstract="false"
                isVariableCaseSensitive="false"
@@ -121,6 +121,7 @@
 -->
          <targetPlatform
                archList="all"
+               binaryParser="org.eclipse.cdt.utils.elf.parser.ElfParser"
                id="org.yocto.crops.zephyr.targetPlatform1"
                isAbstract="false"
                osList="all"
@@ -134,6 +135,7 @@
             isTest="false"
             superClass="org.yocto.crops.core.cropsProjectType">
          <configuration
+               artifactExtension="elf"
                buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe"
                cleanCommand="rm -rf"
                description="Release"
@@ -147,6 +149,7 @@
             </toolChain>
          </configuration>
          <configuration
+               artifactExtension="elf"
                buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe"
                cleanCommand="rm -rf"
                description="Debug"
@@ -210,7 +213,7 @@
          </simple>
          <simple
                external="true"
-               name="location"
+               name="target"
                nullable="true">
          </simple>
          <simple
@@ -221,6 +224,11 @@
                external="true"
                name="gitBranch"
                nullable="false">
+         </simple>
+         <simple
+               external="true"
+               name="containerName"
+               nullable="true">
          </simple>
       </processType>
       <processType
@@ -236,7 +244,8 @@
          </simple>
          <simple
                external="true"
-               name="gitURI">
+               name="gitURI"
+               nullable="false">
          </simple>
          <simple
                external="true"

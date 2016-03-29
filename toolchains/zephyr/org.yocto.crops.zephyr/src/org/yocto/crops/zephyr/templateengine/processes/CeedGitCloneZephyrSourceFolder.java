@@ -66,6 +66,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.yocto.crops.core.CropsCorePlugin;
 //import org.yocto.crops.cdt.core.docker.DockerUtils;
 import org.yocto.crops.core.preferences.PreferenceConstants;
+import org.yocto.crops.zephyr.ZephyrPlugin;
+import org.yocto.crops.zephyr.internal.ZephyrConsole;
 
 
 /**
@@ -82,6 +84,8 @@ public class CeedGitCloneZephyrSourceFolder extends ProcessRunner {
 	protected boolean savedAutoBuildingValue;
 	protected ProjectCreatedActions pca;
 	protected IManagedBuildInfo info;
+	private static final ZephyrConsole console = ZephyrPlugin.getConsole();
+
 	
 	public CeedGitCloneZephyrSourceFolder() {
 		pca = new ProjectCreatedActions();
@@ -96,9 +100,10 @@ public class CeedGitCloneZephyrSourceFolder extends ProcessRunner {
 	@Override
 	public void process(TemplateCore template, ProcessArgument[] args, String processId, IProgressMonitor monitor) throws ProcessFailureException {
 		String projectName = args[0].getSimpleValue();
-		String location = args[1].getSimpleValue();
+		String target = args[1].getSimpleValue();
 		String gitURI = args[2].getSimpleValue();
 		String gitBranch = args[3].getSimpleValue();
+		String containerName = args[4].getSimpleValue();
 		
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		IProject project = workspace.getRoot().getProject(projectName);
@@ -121,8 +126,9 @@ public class CeedGitCloneZephyrSourceFolder extends ProcessRunner {
 				IOption ceed_path = toolchain.getOptionById(CEED_PATH_OPTION);
 				IOption crops_root = toolchain.getOptionById(CROPS_ROOT_OPTION);
 				IOption toolchain_container_id = toolchain.getOptionById(TOOLCHAIN_CONTAINER_ID_OPTION);
-				StringBuffer command = new StringBuffer();
-				command.append(ceed_path.getStringValue().trim());
+//				StringBuffer command = new StringBuffer();
+				List<String> command = new ArrayList<>();
+				//command.append(ceed_path.getStringValue().trim());
 				/* TODO: spin up the toolchain container on the fly if needed
 				 * Needed if workspace has changed (i.e. spin up on workspace start)
 				 * Needed if new toolchain has been chosen (i.e spin up on project creation)
@@ -130,18 +136,29 @@ public class CeedGitCloneZephyrSourceFolder extends ProcessRunner {
 				 * Because the volume mapped to /crops needs to be the $(workspace_loc)!!!
 				 * docker run <toolchain> -v //path//to//workspace:/crops
 				 */
+
+				command.add("docker");
+				command.add("exec");
+				command.add("-i");
+				command.add(containerName);
 //				command.append(" " + "-l");
 //				command.append(" " + "-d"); //$NON-NLS-1$
 //				
 //				command.append(" " + toolchain_container_id.getStringValue().trim());
 //				command.append(" " + "-g");
 //				command.append(" " + "ls");
-//				command.append(" " + "\"git clone --depth 1 --branch" 
-//						+ " " + gitBranch + " " + "/zephyr-src/" 
-//						+ " " + crops_root.getStringValue().trim() 
-//						+  "/" + projectName
-//						+ "/" + ZEPHYR_SRC +"\"");
-				System.out.println(command);
+				command.add("/bin/bash");
+				command.add("-c");
+				command.add("\"git clone --depth 1 --branch" 
+						+ " " + gitBranch + " " + gitURI 
+						+ " " + crops_root.getStringValue().trim() 
+						+  "/" + projectName
+						+ "/" + ZEPHYR_SRC +"\"");
+				StringBuffer commandStr = new StringBuffer();
+				for(String token : command) {
+					commandStr.append(token + " ");
+				}
+				console.writeOutput(commandStr + "\n");
 //				ProgressMonitorDialog dialog = new ProgressMonitorDialog( getActiveWorkbenchShell());
 //				IRunnableWithProgress runnable = new IRunnableWithProgress() {
 //					@Override
@@ -152,34 +169,34 @@ public class CeedGitCloneZephyrSourceFolder extends ProcessRunner {
 //					}
 //				}
 //				String[] commandArray = {""};
-				String commandStr = command.toString();
-				Job job = new Job(CropsCorePlugin.getId() + "CeedGitCloneZephyrSourceFolder.Job") {
-					private boolean started;
-					private boolean done;
-					
-					@Override
-					protected IStatus run(IProgressMonitor monitor) {
-						monitor.beginTask(getName(), IProgressMonitor.UNKNOWN);
-						
-						while(!done) {
-							if (monitor.isCanceled()) {
-								return Status.CANCEL_STATUS;
-							}
-							if (started) {
-								done = true;
-							}
-							try {
-								Thread.sleep(500);
-							} catch (InterruptedException e) {
-								monitor.done();
-								return Status.CANCEL_STATUS;
-							}
-						}
-						monitor.done();
-						return Status.OK_STATUS;
-					}
-				};
-				ProcessBuilder processBuilder = new ProcessBuilder(commandStr).inheritIO().redirectErrorStream(true);
+//				String[] commandStr = command.toString().split(" ");
+//				Job job = new Job(CropsCorePlugin.getId() + "CeedGitCloneZephyrSourceFolder.Job") {
+//					private boolean started;
+//					private boolean done;
+//					
+//					@Override
+//					protected IStatus run(IProgressMonitor monitor) {
+//						monitor.beginTask(getName(), IProgressMonitor.UNKNOWN);
+//						
+//						while(!done) {
+//							if (monitor.isCanceled()) {
+//								return Status.CANCEL_STATUS;
+//							}
+//							if (started) {
+//								done = true;
+//							}
+//							try {
+//								Thread.sleep(500);
+//							} catch (InterruptedException e) {
+//								monitor.done();
+//								return Status.CANCEL_STATUS;
+//							}
+//						}
+//						monitor.done();
+//						return Status.OK_STATUS;
+//					}
+//				};
+				ProcessBuilder processBuilder = new ProcessBuilder(command).redirectErrorStream(true);
 //				setEnvironment(processBuilder.environment());
 				Process process = processBuilder.start();
 //				try {
@@ -196,12 +213,11 @@ public class CeedGitCloneZephyrSourceFolder extends ProcessRunner {
 					String line=null;
 					while(reader != null && (line=reader.readLine()) != null) {
 //						sync.asyncExec(new Runnable());
-						System.out.println(line);
-						System.out.flush();
+						console.writeOutput(line + "\n");
 						// TODO: do a UI thread update to Console
 					}
 					int exitVal = process.waitFor();
-					System.out.println("Exited with error code " + exitVal);;
+					console.writeOutput("Exited with error code " + exitVal + "\n");
 				} catch (IOException e) {
 					throw new ProcessFailureException(Messages.getString("CeedGitCloneZephyrSourceFolder.3") + e.getMessage(), e); //$NON-NLS-1$
 				} catch (InterruptedException e) {

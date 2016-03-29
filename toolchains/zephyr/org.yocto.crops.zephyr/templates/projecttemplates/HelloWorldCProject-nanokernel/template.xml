@@ -33,6 +33,26 @@
 			description="%HelloWorld.sourceDir.description" type="input"
 			default="%HelloWorld.sourceDir.default" pattern="[a-zA-Z0-9]+"
 			mandatory="false" persist="true" hidden="true" />
+		<property id="gitURI"
+			label="%HelloWorld.gitURI.label"
+			description="%HelloWorld.gitURI.description" type="input"
+			default="%HelloWorld.gitURI.default" pattern=".*"
+			mandatory="false" persist="true" hidden="false" />
+		<property id="gitBranch"
+			label="%HelloWorld.gitBranch.label"
+			description="%HelloWorld.gitBranch.description" type="input"
+			default="%HelloWorld.gitBranch.default" pattern=".*"
+			mandatory="false" persist="true" hidden="false" />
+	 	<property 	id="containerName"
+			label="%HelloWorld.containerName.label"
+			description="%HelloWorld.containerName.description"
+			type="select"
+			default="crops-zephyr-0-7-2-src">
+			<!--  TODO: inject these dynamically from 'ceed -l' -->
+			<item value="crops-zephyr-0-7-2-src"
+				  label="crops-zephyr-0-7-2-src"
+			/>
+		</property>
 	</property-group>
 	
 <!-- 	<property-group id="crops" label="%HelloWorld.crops.label" description="%HelloWorld.crops.description" type="PAGES-ONLY" help="help.html">
@@ -107,9 +127,10 @@
 	<!-- Always triple check the spelling... there is no validation check -->
 	<process type="org.yocto.crops.zephyr.CeedGitCloneZephyrSourceFolder">
 		<simple name="projectName" value="$(projectName)" />
-		<simple name="location" value="$(location)" /> 
-		<simple name="gitURI" value="/zephyr-src/" />
-		<simple name="gitBranch" value="v0.8.0-ln-s" />
+		<simple name="target" value="/crops/$(projectName)/zephyr-project" /> 
+		<simple name="gitURI" value="$(gitURI)" />
+		<simple name="gitBranch" value="$(gitBranch)" />
+		<simple name="containerName" value="$(containerName)" />
 	</process>
 	
 </template>
