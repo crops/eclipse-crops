@@ -29,14 +29,14 @@
    <extension
          point="org.eclipse.ui.commands">
       <category
-            name="Sample Project Nature commands"
-            id="org.yocto.crops.core.sampleNature.category">
+            name="Makefile Project Nature commands"
+            id="org.yocto.crops.core.makefileNature.category">
       </category>
       <command
-            name="Add/RemoveSample Project Nature"
+            name="Add/Remove Makefile Project Nature"
             defaultHandler="org.yocto.crops.core.builder.AddRemoveMakefileNatureHandler"
-            categoryId="org.yocto.crops.core.sampleNature.category"
-            id="org.yocto.crops.core.addRemoveSampleNature">
+            categoryId="org.yocto.crops.core.makefileNature.category"
+            id="org.yocto.crops.core.addRemoveMakefileNature">
       </command>
    </extension>
    <extension
@@ -44,7 +44,7 @@
       <menuContribution
             locationURI="popup:org.eclipse.ui.projectConfigure?after=additions">
          <command
-               commandId="org.yocto.crops.core.addRemoveSampleNature"
+               commandId="org.yocto.crops.core.addRemoveMakefileNature"
                label="Disable Crops Makefile builder"
                style="push">
             <visibleWhen
@@ -67,7 +67,7 @@
             </visibleWhen>
          </command>
          <command
-               commandId="org.yocto.crops.core.addRemoveSampleNature"
+               commandId="org.yocto.crops.core.addRemoveMakefileNature"
                label="Enable Crops Makefile builder"
                style="push">
             <visibleWhen
@@ -121,10 +121,11 @@
    <extension
          point="org.eclipse.ui.propertyPages">
       <page
-            name="CROPS Property Page"
-            nameFilter="*.*"
             class="org.yocto.crops.core.properties.CropsPropertyPage"
-            id="org.yocto.crops.core.properties.cropsPropertyPage">
+            icon="icons/crops-16x16.png"
+            id="org.yocto.crops.core.properties.cropsPropertyPage"
+            name="CROPS Property Page"
+            nameFilter="*.*">
          <enabledWhen>
             <instanceof
                   value="org.eclipse.core.resources.IProject">
@@ -285,6 +286,7 @@
          </tool>
          <targetPlatform
                archList="all"
+               binaryParser="org.eclipse.cdt.utils.elf.parser.ElfParser"
                id="org.yocto.crops.core.targetPlatform1"
                isAbstract="false"
                osList="all">
