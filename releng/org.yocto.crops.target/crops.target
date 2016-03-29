@@ -718,7 +718,7 @@
 <plugin id="org.eclipse.team.cvs.ui"/>
 <plugin id="org.eclipse.team.cvs.ui.source"/>
 <plugin id="org.eclipse.team.ui" version="3.7.200.v20150203-1452"/>
-\<plugin id="org.eclipse.team.ui.source" version="3.7.200.v20150203-1452"/>
+<plugin id="org.eclipse.team.ui.source" version="3.7.200.v20150203-1452"/>
 <plugin id="org.eclipse.test"/>
 <plugin id="org.eclipse.test.performance"/>
 <plugin id="org.eclipse.test.performance.win32"/>
