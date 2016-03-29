@@ -8,8 +8,6 @@ Bundle-Activator: org.yocto.crops.docker.launcher.DockerLaunchUIPlugin
 Bundle-Vendor: %Plugin.vendor
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.eclipse.linuxtools.docker.core;bundle-version="1.1.0",
- org.eclipse.linuxtools.docker.ui;bundle-version="1.1.0",
  org.eclipse.debug.core;bundle-version="3.10.0",
  org.eclipse.debug.ui;bundle-version="3.11.100",
  org.eclipse.cdt.core;bundle-version="5.11.0",
@@ -22,7 +20,9 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.cdt.dsf.gdb.ui;bundle-version="2.5.0",
  org.eclipse.core.variables,
  org.eclipse.cdt.ui;bundle-version="5.11.0",
- org.eclipse.cdt.launch;bundle-version="7.3.0"
+ org.eclipse.cdt.launch;bundle-version="7.3.0",
+ org.eclipse.linuxtools.docker.core;bundle-version="1.2.1",
+ org.eclipse.linuxtools.docker.ui
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yocto.crops.docker.launcher,
