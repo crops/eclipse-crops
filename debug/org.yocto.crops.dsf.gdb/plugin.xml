@@ -3,11 +3,11 @@
 <plugin>
     <extension point="org.eclipse.debug.core.launchDelegates">
       <launchDelegate
-            id="org.eclipse.cdt.examples.dsf.gdb.launchDelegate"
-            type="org.eclipse.cdt.launch.applicationLaunchType"
+            id="org.yocto.crops.dsf.gdb.launchDelegate"
+            type="org.eclipse.cdt.launch.remoteApplicationLaunchType"
             modes="debug"
-            delegate="org.eclipse.cdt.examples.dsf.gdb.launch.GdbExtendedLaunchDelegate"
-            name="Example GDB Extended Launch Delegate"
+            delegate="org.yocto.crops.dsf.gdb.launch.GdbExtendedLaunchDelegate"
+            name="CROPS GDB Extended Launch Delegate"
             delegateDescription="Launch Delegate that uses an example extension to the CDT's GDB launch."
             sourceLocatorId="org.eclipse.cdt.debug.core.sourceLocator"
             sourcePathComputerId="org.eclipse.cdt.debug.core.sourcePathComputer">
@@ -17,66 +17,66 @@
          point="org.eclipse.debug.ui.launchConfigurationTabs">
       <!-- Local application launch tabs-->
       <tab
-            id="org.eclipse.cdt.examples.dsf.gdb.launch.localApplicationLaunch.mainTab"
-            group="org.eclipse.cdt.launch.applicationLaunchTabGroup"
+            id="org.yocto.crops.dsf.gdb.launch.remoteApplicationLaunch.mainTab"
+            group="org.eclipse.cdt.launch.remoteApplicationLaunchTabGroup"
             name="Main"
             class="org.eclipse.cdt.dsf.gdb.internal.ui.launching.CMainTab">
-        <associatedDelegate delegate="org.eclipse.cdt.examples.dsf.gdb.launchDelegate"/>
+        <associatedDelegate delegate="org.yocto.crops.dsf.gdb.launchDelegate"/>
       </tab>
-      <tab id="org.eclipse.cdt.examples.dsf.gdb.launch.localApplicationLaunch.argumentsTab"
-            group="org.eclipse.cdt.launch.applicationLaunchTabGroup"
+      <tab id="org.yocto.crops.dsf.gdb.launch.remoteApplicationLaunch.argumentsTab"
+            group="org.eclipse.cdt.launch.remoteApplicationLaunchTabGroup"
             name="Arguments"
             class="org.eclipse.cdt.dsf.gdb.internal.ui.launching.CArgumentsTab">
-        <associatedDelegate delegate="org.eclipse.cdt.examples.dsf.gdb.launchDelegate"/>
+        <associatedDelegate delegate="org.yocto.crops.dsf.gdb.launchDelegate"/>
         <placement after="org.eclipse.cdt.dsf.gdb.launch.mainTab"/>
       </tab>
       <tab 
-            id="org.eclipse.cdt.examples.dsf.gdb.launch.localApplicationLaunch.environmentTab"
-            group="org.eclipse.cdt.launch.applicationLaunchTabGroup"
+            id="org.yocto.crops.dsf.gdb.launch.remoteApplicationLaunch.environmentTab"
+            group="org.eclipse.cdt.launch.remoteApplicationLaunchTabGroup"
             name="Environment"
             class="org.eclipse.debug.ui.EnvironmentTab">
-         <associatedDelegate delegate="org.eclipse.cdt.examples.dsf.gdb.launchDelegate"/>
+         <associatedDelegate delegate="org.yocto.crops.dsf.gdb.launchDelegate"/>
          <placement after="org.eclipse.cdt.dsf.gdb.launch.argumentsTab"/>
       </tab>
       <tab
-            id="org.eclipse.cdt.examples.dsf.gdb.launch.localApplicationLaunch.debuggerTab"
-            group="org.eclipse.cdt.launch.applicationLaunchTabGroup"
+            id="org.yocto.crops.dsf.gdb.launch.remoteApplicationLaunch.debuggerTab"
+            group="org.eclipse.cdt.launch.remoteApplicationLaunchTabGroup"
             name="Debugger"
-            class="org.eclipse.cdt.dsf.gdb.internal.ui.launching.LocalApplicationCDebuggerTab">
-        <associatedDelegate delegate="org.eclipse.cdt.examples.dsf.gdb.launchDelegate"/>
+            class="org.eclipse.cdt.dsf.gdb.internal.ui.launching.RemoteApplicationCDebuggerTab">
+        <associatedDelegate delegate="org.yocto.crops.dsf.gdb.launchDelegate"/>
         <placement after="org.eclipse.debug.ui.environmentTab"/>
       </tab>
       <tab
-            id="org.eclipse.cdt.examples.dsf.gdb.launch.localApplicationLaunch.sourceLookupTab"
-            group="org.eclipse.cdt.launch.applicationLaunchTabGroup"
+            id="org.yocto.crops.dsf.gdb.launch.remoteApplicationLaunch.sourceLookupTab"
+            group="org.eclipse.cdt.launch.remoteApplicationLaunchTabGroup"
             name="Source"
             class="org.eclipse.debug.ui.sourcelookup.SourceLookupTab">
-        <associatedDelegate delegate="org.eclipse.cdt.examples.dsf.gdb.launchDelegate"/>
+        <associatedDelegate delegate="org.yocto.crops.dsf.gdb.launchDelegate"/>
         <placement after="org.eclipse.cdt.dsf.gdb.launch.debuggerTab"/>
       </tab>
       <tab
-            id="org.eclipse.cdt.examples.dsf.gdb.launch.localApplicationLaunch.commonTab"
-            group="org.eclipse.cdt.launch.applicationLaunchTabGroup"
+            id="org.yocto.crops.dsf.gdb.launch.remoteApplicationLaunch.commonTab"
+            group="org.eclipse.cdt.launch.remoteApplicationLaunchTabGroup"
             name="Common"
             class="org.eclipse.debug.ui.CommonTab">
-        <associatedDelegate delegate="org.eclipse.cdt.examples.dsf.gdb.launchDelegate"/>
+        <associatedDelegate delegate="org.yocto.crops.dsf.gdb.launchDelegate"/>
         <placement after="org.eclipse.debug.ui.sourceLookupTab"/>
       </tab>
       <!-- Tabs added to Run launch -->
       <tab
-            id="org.eclipse.cdt.examples.dsf.gdb.launch.localApplicationLaunch.extraTab"
-            group="org.eclipse.cdt.launch.applicationRunLaunchTabGroup"
-            name="Extra"
-            class="org.eclipse.cdt.examples.dsf.gdb.ui.ExtendedTab">
-        <associatedDelegate delegate="org.eclipse.cdt.cdi.launch.localCLaunch"/>
+            id="org.yocto.crops.dsf.gdb.launch.remoteApplicationLaunch.extraTab"
+            group="org.eclipse.cdt.launch.remoteApplicationLaunchTabGroup"
+            name="OpenOCD"
+            class="org.yocto.crops.dsf.gdb.ui.ExtendedTab">
+        <associatedDelegate delegate="org.eclipse.cdt.dsf.gdb.launch.remoteCLaunch"/>
         <!-- Place after main tab to check its id -->
-        <placement after="org.eclipse.cdt.cdi.launch.mainTab"/>
+        <placement after="org.eclipse.cdt.dsf.gdb.launch.mainTab"/>
       </tab>
    </extension>   
    <extension point="org.eclipse.core.runtime.adapters">
       <factory 
-        	class="org.eclipse.cdt.examples.dsf.gdb.GdbExtendedAdapterFactory" 
-	        adaptableType="org.eclipse.cdt.examples.dsf.gdb.launch.GdbExtendedLaunch">
+        	class="org.yocto.crops.dsf.gdb.GdbExtendedAdapterFactory" 
+	        adaptableType="org.yocto.crops.dsf.gdb.launch.GdbExtendedLaunch">
          <adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementContentProvider"/>
          <adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IModelProxyFactory"/>
          <adapter type="org.eclipse.debug.ui.contexts.ISuspendTrigger"/>

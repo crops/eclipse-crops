@@ -23,6 +23,7 @@ import org.eclipse.ui.PlatformUI;
  * This class extends the existing "Terminate" command by adding a popup 
  * confirmation before terminating the session.
  */
+@SuppressWarnings("restriction")
 public class DsfExtendedTerminateCommand extends DsfTerminateCommand {
 
 	public DsfExtendedTerminateCommand(DsfSession session) {

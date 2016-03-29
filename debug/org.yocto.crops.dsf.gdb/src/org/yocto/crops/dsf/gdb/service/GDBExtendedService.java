@@ -34,6 +34,7 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IStatusHandler;
 import org.osgi.framework.BundleContext;
 
+@SuppressWarnings("restriction")
 public class GDBExtendedService extends AbstractDsfService implements IGDBExtendedFunctions {
 	
 	private IMICommandControl fCommandControl;
@@ -78,7 +79,7 @@ public class GDBExtendedService extends AbstractDsfService implements IGDBExtend
 	protected BundleContext getBundleContext() {
 		return GDBExamplePlugin.getBundleContext();
 	}
-
+	
 	@Override
 	public void notify(ICommandControlDMContext ctx, String str, RequestMonitor rm) {
 		IStatus status = new Status( 

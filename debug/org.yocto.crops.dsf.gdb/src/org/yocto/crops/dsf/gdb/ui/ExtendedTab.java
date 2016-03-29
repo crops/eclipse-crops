@@ -24,16 +24,17 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
+@SuppressWarnings("restriction")
 public class ExtendedTab extends CLaunchConfigurationTab {
 
 	@Override
 	public String getName() {
-		return "Extra"; //$NON-NLS-1$
+		return "OpenOCD"; //$NON-NLS-1$
 	}
 	
 	@Override
 	public String getId() {
-		return "org.yocto.crops.dsf.gdb.extra"; //$NON-NLS-1$
+		return "org.yocto.crops.dsf.gdb.openocd"; //$NON-NLS-1$
 	}
 
 	@Override
