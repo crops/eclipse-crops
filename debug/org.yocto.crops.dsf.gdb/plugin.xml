@@ -70,7 +70,7 @@
             class="org.yocto.crops.dsf.gdb.ui.ExtendedTab">
         <associatedDelegate delegate="org.eclipse.cdt.dsf.gdb.launch.remoteCLaunch"/>
         <!-- Place after main tab to check its id -->
-        <placement after="org.eclipse.cdt.dsf.gdb.launch.mainTab"/>
+        <placement after="org.eclipse.debug.ui.CommonTab"/>
       </tab>
    </extension>   
    <extension point="org.eclipse.core.runtime.adapters">
