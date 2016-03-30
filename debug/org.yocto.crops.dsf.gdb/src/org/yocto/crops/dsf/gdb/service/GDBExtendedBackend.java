@@ -53,7 +53,7 @@ public class GDBExtendedBackend extends GDBBackend_HEAD {
 	private static IPath toContainerPath(IPath hostPath) {
 		// First verify we are dealing with a proper project.
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		final String workspaceName = workspace.getRoot().getName();
+		String workspaceName = workspace.getRoot().getLocation().lastSegment();
 		// Now verify we know the program to debug.
 		// We can verify the Host local path
 		// but then we must translate that into the container path

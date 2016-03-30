@@ -16,6 +16,7 @@ import org.eclipse.cdt.dsf.gdb.service.command.GDBControl;
 import org.eclipse.cdt.dsf.gdb.service.command.GDBControl_7_0;
 import org.eclipse.cdt.dsf.gdb.service.command.GDBControl_7_2;
 import org.eclipse.cdt.dsf.gdb.service.command.GDBControl_7_4;
+import org.eclipse.cdt.dsf.mi.service.IMIBackend;
 import org.eclipse.cdt.dsf.mi.service.command.CommandFactory;
 import org.eclipse.cdt.dsf.service.DsfSession;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -55,6 +56,11 @@ public class GdbExtendedDebugServicesFactory extends GdbDebugServicesFactory {
 			return new GDBControl(session, config, new GdbExtendedCommandFactory_6_8());
 		}
 		return new GDBControl(session, config, new CommandFactory());
+	}
+	
+	@Override
+	protected IMIBackend createBackendGDBService(DsfSession session, ILaunchConfiguration lc) {
+		return new GDBExtendedBackend(session, lc);
 	}
 	
 	protected IGDBExtendedFunctions createExtendedService(DsfSession session) {
