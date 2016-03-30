@@ -32,6 +32,7 @@ public class WizardOperation implements IRunnableWithProgress {
 		String projectName = (String) MBSCustomPageManager.getPageProperty(WizardPage.PAGE_ID, WizardPage.CROPS_PROJECT_NAME);
 		String path = (String) MBSCustomPageManager.getPageProperty(WizardPage.PAGE_ID, WizardPage.CEED_COMMAND_PATH);
 		String board = (String) MBSCustomPageManager.getPageProperty(WizardPage.PAGE_ID, WizardPage.ZEPHYR_BOARD);
+		String arch = (String) MBSCustomPageManager.getPageProperty(WizardPage.PAGE_ID, WizardPage.ZEPHYR_ARCH);
 		Boolean expert = (Boolean) MBSCustomPageManager.getPageProperty(WizardPage.PAGE_ID, WizardPage.EXPERT_MODE);
 		String gccVariant = (String) MBSCustomPageManager.getPageProperty(WizardPage.PAGE_ID, WizardPage.GCC_VARIANT);
 		String installDir = (String) MBSCustomPageManager.getPageProperty(WizardPage.PAGE_ID, WizardPage.INSTALL_DIR);
@@ -39,6 +40,7 @@ public class WizardOperation implements IRunnableWithProgress {
 		
 		SharedDefaults.getInstance().getSharedDefaultsMap().put(WizardPage.SHARED_DEFAULTS_PATH_KEY, path);
 		SharedDefaults.getInstance().getSharedDefaultsMap().put(WizardPage.SHARED_DEFAULTS_BOARD_KEY, board);
+		SharedDefaults.getInstance().getSharedDefaultsMap().put(WizardPage.SHARED_DEFAULTS_ARCH_KEY, arch);
 		SharedDefaults.getInstance().getSharedDefaultsMap().put(WizardPage.SHARED_DEFAULTS_EXPERT_MODE_KEY, expert.toString());
 		SharedDefaults.getInstance().getSharedDefaultsMap().put(WizardPage.SHARED_DEFAULTS_GCC_VARIANT_KEY, gccVariant);
 		SharedDefaults.getInstance().getSharedDefaultsMap().put(WizardPage.SHARED_DEFAULTS_INSTALL_DIR_KEY, installDir);

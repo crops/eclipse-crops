@@ -27,6 +27,8 @@ import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.yocto.crops.core.CropsCorePlugin;
 import org.yocto.crops.zephyr.preferences.PreferenceConstants;
 import org.yocto.crops.zephyr.ZephyrConstants;
+import org.yocto.crops.zephyr.ZephyrConstants.Arches;
+import org.yocto.crops.zephyr.ZephyrConstants.Arches.arch_id;
 import org.yocto.crops.zephyr.ZephyrConstants.Boards;
 import org.yocto.crops.zephyr.ZephyrConstants.Boards.board_id;
 
@@ -36,6 +38,7 @@ public class WizardPage extends MBSCustomPage {
 	private boolean finish = false;
 	private Text pathText;
 	private Combo boardCombo;
+	private Combo archCombo;
 	private Boolean expertBoolean;
 	private Text gccVariantText;
 	private Text installDirText;
@@ -46,6 +49,7 @@ public class WizardPage extends MBSCustomPage {
 	public static final String CROPS_PROJECT_NAME = "cropsProjectName"; //$NON-NLS-1$
 	public static final String CEED_COMMAND_PATH = "ceedCommandPath"; //$NON-NLS-1$
 	public static final String ZEPHYR_BOARD = "zephyrBoard"; //$NON-NLS-1$
+	public static final String ZEPHYR_ARCH = "zephyrArch"; //$NON-NLS-1$
 	public static final String EXPERT_MODE = "expertMode"; //$NON-NLS-1$
 	public static final String GCC_VARIANT = "gccVariant"; //$NON-NLS-1$
 	public static final String INSTALL_DIR = "installDir"; //$NON-NLS-1$
@@ -53,6 +57,7 @@ public class WizardPage extends MBSCustomPage {
 	
 	static final String SHARED_DEFAULTS_PATH_KEY = "path"; //$NON-NLS-1$
 	static final String SHARED_DEFAULTS_BOARD_KEY = "board"; //$NON-NLS-1$
+	static final String SHARED_DEFAULTS_ARCH_KEY = "arch"; //$NON-NLS-1$
 	static final String SHARED_DEFAULTS_EXPERT_MODE_KEY = "expert"; //$NON-NLS-1$
 	static final String SHARED_DEFAULTS_GCC_VARIANT_KEY = "gccVariant"; //$NON-NLS-1$
 	static final String SHARED_DEFAULTS_INSTALL_DIR_KEY = "installDir"; //$NON-NLS-1$
@@ -64,6 +69,7 @@ public class WizardPage extends MBSCustomPage {
 		IPreferenceStore store = CropsCorePlugin.getDefault().getPreferenceStore();
 		
 		MBSCustomPageManager.addPageProperty(PAGE_ID, ZEPHYR_BOARD, store.getDefaultString(PreferenceConstants.P_ZEPHYR_BOARD));
+		MBSCustomPageManager.addPageProperty(PAGE_ID, ZEPHYR_ARCH, store.getDefaultString(PreferenceConstants.P_ZEPHYR_ARCH));
 		MBSCustomPageManager.addPageProperty(PAGE_ID, GCC_VARIANT, store.getDefaultString(PreferenceConstants.P_ZEPHYR_GCC_VARIANT));
 		MBSCustomPageManager.addPageProperty(PAGE_ID, INSTALL_DIR, store.getDefaultString(PreferenceConstants.P_ZEPHYR_INSTALL_DIR));
 		MBSCustomPageManager.addPageProperty(PAGE_ID, ZEPHYR_BASE, store.getDefaultString(PreferenceConstants.P_ZEPHYR_BASE));
@@ -145,6 +151,21 @@ public class WizardPage extends MBSCustomPage {
 			@Override
 			public void modifyText(ModifyEvent e) {
 				updateBoardProperty();
+			}
+		});
+
+		Label archLabel = new Label(composite, SWT.NONE);
+		boardLabel.setText(Messages.WizardPage_arch);
+		Combo archCombo = new Combo(composite, SWT.DROP_DOWN);
+		Arches arches = new Arches();
+		for( arch_id id : arches.getArches().keySet()) {
+			archCombo.add(arches.getArch(id).toString());
+		}
+		boardCombo.addModifyListener(new ModifyListener() {
+
+			@Override
+			public void modifyText(ModifyEvent e) {
+				updateArchProperty();
 			}
 		});
 
@@ -332,6 +353,9 @@ public class WizardPage extends MBSCustomPage {
 		MBSCustomPageManager.addPageProperty(PAGE_ID, ZEPHYR_BOARD, boardCombo.getText());
 	}
 	
+	private void updateArchProperty() {
+		MBSCustomPageManager.addPageProperty(PAGE_ID,  ZEPHYR_ARCH, archCombo.getText());
+	}
 	private void updateGccVariantProperty() {
 		MBSCustomPageManager.addPageProperty(PAGE_ID, GCC_VARIANT, gccVariantText.getText());
 	}

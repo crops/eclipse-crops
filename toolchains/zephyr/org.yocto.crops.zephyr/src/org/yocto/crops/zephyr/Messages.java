@@ -12,6 +12,7 @@ public class Messages extends NLS {
 	public static String WizardPage_title;
 	
 	public static String WizardPage_board;
+	public static String WizardPage_arch;
 	public static String WizardPage_zephyr_install_dir;
 	public static String WizardPage_zephyr_gcc_variant;
 	public static String WizardPage_zephyr_base;

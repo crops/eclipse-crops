@@ -39,6 +39,8 @@ public class ZephyrConfigurationEnvironmentVariableSupplier extends CropsConfigu
 		/* zephyr specific environment variables */
 		if (ZephyrBoardEnvironmentVariable.isVar(variableName))
 			return ZephyrBoardEnvironmentVariable.create(configuration);
+		if (ZephyrArchEnvironmentVariable.isVar(variableName))
+			return ZephyrArchEnvironmentVariable.create(configuration);
 		if (ZephyrSdkInstallDirEnvironmentVariable.isVar(variableName))
 			return ZephyrSdkInstallDirEnvironmentVariable.create(configuration);
 		if (ZephyrGccVariantEnvironmentVariable.isVar(variableName))
@@ -72,6 +74,7 @@ public class ZephyrConfigurationEnvironmentVariableSupplier extends CropsConfigu
 		IBuildEnvironmentVariable codi_socket = ContainerDispatcherSocketEnvironmentVariable.create(configuration);
 		IBuildEnvironmentVariable toolchain_container_id = ToolchainContainerIDEnvironmentVariable.create(configuration);
 		IBuildEnvironmentVariable board = ZephyrBoardEnvironmentVariable.create(configuration);
+		IBuildEnvironmentVariable arch = ZephyrArchEnvironmentVariable.create(configuration);
 		IBuildEnvironmentVariable install_dir = ZephyrSdkInstallDirEnvironmentVariable.create(configuration);
 		IBuildEnvironmentVariable gcc_variant = ZephyrGccVariantEnvironmentVariable.create(configuration);
 		IBuildEnvironmentVariable zephyr_base = ZephyrBaseEnvironmentVariable.create(configuration);
@@ -93,6 +96,8 @@ public class ZephyrConfigurationEnvironmentVariableSupplier extends CropsConfigu
 			variables.add(toolchain_container_id);
 		if (board != null)
 			variables.add(board);
+		if (arch != null)
+			variables.add(arch);
 		if (install_dir != null)
 			variables.add(install_dir);
 		if (gcc_variant != null)
@@ -359,6 +364,48 @@ public class ZephyrConfigurationEnvironmentVariableSupplier extends CropsConfigu
 		
 		public String getValue() {
 			return zephyr_board;
+		}
+
+		@Override
+		public String getDelimiter() {
+			return CropsUtils.isWin() ? ";" : ":"; //$NON-NLS-1$ //$NON-NLS-2$
+		}
+	}
+
+	private static class ZephyrArchEnvironmentVariable implements IBuildEnvironmentVariable {
+		
+		public static String name = "arch"; //$NON-NLS-1$
+		
+		private String zephyr_arch;
+		
+		private ZephyrArchEnvironmentVariable(String zephyr_arch) {
+			this.zephyr_arch = zephyr_arch;
+		}
+		
+		public static ZephyrArchEnvironmentVariable create(IConfiguration configuration) {
+			IPreferenceStore store = ZephyrPlugin.getDefault().getPreferenceStore();
+			String system_zephyr_arch = store.getDefaultString(PreferenceConstants.P_ZEPHYR_ARCH);
+			// TODO: use regex to validate based on arches queried from codi or JSON
+			return new ZephyrArchEnvironmentVariable(system_zephyr_arch);
+		}
+		
+		public static boolean isVar(String name) {
+			// Windows has case insensitive env var names
+			return CropsUtils.isWin()
+					? name.equalsIgnoreCase(ZephyrArchEnvironmentVariable.name)
+					: name.equals(ZephyrArchEnvironmentVariable.name);
+		}
+		
+		public String getName() {
+			return name;
+		}
+		
+		public int getOperation() {
+			return IBuildEnvironmentVariable.ENVVAR_REPLACE;
+		}
+		
+		public String getValue() {
+			return zephyr_arch;
 		}
 
 		@Override

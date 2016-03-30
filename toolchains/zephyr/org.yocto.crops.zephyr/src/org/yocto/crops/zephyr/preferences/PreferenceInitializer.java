@@ -66,6 +66,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(PreferenceConstants.P_ZEPHYR_BOARD, "arduino_101");
 		store.setDefault(PreferenceConstants.P_ZEPHYR_GCC_VARIANT, "zephyr");
 		store.setDefault(PreferenceConstants.P_ZEPHYR_INSTALL_DIR, "/opt/zephyr-sdk");
+		store.setDefault(PreferenceConstants.P_ZEPHYR_ARCH, "x86");
 		/* TODO: switch ZEPHYR_BASE depending on type of container...
 		 * "fat" containers will have ZEPYHYR_BASE internal
 		 * "skinny" containers will need external ZEPHYR_BASE

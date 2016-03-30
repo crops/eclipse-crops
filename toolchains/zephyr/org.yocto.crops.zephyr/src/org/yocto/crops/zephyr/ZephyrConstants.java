@@ -4,11 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ZephyrConstants {
-	/* TODO handle these a different way? */
-	private static final String ZEPHYR_SDK_VERSION = "0.7.2";
-	private static final String ZEPHYR_GIT_REPO = "http://github.com/crops:8888/todor/zephyr.git";
-	private static final String ZEPHYR_GIT_BRANCH = "v0.8.0-ln-s";
-	private static final String ZEPHYR_PROJECT = "zephyr-project";
 	
 	public static class Boards {
 	/* zephyr-project/boards */
@@ -51,6 +46,30 @@ public class ZephyrConstants {
 		}
 	}
 
+	public static class Arches {
+	/* zephyr-project/arch */
+		public String getArch(arch_id id) {
+			return getArches().get(id);
+		}
+			
+		/* Assuming we want nicer names we would use this Map */
+		public Map<arch_id, String> getArches() {
+			Map<arch_id, String> map = new HashMap<>();
+			map.put(arch_id.arc, "arc");
+			map.put(arch_id.arm, "arm");
+			map.put(arch_id.x86, "x86");
+			return map;
+		}
+			
+		/* TODO: pull these from JSON file provided by toolchain container */
+		public enum arch_id {
+			arc,
+			arm,
+			x86
+		}
+	}
+
+	
 	/* zephyr-project/arch */
 	enum Arch {
 	arc,

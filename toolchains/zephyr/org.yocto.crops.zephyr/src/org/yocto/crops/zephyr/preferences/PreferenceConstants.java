@@ -11,4 +11,6 @@ public class PreferenceConstants {
 	public static final String P_ZEPHYR_INSTALL_DIR = "zephyrInstallDirPreference";
 	
 	public static final String P_ZEPHYR_BASE = "zephyrBasePreference";
+	
+	public static final String P_ZEPHYR_ARCH = "zephyrArchPreference";
 }

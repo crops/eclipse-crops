@@ -60,7 +60,13 @@ public class ZephyrPreferencePage
 		/* TODO: figure out the generic CROPS way to expand "boards" from JSON */
 //		Set<String> boardNames = Toolchain.getBoardNames();
 //		String[][] boardNamesArray = new String[boardNames.size()][2];
-		String[][] boardNames = new String[][]{{"arduino_101","arduino_101"}};
+		String[][] boardNames = new String[][]{
+								{"arduino_101","arduino_101"},
+								{"arduino_101_sss","arduino_101_sss"}};
+		String[][] archNames = new String[][] {
+								{"arc","arc"},
+								{"arm","arm"},
+								{"x86","x86"}};
 //		int i = 0;
 //		for(String boardName : boardNames) {
 //			boardNamesArray[i][0] = boardName;
@@ -71,6 +77,11 @@ public class ZephyrPreferencePage
 			new ComboFieldEditor(PreferenceConstants.P_ZEPHYR_BOARD,
 								 "Zephyr &Board:",
 								 boardNames,
+								 getFieldEditorParent()));
+		addField(
+			new ComboFieldEditor(PreferenceConstants.P_ZEPHYR_ARCH,
+								 "Zephyr &Arch:",
+								 archNames,
 								 getFieldEditorParent()));
 		addField(
 			new StringFieldEditor(PreferenceConstants.P_ZEPHYR_GCC_VARIANT,

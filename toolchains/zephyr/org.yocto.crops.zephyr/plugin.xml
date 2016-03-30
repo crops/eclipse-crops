@@ -46,6 +46,17 @@
          </option>
          <option
                category="org.yocto.crops.zephyr.category.zephyr_defaults"
+               command="ARCH="
+               id="crops.cdt.managedbuild.option.zephyr_arch"
+               isAbstract="false"
+               name="arch"
+               resourceFilter="all"
+               tip="Zephyr target architecture"
+               valueHandler="org.yocto.crops.zephyr.ZephyrArchOptionValueHandler"
+               valueType="string">
+         </option>
+         <option
+               category="org.yocto.crops.zephyr.category.zephyr_defaults"
                command="ZEPHYR_SDK_INSTALL_DIR="
                id="crops.cdt.managedbuild.option.zephyr_install_dir"
                isAbstract="false"
