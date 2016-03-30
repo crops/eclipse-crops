@@ -115,13 +115,13 @@ void philEntry(void)
 		TAKE(f1);
 		TAKE(f2);
 
-		PRINT(id, "EATING  ");
+		PRINT(id, "$(message)");
 		RANDDELAY(id);
 
 		GIVE(f2);
 		GIVE(f1);
 
-		PRINT(id, "THINKING");
+		PRINT(id, "$(message2)");
 		RANDDELAY(id);
 	}
 }
