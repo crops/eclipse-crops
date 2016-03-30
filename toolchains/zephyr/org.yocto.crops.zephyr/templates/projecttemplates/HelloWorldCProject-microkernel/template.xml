@@ -34,7 +34,7 @@
 			mandatory="false" persist="true" hidden="true" />
 		<property id="target" label="%HelloWorld.target.label"
 			description="%HelloWorld.target.description" type="input"
-			default="%HelloWorld.target.default" pattern=".*"
+			default="/crops/$(projectName)/zephyr-project" pattern=".*"
 			mandatory="true" persist="true" hidden="false" />
 		<property id="gitURI" label="%HelloWorld.gitURI.label"
 			description="%HelloWorld.gitURI.description" type="input"
@@ -94,7 +94,7 @@
 	<!-- Always triple check the spelling... there is no validation check -->
 	<process type="org.yocto.crops.zephyr.ContainerGitCloneZephyrSourceFolder">
 		<simple name="projectName" value="$(projectName)" />
-		<simple name="target" value="$(target)" /> 
+		<simple name="target" value="/crops/$(projectName)/zephyr-project" /> 
 		<simple name="gitURI" value="$(gitURI)" />
 		<simple name="gitBranch" value="$(gitBranch)" />
 		<simple name="containerName" value="$(containerName)" />

@@ -167,6 +167,14 @@
    <extension
          point="org.eclipse.cdt.core.templates">
       <template
+            id="org.yocto.crops.templates.zephyr.microkernel.HelloWorldCProject"
+            location="templates/projecttemplates/HelloWorldCProject-microkernel/template.xml"
+            projectType="org.eclipse.cdt.build.core.buildArtefactType.exe">
+         <toolChain
+               id="org.yocto.crops.zephyr.toolchain">
+         </toolChain>
+      </template>
+      <template
             id="org.yocto.crops.templates.zephyr.nanokernel.HelloWorldCProject"
             location="templates/projecttemplates/HelloWorldCProject-nanokernel/template.xml"
             projectType="org.eclipse.cdt.build.core.buildArtefactType.exe">
@@ -175,8 +183,16 @@
          </toolChain>
       </template>
       <template
-            id="org.yocto.crops.templates.zephyr.microkernel.HelloWorldCProject"
-            location="templates/projecttemplates/HelloWorldCProject-microkernel/template.xml"
+            id="org.yocto.crops.templates.zephyr.microkernel.PhilosophersCProject"
+            location="templates/projecttemplates/PhilosophersCProject-microkernel/template.xml"
+            projectType="org.eclipse.cdt.build.core.buildArtefactType.exe">
+         <toolChain
+               id="org.yocto.crops.zephyr.toolchain">
+         </toolChain>
+      </template>
+      <template
+            id="org.yocto.crops.templates.zephyr.nanokernel.PhilosophersCProject"
+            location="templates/projecttemplates/PhilosophersCProject-nanokernel/template.xml"
             projectType="org.eclipse.cdt.build.core.buildArtefactType.exe">
          <toolChain
                id="org.yocto.crops.zephyr.toolchain">

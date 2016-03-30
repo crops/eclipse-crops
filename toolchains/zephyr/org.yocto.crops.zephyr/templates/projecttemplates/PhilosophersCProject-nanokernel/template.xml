@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<template type="ProjTempl" version="1.0" supplier="Intel" revision="1.0" author="Zephyr contributors"
+		copyright="Copyright (c) 2016 Intel Corporation and others. All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available athttp://www.eclipse.org/legal/epl-v10.html"
+		id="PhilosphersCProject-nanokernel" label="%Philosphers.CNanokerneltemplate.label" description="%Philosphers.CNanokerneltemplate.description"
+		 help="help.html">
+
+	<property-group id="basics" label="%Philosphers.basics.label" description="%Philosphers.basics.description" type="PAGES-ONLY" help="help.html">
+		<property id="author"
+			label="%Philosphers.author.label"
+			description="%Philosphers.author.description"
+			type="input"
+			pattern=".*"
+			default="$(user.name)"
+			hidden="false"
+			persist="true"/>
+		<property id="copyright"
+			label="%Philosphers.copyright.label"
+			description="%Philosphers.copyright.description"
+			type="input"
+			pattern=".*"
+			default="%Philosphers.copyright.default"
+			hidden="false"
+			persist="true"/>
+		<property id="message"
+			label="%Philosphers.message.label"
+			description="%Philosphers.message.description"
+			type="input"
+			pattern=".*"
+			default="%Philosphers.message.default"
+			hidden="false"
+			persist="true"/>
+		<property id="message2"
+			label="%Philosphers.message2.label"
+			description="%Philosphers.message2.description"
+			type="input"
+			pattern=".*"
+			default="%Philosphers.message2.default"
+			hidden="false"
+			persist="true"/>
+		<property id="sourceDir" label="%Philosphers.sourceDir.label"
+			description="%Philosphers.sourceDir.description" type="input"
+			default="%Philosphers.sourceDir.default" pattern="[a-zA-Z0-9]+"
+			mandatory="false" persist="true" hidden="true" />
+		<property id="gitURI"
+			label="%Philosphers.gitURI.label"
+			description="%Philosphers.gitURI.description" type="input"
+			default="%Philosphers.gitURI.default" pattern=".*"
+			mandatory="false" persist="true" hidden="false" />
+		<property id="gitBranch"
+			label="%Philosphers.gitBranch.label"
+			description="%Philosphers.gitBranch.description" type="input"
+			default="%Philosphers.gitBranch.default" pattern=".*"
+			mandatory="false" persist="true" hidden="false" />
+	 	<property 	id="containerName"
+			label="%Philosphers.containerName.label"
+			description="%Philosphers.containerName.description"
+			type="select"
+			default="crops-zephyr-0-7-2-src">
+			<!--  TODO: inject these dynamically from 'ceed -l' -->
+			<item value="crops-zephyr-0-7-2-src"
+				  label="crops-zephyr-0-7-2-src"
+			/>
+		</property>
+	</property-group>
+	
+<!-- 	<property-group id="crops" label="%Philosphers.crops.label" description="%Philosphers.crops.description" type="PAGES-ONLY" help="help.html">
+		<property 	id="ceedExec"
+			      	label="%Philosphers.ceedExec.label"
+			      	description="%Philosphers.ceedExec.description"
+			      	type="input"
+			      	default="${ceed}"
+			      	pattern=".*"
+			      	mandatory="false"
+			      	persist="true"
+			      	/>
+		<property	id="cropsRoot"
+	  				label="%Philosphers.cropsRoot.label"
+					description="%Philosphers.cropsRoot.description"
+					type="input"
+					default="${crops_root}"
+					pattern=".*"
+					/>
+	 	<property 	id="toolchainContainerId"
+	 				label="%Philosphers.toolchainContainerId.label"
+					description="%Philosphers.toolchainContainerId.description"
+					type="select"
+					default="0">
+					TODO: inject these dynamically from 'ceed -l'
+					<item value="crops/zephyr:0.7.1"
+						  label="crops/zephyr:0.7.1"
+					/>
+					<item value="crops/toolchain:i586"
+						  label="crops/toolchain:i586"
+					/>
+		</property>
+	</property-group>
+ -->
+	<process type="org.eclipse.cdt.core.CreateSourceFolder">
+		<simple name="projectName" value="$(projectName)"/>
+		<simple name="path" value="$(sourceDir)"/>
+	</process>
+
+	<process type="org.eclipse.cdt.core.AddFiles">
+		<simple name="projectName" value="$(projectName)"/>
+		<complex-array name="files">
+ 			<element>
+				<simple name="source" value="src/phil_fiber.c"/>
+				<simple name="target" value="$(sourceDir)/phil_fiber.c"/>
+				<simple name="replaceable" value="true"/>
+			</element>
+			<element>
+				<simple name="source" value="src/phil_task.c"/>
+				<simple name="target" value="$(sourceDir)/phil_task.c"/>
+				<simple name="replaceable" value="true"/>
+			</element>
+			<element>
+				<simple name="source" value="src/phil.h"/>
+				<simple name="target" value="$(sourceDir)/phil.h"/>
+				<simple name="replaceable" value="true"/>
+			</element>
+			<element>
+				<simple name="source" value="src/Makefile"/>
+				<simple name="target" value="$(sourceDir)/Makefile"/>
+				<simple name="replaceable" value="true"/>
+			</element>
+			<element>
+				<simple name="source" value="Makefile"/>
+				<simple name="target" value="Makefile"/>
+				<simple name="replaceable" value="true"/>
+			</element>
+			<element>
+				<simple name="source" value="prj_arc.conf"/>
+				<simple name="target" value="prj_arc.conf"/>
+				<simple name="replaceable" value="true"/>
+			</element>
+			<element>
+				<simple name="source" value="prj_arm.conf"/>
+				<simple name="target" value="prj_arm.conf"/>
+				<simple name="replaceable" value="true"/>
+			</element>
+			<element>
+				<simple name="source" value="prj_x86.conf"/>
+				<simple name="target" value="prj_x86.conf"/>
+				<simple name="replaceable" value="true"/>
+			</element>
+			<element>
+				<simple name="source" value="README.txt"/>
+				<simple name="target" value="README.txt"/>
+				<simple name="replaceable" value="true"/>
+			</element>
+			<element>
+				<simple name="source" value="testcase.ini"/>
+				<simple name="target" value="testcase.ini"/>
+				<simple name="replaceable" value="true"/>
+			</element>
+		</complex-array>
+	</process>
+	
+	<!-- prefix is the bundle name, not the fully qualified class name -->
+	<!-- Always triple check the spelling... there is no validation check -->
+	<process type="org.yocto.crops.zephyr.CeedGitCloneZephyrSourceFolder">
+		<simple name="projectName" value="$(projectName)" />
+		<simple name="target" value="/crops/$(projectName)/zephyr-project" /> 
+		<simple name="gitURI" value="$(gitURI)" />
+		<simple name="gitBranch" value="$(gitBranch)" />
+		<simple name="containerName" value="$(containerName)" />
+	</process>
+	
+</template>
+
