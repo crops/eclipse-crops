@@ -68,7 +68,7 @@
             group="org.eclipse.cdt.launch.remoteApplicationLaunchTabGroup"
             name="OpenOCD"
             class="org.yocto.crops.dsf.gdb.ui.ExtendedTab">
-        <associatedDelegate delegate="org.eclipse.cdt.dsf.gdb.launch.remoteCLaunch"/>
+        <associatedDelegate delegate="org.yocto.crops.dsf.gdb.launchDelegate"/>
         <!-- Place after main tab to check its id -->
         <placement after="org.eclipse.debug.ui.CommonTab"/>
       </tab>
