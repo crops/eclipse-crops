@@ -286,7 +286,7 @@
          </tool>
          <targetPlatform
                archList="all"
-               binaryParser="org.eclipse.cdt.utils.elf.parser.ElfParser"
+               binaryParser="org.eclipse.cdt.core.ELF"
                id="org.yocto.crops.core.targetPlatform1"
                isAbstract="false"
                osList="all">
