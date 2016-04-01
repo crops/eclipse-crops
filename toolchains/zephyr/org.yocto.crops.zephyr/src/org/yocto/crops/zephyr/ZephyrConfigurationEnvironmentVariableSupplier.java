@@ -9,18 +9,20 @@ import org.eclipse.cdt.managedbuilder.core.IBuildObject;
 import org.eclipse.cdt.managedbuilder.core.IConfiguration;
 import org.eclipse.cdt.managedbuilder.core.IHoldsOptions;
 import org.eclipse.cdt.managedbuilder.core.IManagedOptionValueHandler;
+import org.eclipse.cdt.managedbuilder.core.IManagedProject;
 import org.eclipse.cdt.managedbuilder.core.IOption;
 import org.eclipse.cdt.managedbuilder.core.IToolChain;
 import org.eclipse.cdt.managedbuilder.envvar.IBuildEnvironmentVariable;
 import org.eclipse.cdt.managedbuilder.envvar.IConfigurationEnvironmentVariableSupplier;
 import org.eclipse.cdt.managedbuilder.envvar.IEnvironmentVariableProvider;
+import org.eclipse.cdt.managedbuilder.envvar.IProjectEnvironmentVariableSupplier;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.yocto.crops.core.CropsCorePlugin;
 import org.yocto.crops.core.CropsUtils;
 import org.yocto.crops.core.preferences.CropsConfigurationEnvironmentVariableSupplier;
 import org.yocto.crops.zephyr.preferences.PreferenceConstants;
 
-public class ZephyrConfigurationEnvironmentVariableSupplier extends CropsConfigurationEnvironmentVariableSupplier {
+public class ZephyrConfigurationEnvironmentVariableSupplier extends CropsConfigurationEnvironmentVariableSupplier implements IProjectEnvironmentVariableSupplier{
 
 	@Override
 	public IBuildEnvironmentVariable getVariable(String variableName, IConfiguration configuration,
@@ -742,6 +744,272 @@ public class ZephyrConfigurationEnvironmentVariableSupplier extends CropsConfigu
 		
 		public String getValue() {
 			return prj_mdef;
+		}
+
+		@Override
+		public String getDelimiter() {
+			return CropsUtils.isWin() ? ";" : ":"; //$NON-NLS-1$ //$NON-NLS-2$
+		}
+	}
+
+
+	@Override
+	public IBuildEnvironmentVariable getVariable(String variableName, IManagedProject project,
+			IEnvironmentVariableProvider provider) {
+		/* zephyr specific environment variables */
+		if (ZephyrBoardProjectEnvironmentVariable.isVar(variableName))
+			return ZephyrBoardProjectEnvironmentVariable.create(project);
+		if (ZephyrArchEnvironmentVariable.isVar(variableName))
+			return ZephyrArchProjectEnvironmentVariable.create(project);
+		if (ZephyrSdkInstallDirProjectEnvironmentVariable.isVar(variableName))
+			return ZephyrSdkInstallDirProjectEnvironmentVariable.create(project);
+		if (ZephyrGccVariantProjectEnvironmentVariable.isVar(variableName))
+			return ZephyrGccVariantProjectEnvironmentVariable.create(project);
+		if (ZephyrBaseProjectEnvironmentVariable.isVar(variableName))
+			return ZephyrBaseProjectEnvironmentVariable.create(project);
+		else
+			return null;
+	}
+
+	@Override
+	public IBuildEnvironmentVariable[] getVariables(IManagedProject project, IEnvironmentVariableProvider provider) {
+		IBuildEnvironmentVariable prj_board = ZephyrBoardProjectEnvironmentVariable.create(project);
+		IBuildEnvironmentVariable prj_arch = ZephyrArchProjectEnvironmentVariable.create(project);
+		IBuildEnvironmentVariable prj_install_dir = ZephyrSdkInstallDirProjectEnvironmentVariable.create(project);
+		IBuildEnvironmentVariable prj_gcc_variant = ZephyrGccVariantProjectEnvironmentVariable.create(project);
+		IBuildEnvironmentVariable prj_zephyr_base = ZephyrBaseProjectEnvironmentVariable.create(project);
+
+		List<IBuildEnvironmentVariable> variables = new ArrayList<IBuildEnvironmentVariable>();
+		if (prj_board != null)
+			variables.add(prj_board);
+		if (prj_arch != null)
+			variables.add(prj_arch);
+		if (prj_install_dir != null)
+			variables.add(prj_install_dir);
+		if (prj_gcc_variant != null)
+			variables.add(prj_gcc_variant);
+		if (prj_zephyr_base != null)
+			variables.add(prj_zephyr_base);
+//		if (short_kernel != null)
+//			variables.add(short_kernel);
+//		if (long_kernel != null)
+//			variables.add(long_kernel);
+//		if (prj_conf != null)
+//			variables.add(prj_conf);
+//		if (prj_mdef != null)
+//			variables.add(prj_mdef);
+		return variables.toArray(new IBuildEnvironmentVariable[0]);
+	}
+	private static class ZephyrBoardProjectEnvironmentVariable implements IBuildEnvironmentVariable {
+		
+		public static String name = "project.board"; //$NON-NLS-1$
+		
+		private String zephyr_board;
+		
+		private ZephyrBoardProjectEnvironmentVariable(String zephyr_board) {
+			this.zephyr_board = zephyr_board;
+		}
+		
+		public static ZephyrBoardProjectEnvironmentVariable create(IManagedProject project) {
+			IPreferenceStore store = ZephyrPlugin.getDefault().getPreferenceStore();
+			String system_zephyr_board = store.getDefaultString(PreferenceConstants.P_ZEPHYR_BOARD);
+			// TODO: use regex to validate based on boards queried from codi or JSON
+			return new ZephyrBoardProjectEnvironmentVariable(system_zephyr_board);
+		}
+		
+		public static boolean isVar(String name) {
+			// Windows has case insensitive env var names
+			return CropsUtils.isWin()
+					? name.equalsIgnoreCase(ZephyrBoardProjectEnvironmentVariable.name)
+					: name.equals(ZephyrBoardProjectEnvironmentVariable.name);
+		}
+		
+		public String getName() {
+			return name;
+		}
+		
+		public int getOperation() {
+			return IBuildEnvironmentVariable.ENVVAR_REPLACE;
+		}
+		
+		public String getValue() {
+			return zephyr_board;
+		}
+
+		@Override
+		public String getDelimiter() {
+			return CropsUtils.isWin() ? ";" : ":"; //$NON-NLS-1$ //$NON-NLS-2$
+		}
+	}
+
+	private static class ZephyrArchProjectEnvironmentVariable implements IBuildEnvironmentVariable {
+		
+		public static String name = "project.arch"; //$NON-NLS-1$
+		
+		private String zephyr_arch;
+		
+		private ZephyrArchProjectEnvironmentVariable(String zephyr_arch) {
+			this.zephyr_arch = zephyr_arch;
+		}
+		
+		public static ZephyrArchProjectEnvironmentVariable create(IManagedProject project) {
+			IPreferenceStore store = ZephyrPlugin.getDefault().getPreferenceStore();
+			String system_zephyr_arch = store.getDefaultString(PreferenceConstants.P_ZEPHYR_ARCH);
+			// TODO: use regex to validate based on arches queried from codi or JSON
+			return new ZephyrArchProjectEnvironmentVariable(system_zephyr_arch);
+		}
+		
+		public static boolean isVar(String name) {
+			// Windows has case insensitive env var names
+			return CropsUtils.isWin()
+					? name.equalsIgnoreCase(ZephyrArchProjectEnvironmentVariable.name)
+					: name.equals(ZephyrArchProjectEnvironmentVariable.name);
+		}
+		
+		public String getName() {
+			return name;
+		}
+		
+		public int getOperation() {
+			return IBuildEnvironmentVariable.ENVVAR_REPLACE;
+		}
+		
+		public String getValue() {
+			return zephyr_arch;
+		}
+
+		@Override
+		public String getDelimiter() {
+			return CropsUtils.isWin() ? ";" : ":"; //$NON-NLS-1$ //$NON-NLS-2$
+		}
+	}
+
+	private static class ZephyrSdkInstallDirProjectEnvironmentVariable implements IBuildEnvironmentVariable {
+		
+		public static String name = "project.zephyr_install_dir"; //$NON-NLS-1$
+		
+		private String zephyr_install_dir;
+		
+		private ZephyrSdkInstallDirProjectEnvironmentVariable(String zephyr_install_dir) {
+			this.zephyr_install_dir = zephyr_install_dir;
+		}
+		
+		public static ZephyrSdkInstallDirProjectEnvironmentVariable create(IManagedProject project) {
+			IPreferenceStore store = ZephyrPlugin.getDefault().getPreferenceStore();
+			String system_zephyr_install_dir = store.getDefaultString(PreferenceConstants.P_ZEPHYR_INSTALL_DIR);
+			// TODO: use regex to validate based on boards queried from codi or JSON
+			return new ZephyrSdkInstallDirProjectEnvironmentVariable(system_zephyr_install_dir);
+		}
+		
+		public static boolean isVar(String name) {
+			// Windows has case insensitive env var names
+			return CropsUtils.isWin()
+					? name.equalsIgnoreCase(ZephyrSdkInstallDirProjectEnvironmentVariable.name)
+					: name.equals(ZephyrSdkInstallDirProjectEnvironmentVariable.name);
+		}
+		
+		public String getName() {
+			return name;
+		}
+		
+		public int getOperation() {
+			return IBuildEnvironmentVariable.ENVVAR_REPLACE;
+		}
+		
+		public String getValue() {
+			return zephyr_install_dir;
+		}
+
+		@Override
+		public String getDelimiter() {
+			return CropsUtils.isWin() ? ";" : ":"; //$NON-NLS-1$ //$NON-NLS-2$
+		}
+	}
+
+	private static class ZephyrGccVariantProjectEnvironmentVariable implements IBuildEnvironmentVariable {
+		
+		public static String name = "project.zephyr_gcc_variant"; //$NON-NLS-1$
+		
+		private String zephyr_gcc_variant;
+		
+		private ZephyrGccVariantProjectEnvironmentVariable(String zephyr_gcc_variant) {
+			this.zephyr_gcc_variant = zephyr_gcc_variant;
+		}
+		
+		public static ZephyrGccVariantProjectEnvironmentVariable create(IManagedProject project) {
+			IPreferenceStore store = ZephyrPlugin.getDefault().getPreferenceStore();
+			String system_zephyr_gcc_variant = store.getDefaultString(PreferenceConstants.P_ZEPHYR_GCC_VARIANT);
+			
+			// TODO: use regex to validate based on boards queried from codi or JSON
+			return new ZephyrGccVariantProjectEnvironmentVariable(system_zephyr_gcc_variant);
+		}
+		
+		public static boolean isVar(String name) {
+			// Windows has case insensitive env var names
+			return CropsUtils.isWin()
+					? name.equalsIgnoreCase(ZephyrGccVariantProjectEnvironmentVariable.name)
+					: name.equals(ZephyrGccVariantProjectEnvironmentVariable.name);
+		}
+		
+		public String getName() {
+			return name;
+		}
+		
+		public int getOperation() {
+			return IBuildEnvironmentVariable.ENVVAR_REPLACE;
+		}
+		
+		public String getValue() {
+			return zephyr_gcc_variant;
+		}
+
+		@Override
+		public String getDelimiter() {
+			return CropsUtils.isWin() ? ";" : ":"; //$NON-NLS-1$ //$NON-NLS-2$
+		}
+	}
+
+	private static class ZephyrBaseProjectEnvironmentVariable implements IBuildEnvironmentVariable {
+		
+		public static String name = "project.zephyr_base"; //$NON-NLS-1$
+		
+		private static String zephyr_base;
+		
+		private ZephyrBaseProjectEnvironmentVariable(String zephyr_base) {
+			ZephyrBaseEnvironmentVariable.zephyr_base = zephyr_base;
+		}
+		
+		public static ZephyrBaseProjectEnvironmentVariable create(IManagedProject project) {
+			IPreferenceStore store = ZephyrPlugin.getDefault().getPreferenceStore();
+			String system_zephyr_base = store.getDefaultString(PreferenceConstants.P_ZEPHYR_BASE);
+			IPreferenceStore crops_store = CropsCorePlugin.getDefault().getPreferenceStore();
+			String system_root = crops_store.getDefaultString(org.yocto.crops.core.preferences.PreferenceConstants.P_CROPS_ROOT);
+			/* FIXME: this is not what we expect... this is literally "${ProjName}" not the resolved name*/
+			String project_name = project.getDefaultArtifactName();
+			if (zephyr_base == null) {
+				zephyr_base = system_root + "/" + project_name + "/zephyr-project";//system_zephyr_base;
+			}
+			// TODO: use regex to validate based on boards queried from codi or JSON
+			return new ZephyrBaseProjectEnvironmentVariable(zephyr_base);
+		}
+		
+		public static boolean isVar(String name) {
+			// Windows has case insensitive env var names
+			return CropsUtils.isWin()
+					? name.equalsIgnoreCase(ZephyrBaseProjectEnvironmentVariable.name)
+					: name.equals(ZephyrBaseProjectEnvironmentVariable.name);
+		}
+		
+		public String getName() {
+			return name;
+		}
+		
+		public int getOperation() {
+			return IBuildEnvironmentVariable.ENVVAR_REPLACE;
+		}
+		
+		public String getValue() {
+			return zephyr_base;
 		}
 
 		@Override

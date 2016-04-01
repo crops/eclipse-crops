@@ -144,6 +144,7 @@
             id="org.yocto.crops.zephyr.zephyrProjectType"
             isAbstract="true"
             isTest="false"
+            projectEnvironmentSupplier="org.yocto.crops.zephyr.ZephyrConfigurationEnvironmentVariableSupplier"
             superClass="org.yocto.crops.core.cropsProjectType">
          <configuration
                artifactExtension="elf"
