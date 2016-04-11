@@ -1,5 +1,6 @@
 package org.yocto.crops.zephyr;
 
+import org.apache.log4j.BasicConfigurator;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -32,6 +33,7 @@ public class ZephyrPlugin extends AbstractUIPlugin {
 	 */
 	public ZephyrPlugin() {
 		console = new ZephyrConsole();
+		BasicConfigurator.configure();
 	}
 
 	/*
