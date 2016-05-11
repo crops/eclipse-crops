@@ -46,7 +46,7 @@
           name="org.eclipse.core.resources"/>
       <requirement
           name="org.eclipse.cdt.sdk.feature.group"
-          versionRange="8.8.0"/>
+          versionRange="8.8.1"/>
 <!--
       <requirement
           name="org.eclipse.cdt.core"

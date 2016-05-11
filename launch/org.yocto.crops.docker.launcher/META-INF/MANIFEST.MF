@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Localization: OSGI-INF/l10n/bundle
 Bundle-Name: %Plugin.name
 Bundle-SymbolicName: org.yocto.crops.docker.launcher;singleton:=true
-Bundle-Version: 0.1.0.qualifier
+Bundle-Version: 0.1.1.qualifier
 Bundle-Activator: org.yocto.crops.docker.launcher.DockerLaunchUIPlugin
 Bundle-Vendor: %Plugin.vendor
 Require-Bundle: org.eclipse.ui,

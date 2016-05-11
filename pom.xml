@@ -10,7 +10,7 @@
 
 	<groupId>org.yocto.crops</groupId>
 	<artifactId>crops-parent</artifactId>
-	<version>0.2.0-SNAPSHOT</version>
+	<version>0.2.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>CROPS Parent</name>
 
@@ -315,7 +315,7 @@
 		</pluginRepository>
 		<pluginRepository>
 			<id>cdt</id>
-			<url>http://download.eclipse.org/tools/cdt/releases/8.8/</url>
+			<url>http://download.eclipse.org/tools/cdt/releases/8.8.1/</url>
 		</pluginRepository>
   	</pluginRepositories>
 	<profiles>
@@ -496,7 +496,7 @@
 							<groupId>org.yocto.crops</groupId>
 							<artifactId>org.yocto.crops.target</artifactId>
 							<classifier>${target-platform}</classifier>
-							<version>0.2.0</version>
+							<version>0.2.1</version>
 						</artifact>
 					</target>
 				</configuration>

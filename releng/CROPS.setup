@@ -334,18 +334,18 @@
       name="CROPS"
       version="0.2"
       location="${workspace.location/../api.baseline}"
-      remoteURI="https://crops.github.io/eclipse-crops/releases/0.2/eclipse-crops-0.2.0.zip"/>
+      remoteURI="https://crops.github.io/eclipse-crops/releases/0.2/eclipse-crops-0.2.1.zip"/>
   <setupTask
       xsi:type="setup:VariableTask"
       id="git.clone.crops.location"
       name="Git Clone Location"
       defaultValue="${workspace.location/../git}"/>
-  <stream name="timo/eclipse-crops-maven">
+  <stream name="deprecated-eclipse-crops-mars">
     <setupTask
         xsi:type="git:GitCloneTask"
         id="git.clone.crops"
-        remoteURI="todor/eclipse-crops"
-        checkoutBranch="timo/eclipse-crops-maven">
+        remoteURI="crops/eclipse-crops"
+        checkoutBranch="deprecated-eclipse-crops-mars">
       <annotation
           source="http://www.eclipse.org/oomph/setup/InducedChoices">
         <detail
