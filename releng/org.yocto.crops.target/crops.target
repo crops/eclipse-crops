@@ -36,8 +36,8 @@
 <repository location="http://download.eclipse.org/tools/cdt/releases/8.8.1"/>
 </location>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.jgit.feature.group" version="4.2.0.201601211800-r"/>
-<unit id="org.eclipse.jgit.source.feature.group" version="4.2.0.201601211800-r"/>
+<unit id="org.eclipse.jgit.feature.group" version="4.3.1.201605051710-r"/>
+<unit id="org.eclipse.jgit.source.feature.group" version="4.3.1.201605051710-r"/>
 <repository location="http://download.eclipse.org/egit/updates"/>
 </location>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
