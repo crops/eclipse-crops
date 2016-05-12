@@ -2,5 +2,6 @@ language: java
 
 jdk:
   - oraclejdk8
-  - oraclejdk7
-  - openjdk7
+#  proc.isAlive() since Java 1.8
+#  - oraclejdk7
+#  - openjdk7

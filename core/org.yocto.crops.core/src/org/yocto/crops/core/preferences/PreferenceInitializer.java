@@ -58,7 +58,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(PreferenceConstants.P_CODI_SOCKET, "10000");
 		store.setDefault(PreferenceConstants.P_EXPERT_MODE, false);
 		store.setDefault(PreferenceConstants.P_MAKE_TYPE, "makefile");
-		store.setDefault(PreferenceConstants.P_TOOLCHAIN_CONTAINER_ID, "crops-zephyr-0-7-2-src");
+		store.setDefault(PreferenceConstants.P_TOOLCHAIN_CONTAINER_ID, "crops-zephyr-0-7-5-src");
 		
 	}
 
