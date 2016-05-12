@@ -62,7 +62,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 //		store.setDefault(org.yocto.crops.core.preferences.PreferenceConstants.P_MAKE_TYPE, "makefile");
 //		
 		/* TODO: move to zephyr specific Preferences store ? */
-		store.setDefault(PreferenceConstants.P_TOOLCHAIN_CONTAINER_ID, "crops-zephyr-0-7-2-src");
+		store.setDefault(PreferenceConstants.P_TOOLCHAIN_CONTAINER_ID, "crops-zephyr-0-7-5-src");
 		store.setDefault(PreferenceConstants.P_ZEPHYR_BOARD, "arduino_101");
 		store.setDefault(PreferenceConstants.P_ZEPHYR_GCC_VARIANT, "zephyr");
 		store.setDefault(PreferenceConstants.P_ZEPHYR_INSTALL_DIR, "/opt/zephyr-sdk");

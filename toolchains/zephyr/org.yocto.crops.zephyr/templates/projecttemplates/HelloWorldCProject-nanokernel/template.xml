@@ -47,10 +47,10 @@
 			label="%HelloWorld.containerName.label"
 			description="%HelloWorld.containerName.description"
 			type="select"
-			default="crops-zephyr-0-7-2-src">
+			default="crops-zephyr-0-7-5-src">
 			<!--  TODO: inject these dynamically from 'ceed -l' -->
-			<item value="crops-zephyr-0-7-2-src"
-				  label="crops-zephyr-0-7-2-src"
+			<item value="crops-zephyr-0-7-5-src"
+				  label="crops-zephyr-0-7-5-src"
 			/>
 		</property>
 	</property-group>

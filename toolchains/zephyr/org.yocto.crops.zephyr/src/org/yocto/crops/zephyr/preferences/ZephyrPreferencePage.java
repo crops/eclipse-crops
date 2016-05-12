@@ -45,7 +45,7 @@ public class ZephyrPreferencePage
 	 */
 	public void createFieldEditors() {
 		/* TODO: figure out the generic CROPS way to expand "toolchains" from JSON */
-		String[] toolchainNames = {"crops-zephyr-0-7-2-src"}; //CropsUtils.getToolchainContainers();
+		String[] toolchainNames = {"crops-zephyr-0-7-5-src"}; //CropsUtils.getToolchainContainers();
 		String[][] toolchainNamesArray = new String[toolchainNames.length][2];
 		int i = 0;
 		for (String toolchainName : toolchainNames) {
