@@ -21,9 +21,9 @@
   <setupTask
       xsi:type="setup:InstallationTask"
       id="installation"/>
-  <version name="mars"
-      label="Mars"
-      requiredJavaVersion="1.7">
+  <version name="neon"
+      label="Neon"
+      requiredJavaVersion="1.8">
     <setupTask
         xsi:type="setup.p2:P2Task"
         label="${scope.product.label} (${scope.product.version.label})">
@@ -37,7 +37,7 @@
           name="org.eclipse.rcp.feature.group"/>
       <requirement
           name="org.eclipse.platform.sdk"
-          versionRange="4.5.2.M20160212-1500"/>
+          versionRange="4.6.0"/>
       <requirement
           name="org.eclipse.ui"/>
       <requirement
@@ -46,7 +46,7 @@
           name="org.eclipse.core.resources"/>
       <requirement
           name="org.eclipse.cdt.sdk.feature.group"
-          versionRange="8.8.1"/>
+          versionRange="9.0.0"/>
 <!--
       <requirement
           name="org.eclipse.cdt.core"
@@ -67,15 +67,15 @@
 	  <requirement
 	      name="com.spotify.docker.client.source"/>
       <repository
-          url="http://download.eclipse.org/technology/m2e/milestones/1.6/"/>
+          url="http://download.eclipse.org/technology/m2e/milestones/1.7/"/>
       <repository
           url="http://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-tycho/0.9.0/N/LATEST/"/>
       <repository
-          url="http://download.eclipse.org/releases/mars"/>
+          url="http://download.eclipse.org/releases/neon"/>
 	  <repository
-	      url="http://download.eclipse.org/linuxtools/update-docker/"/>
+	      url="http://download.eclipse.org/linuxtools/updates-docker-nightly/"/>
     </setupTask>
-    <description>Eclipse Crops Plugin Development Environment for Mars.</description>
+    <description>Eclipse Crops Plugin Development Environment for Neon.</description>
   </version>
   <description>Eclipse Crops Plugin Development Environment provides an environment to develop the plugin itself.</description>
 </setup:Product>
