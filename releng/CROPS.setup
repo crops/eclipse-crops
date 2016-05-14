@@ -315,18 +315,17 @@
       encoding="UTF-8">
     <description>Initialize JDT's package explorer to show working sets as its root objects</description>
   </setupTask>
-  <!-- Mac and Ubuntu 14.04 are JRE-1.7 by default.
-       Eclipse Neon (4.6) will require JRE-1.8. Wait until then to bump. -->
+  <!-- Eclipse Neon (4.6) will requires JRE-1.8. -->
   <setupTask
       xsi:type="jdt:JRETask"
-      version="JavaSE-1.7"
+      version="JavaSE-1.8"
       location="${jre.location-1.7}">
     <description>Define the JRE needed to compile and run the Java projects of ${scope.project.label}</description>
   </setupTask>
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
-      defaultValue="Mars"
+      defaultValue="Neon"
       storageURI="scope://Workspace"/>
   <setupTask
       xsi:type="pde:APIBaselineTask"
@@ -334,18 +333,18 @@
       name="CROPS"
       version="0.2"
       location="${workspace.location/../api.baseline}"
-      remoteURI="https://crops.github.io/eclipse-crops/releases/0.2/eclipse-crops-0.2.1.zip"/>
+      remoteURI="https://raw.githubusercontent.com/eclipse-crops/eclipse-crops-neon/releng/org.yocto.crops.target/crops.target"/>
   <setupTask
       xsi:type="setup:VariableTask"
       id="git.clone.crops.location"
       name="Git Clone Location"
       defaultValue="${workspace.location/../git}"/>
-  <stream name="deprecated-eclipse-crops-mars">
+  <stream name="eclipse-crops-neon">
     <setupTask
         xsi:type="git:GitCloneTask"
         id="git.clone.crops"
-        remoteURI="crops/eclipse-crops"
-        checkoutBranch="deprecated-eclipse-crops-mars">
+        remoteURI="moto-timo/eclipse-crops"
+        checkoutBranch="eclipse-crops-neon">
       <annotation
           source="http://www.eclipse.org/oomph/setup/InducedChoices">
         <detail
@@ -366,7 +365,7 @@
     <setupTask
         xsi:type="setup.targlets:TargletTask"
         programArguments="-consolelog"
-        vmArguments="-Xms40m -Xmx512M -XX:MaxPermSize=256m -ea">
+        vmArguments="-Xms40m -Xmx512M -ea">
       <targlet
           name="CROPS"
           activeRepositoryList="${eclipse.target.platform}">
@@ -436,15 +435,15 @@
         <repositoryList
             name="Mars">
           <repository
-              url="http://download.eclipse.org/tools/orbit/downloads/drops/R20160221192158/repository/"/>
+              url="http://download.eclipse.org/tools/orbit/downloads/drops/S20160501200945/repository/"/>
           <repository
               url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
           <repository
               url="http://download.eclipse.org/tm/updates/4.0/"/>
 	  <repository
-	      url="http://download.eclipse.org/releases/mars/"/>
+	      url="http://download.eclipse.org/releases/neon/"/>
           <repository
-              url="http://download.eclipse.org/eclipse/updates/4.5/"/>
+              url="http://download.eclipse.org/eclipse/updates/4.6/"/>
           <repository
               url="http://download.eclipse.org/tools/ptp/builds/remote/2.0.0"/>
           <repository
