@@ -1,9 +1,5 @@
 package org.yocto.crops.zephyr;
 
-import java.nio.file.Paths;
-
-import org.eclipse.cdt.core.CCorePlugin;
-import org.eclipse.cdt.core.cdtvariables.ICdtVariableManager;
 import org.eclipse.cdt.managedbuilder.core.BuildException;
 import org.eclipse.cdt.managedbuilder.core.IBuildObject;
 import org.eclipse.cdt.managedbuilder.core.IConfiguration;
@@ -15,7 +11,6 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.yocto.crops.core.CropsCorePlugin;
 import org.yocto.crops.core.CropsUtils;
 import org.yocto.crops.zephyr.preferences.PreferenceConstants;
 

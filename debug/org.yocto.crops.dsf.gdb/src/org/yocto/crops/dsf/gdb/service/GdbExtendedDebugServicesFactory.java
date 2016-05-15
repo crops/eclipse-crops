@@ -25,8 +25,8 @@ import org.yocto.crops.dsf.gdb.service.command.GdbExtendedCommandFactory_6_8;
 
 public class GdbExtendedDebugServicesFactory extends GdbDebugServicesFactory {
 	
-	public GdbExtendedDebugServicesFactory(String version) {
-		super(version);
+	public GdbExtendedDebugServicesFactory(String version, ILaunchConfiguration config) {
+		super(version, config);
 	}
 	
 	@Override

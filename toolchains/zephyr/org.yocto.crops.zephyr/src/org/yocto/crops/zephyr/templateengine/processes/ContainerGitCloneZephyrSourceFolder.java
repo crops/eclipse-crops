@@ -29,7 +29,7 @@ import com.spotify.docker.client.DefaultDockerClient;
 import com.spotify.docker.client.DockerCertificateException;
 import com.spotify.docker.client.DockerCertificates;
 import com.spotify.docker.client.DockerClient;
-import com.spotify.docker.client.DockerClient.ExecParameter;
+import com.spotify.docker.client.DockerClient.ExecCreateParam;
 import com.spotify.docker.client.DockerException;
 import com.spotify.docker.client.LogMessage;
 import com.spotify.docker.client.LogStream;
@@ -53,6 +53,7 @@ public class ContainerGitCloneZephyrSourceFolder extends ProcessRunner {
 	private static String container_id;
 	private static String execId;
 	private static final ZephyrConsole console = ZephyrPlugin.getConsole();
+	private Logger log;
 	
 	/* TODO: make this into a Runnable ? */
 	public static int git_clone(DockerClient client, Container container, String gitURI, String gitBranch, String target) {
@@ -60,8 +61,8 @@ public class ContainerGitCloneZephyrSourceFolder extends ProcessRunner {
 		LogMessage message = null;
     	try {
 			execId = client.execCreate(container_id, new String[] {"git", "clone", "--depth", "1", "--no-local", "--branch", gitBranch, gitURI, target},
-					ExecParameter.STDOUT,
-					ExecParameter.STDERR);
+					ExecCreateParam.attachStdout(true),
+					ExecCreateParam.attachStdin(true));
 		} catch (DockerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -71,8 +72,8 @@ public class ContainerGitCloneZephyrSourceFolder extends ProcessRunner {
 		}
     	try {
 			LogStream stream = client.execStart(execId);
-			while(client.execInspect(execId).running() && stream.hasNext()) {
-				message = stream.peek();
+			while(client.execInspect(execId).running() /* && stream.hasNext() */) {
+				/* message = stream.peek(); */
 				/* TODO need to find new line characters and print one line */
 				ByteBuffer bb = message.content();
 				while(bb.remaining() > 0) {
@@ -94,7 +95,7 @@ public class ContainerGitCloneZephyrSourceFolder extends ProcessRunner {
 					end++;
 					bb.position(end);
 				}
-				stream.next();
+				/* stream.next(); */
 			}
 		} catch (DockerException e) {
 			// TODO Auto-generated catch block

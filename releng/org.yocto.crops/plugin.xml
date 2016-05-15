@@ -116,7 +116,7 @@
     
    </extension>
    -->
-   <!--extension point="org.eclipse.ui.cheatsheets.cheatSheetContent">
+   <extension point="org.eclipse.ui.cheatsheets.cheatSheetContent">
       <cheatsheet
             name="%cheatsheet.helloworld.name"
             contentFile="$nl$/cheatsheets/HelloWorld.xml"
@@ -124,6 +124,6 @@
          <description>%cheatsheet.helloworld.desc</description>
       </cheatsheet>
     
-   </extension-->
+   </extension>
    
 </plugin>

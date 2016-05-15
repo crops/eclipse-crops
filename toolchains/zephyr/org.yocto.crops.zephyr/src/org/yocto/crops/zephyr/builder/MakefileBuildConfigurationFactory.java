@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IBuildConfiguration;
 import org.eclipse.core.runtime.IAdapterFactory;
-import org.yocto.crops.core.CropsCorePlugin;
 
 public class MakefileBuildConfigurationFactory implements IAdapterFactory {
 

@@ -8,7 +8,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-public class BoardDeserializer implements JsonDeserializer<Object> {
+public class BoardDeserializer implements JsonDeserializer<Board> {
 	@Override
 	public Board deserialize(final JsonElement json, final Type typOf, final JsonDeserializationContext context)
 			throws JsonParseException {
