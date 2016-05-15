@@ -1,7 +1,6 @@
 package org.yocto.crops.zephyr;
 
 import org.apache.log4j.BasicConfigurator;
-import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -13,7 +12,6 @@ import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yocto.crops.zephyr.internal.ZephyrConsole;
-import org.yocto.crops.zephyr.templateengine.processes.ContainerGitCloneZephyrSourceFolder;
 
 /**
  * The activator class controls the plug-in life cycle

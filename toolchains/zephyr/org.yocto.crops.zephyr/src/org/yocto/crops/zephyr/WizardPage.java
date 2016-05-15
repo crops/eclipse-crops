@@ -1,7 +1,5 @@
 package org.yocto.crops.zephyr;
 
-import java.util.Map.Entry;
-
 import org.eclipse.cdt.core.templateengine.SharedDefaults;
 import org.eclipse.cdt.managedbuilder.ui.wizards.MBSCustomPage;
 import org.eclipse.cdt.managedbuilder.ui.wizards.MBSCustomPageManager;
@@ -26,7 +24,6 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.yocto.crops.core.CropsCorePlugin;
 import org.yocto.crops.zephyr.preferences.PreferenceConstants;
-import org.yocto.crops.zephyr.ZephyrConstants;
 import org.yocto.crops.zephyr.ZephyrConstants.Arches;
 import org.yocto.crops.zephyr.ZephyrConstants.Arches.arch_id;
 import org.yocto.crops.zephyr.ZephyrConstants.Boards;

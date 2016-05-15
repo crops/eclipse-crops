@@ -1,13 +1,8 @@
 package org.yocto.crops.zephyr.preferences;
 
-import java.lang.reflect.Array;
-import java.util.Set;
-
 import org.eclipse.jface.preference.*;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.IWorkbench;
-import org.yocto.crops.core.CropsCorePlugin;
-import org.yocto.crops.core.CropsUtils;
 import org.yocto.crops.core.Messages;
 //import org.yocto.crops.zephyr.model.Toolchain;
 //import org.yocto.crops.zephyr.model.Toolchains;
