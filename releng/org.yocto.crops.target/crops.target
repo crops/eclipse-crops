@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="crops_e4.6" sequenceNumber="75">
+<?pde version="3.8"?><target name="crops_e4.6" sequenceNumber="78">
 <locations>
-<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.rse.feature.group" version="0.0.0"/>
-<repository location="http://download.eclipse.org/tm/updates/4.0milestones/"/>
-</location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.tm.terminal.control" version="0.0.0"/>
 <repository location="http://download.eclipse.org/tm/terminal/builds/development/nightly/"/>
@@ -16,25 +12,6 @@
 <repository location="http://download.eclipse.org/tools/ptp/builds/remote/nightly/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="com.ibm.icu.source" version="0.0.0"/>
-<unit id="com.google.gson" version="2.2.4.v201311231704"/>
-<unit id="javax.inject" version="1.0.0.v20091030"/>
-<unit id="org.sat4j.core" version="2.3.5.v201308161310"/>
-<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/S20160501200945/repository/"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.cdt.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.cdt.launch.remote.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.cdt.docker.launcher.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.cdt.debug.gdbjtag.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.cdt.gdb.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.cdt.build.crossgcc.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.cdt.autotools.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.cdt.gnu.debug.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.cdt.gnu.dsf.feature.group" version="0.0.0"/>
-<repository location="http://download.eclipse.org/releases/neon/"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.pde.source.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.platform.ide" version="4.6.0.I20160512-1000"/>
 <unit id="org.eclipse.rcp.feature.group" version="4.6.0.v20160512-1000"/>
@@ -44,10 +21,6 @@
 <repository location="http://download.eclipse.org/eclipse/updates/4.6milestones/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.license.feature.group" version="1.0.1.v20140414-1359"/>
-<repository location="http://download.eclipse.org/cbi/updates/license/"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.linuxtools.vagrant.feature.feature.group" version="2.0.0.201605132202"/>
 <unit id="com.spotify.docker.client" version="3.4.0.v20160411-1914"/>
 <unit id="com.spotify.docker.client.source" version="3.4.0.v20160411-1914"/>
@@ -55,12 +28,34 @@
 <repository location="http://download.eclipse.org/linuxtools/updates-docker-nightly/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.jgit.feature.group" version="4.3.1.201605051710-r"/>
-<unit id="org.eclipse.egit.source.feature.group" version="4.3.1.201605051710-r"/>
-<unit id="org.eclipse.egit.feature.group" version="4.3.1.201605051710-r"/>
-<unit id="org.eclipse.jgit.source.feature.group" version="4.3.1.201605051710-r"/>
-<unit id="org.eclipse.egit.mylyn.feature.group" version="4.3.1.201605051710-r"/>
-<repository location="http://download.eclipse.org/egit/updates"/>
+<unit id="com.ibm.icu.source" version="0.0.0"/>
+<unit id="com.google.gson" version="2.2.4.v201311231704"/>
+<unit id="javax.inject" version="1.0.0.v20091030"/>
+<unit id="org.sat4j.core" version="2.3.5.v201308161310"/>
+<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/S20160501200945/repository/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.cdt.gnu.dsf.feature.group" version="9.0.0.201605031942"/>
+<unit id="org.eclipse.cdt.gdb.feature.group" version="9.0.0.201605031942"/>
+<unit id="org.eclipse.egit.feature.group" version="4.4.0.201605041135-m1"/>
+<unit id="org.eclipse.cdt.feature.group" version="9.0.0.201605031942"/>
+<unit id="org.eclipse.cdt.launch.remote.feature.group" version="9.0.0.201605031942"/>
+<unit id="org.eclipse.cdt.debug.gdbjtag.feature.group" version="9.0.0.201605031942"/>
+<unit id="org.eclipse.cdt.docker.launcher.feature.group" version="9.0.0.201605031942"/>
+<unit id="org.eclipse.egit.mylyn.feature.group" version="4.4.0.201605041135-m1"/>
+<unit id="org.eclipse.cdt.gnu.debug.feature.group" version="9.0.0.201605031942"/>
+<unit id="org.eclipse.mylyn.github.feature.feature.group" version="4.4.0.201605041135-m1"/>
+<unit id="org.eclipse.cdt.autotools.feature.group" version="9.0.0.201605031942"/>
+<unit id="org.eclipse.cdt.build.crossgcc.feature.group" version="9.0.0.201605031942"/>
+<repository location="http://download.eclipse.org/releases/neon/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.license.feature.group" version="1.0.1.v20140414-1359"/>
+<repository location="http://download.eclipse.org/cbi/updates/license/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.rse.feature.group" version="0.0.0"/>
+<repository location="http://download.eclipse.org/tm/updates/4.0milestones/"/>
 </location>
 </locations>
 <targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
