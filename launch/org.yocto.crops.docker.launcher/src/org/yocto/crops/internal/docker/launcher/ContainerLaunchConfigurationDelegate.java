@@ -39,7 +39,6 @@ import org.eclipse.linuxtools.docker.core.IDockerContainerInfo;
 import org.eclipse.linuxtools.docker.core.IDockerNetworkSettings;
 import org.eclipse.linuxtools.docker.ui.launch.ContainerLauncher;
 import org.eclipse.linuxtools.docker.ui.launch.IContainerLaunchListener;
-import org.eclipse.linuxtools.internal.docker.core.DockerContainer;
 
 @SuppressWarnings("restriction")
 public class ContainerLaunchConfigurationDelegate extends GdbLaunchDelegate

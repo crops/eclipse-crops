@@ -3,8 +3,6 @@ package org.yocto.crops.zephyr.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.yocto.crops.zephyr.ZephyrConstants.Boards.board_id;
-
 public class Toolchain {
 		private String name;
 		private static Boards boards;
@@ -27,9 +25,10 @@ public class Toolchain {
 		
 		public static Set<String> getBoardNames() {
 			Set<String> boardNames = new HashSet<>();
-			//for(Board board : getBoards().getBoards()) {
-			//	boardNames.add(board.getName());
-			//}
+			for(Board board : boards.getBoards()) {
+				boardNames.add(board.getName());
+			}
+			/*
 			boardNames.add("arduino_101");
 			boardNames.add("arduino_101_sss");
 			boardNames.add("basic_cortex_m3");
@@ -42,6 +41,7 @@ public class Toolchain {
 			boardNames.add("quark_d2000_crb");
 			boardNames.add("quark_se_ctb");
 			boardNames.add("quark_se_sss_ctb");
+			*/
 			return boardNames;
 		}
 }

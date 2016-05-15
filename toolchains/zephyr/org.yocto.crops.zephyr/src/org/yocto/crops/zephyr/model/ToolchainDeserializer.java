@@ -8,7 +8,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-public class ToolchainDeserializer implements JsonDeserializer<Object> {
+public class ToolchainDeserializer implements JsonDeserializer<Toolchain> {
 	
 	@Override
 	public Toolchain deserialize(final JsonElement json, final Type typOf, final JsonDeserializationContext context)

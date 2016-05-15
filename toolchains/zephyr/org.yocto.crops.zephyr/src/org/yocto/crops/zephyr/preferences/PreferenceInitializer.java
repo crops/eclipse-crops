@@ -1,17 +1,11 @@
 package org.yocto.crops.zephyr.preferences;
 
-import java.io.IOException;
-import java.nio.file.LinkOption;
-import java.nio.file.Paths;
-
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
-import org.yocto.crops.core.CropsCorePlugin;
 import org.yocto.crops.core.CropsUtils;
 import org.yocto.crops.zephyr.ZephyrPlugin;
-import org.yocto.crops.zephyr.ZephyrUtils;
 
 /**
  * Class used to initialize default preference values.

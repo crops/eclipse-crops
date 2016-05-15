@@ -14,11 +14,12 @@ import org.eclipse.cdt.dsf.debug.service.IRunControl;
 import org.eclipse.cdt.dsf.gdb.service.GDBRunControl_7_0_NS;
 import org.eclipse.cdt.dsf.gdb.service.GDBRunControl_7_2_NS;
 import org.eclipse.cdt.dsf.service.DsfSession;
+import org.eclipse.debug.core.ILaunchConfiguration;
 
 public class GdbExtendedDebugServicesFactoryNS extends GdbExtendedDebugServicesFactory {
 
-	public GdbExtendedDebugServicesFactoryNS(String version) {
-		super(version);
+	public GdbExtendedDebugServicesFactoryNS(String version, ILaunchConfiguration config) {
+		super(version, config);
 	}
 	
 	@Override

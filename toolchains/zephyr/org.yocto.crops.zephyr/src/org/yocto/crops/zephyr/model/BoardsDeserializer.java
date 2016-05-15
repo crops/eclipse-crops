@@ -13,20 +13,20 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 
-public class KernelTypesDeserializer implements JsonDeserializer<KernelTypes> {
+public class BoardsDeserializer implements JsonDeserializer<Boards> {
 	@Override
-	public KernelTypes deserialize(final JsonElement json, final Type typeOf, final JsonDeserializationContext context)
+	public Boards deserialize(final JsonElement json, final Type typeOf, final JsonDeserializationContext context)
 		throws JsonParseException {
 		
 		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.registerTypeAdapter(KernelType.class, new KernelTypeDeserializer());
+		gsonBuilder.registerTypeAdapter(Board.class, new BoardDeserializer());
 		Gson gson = gsonBuilder.create();
 		
 		final JsonArray jsonArray = json.getAsJsonArray();
-		KernelType[] kernelTypeArray = (KernelType[]) gson.fromJson(jsonArray.getAsJsonArray(), KernelType[].class);
-		Set<KernelType> kernelTypeSet = new HashSet<>(Arrays.asList(kernelTypeArray));
-		final KernelTypes kernelTypes = new KernelTypes();
-		kernelTypes.setKernelTypes(kernelTypeSet);
-		return kernelTypes;
+		Board[] boardArray = (Board[]) gson.fromJson(jsonArray.getAsJsonArray(), Board[].class);
+		Set<Board> boardSet = new HashSet<>(Arrays.asList(boardArray));
+		final Boards boards = new Boards();
+		boards.setBoards(boardSet);
+		return boards;
 	}
 }
