@@ -9,7 +9,7 @@ public class Boards {
 		return boards;
 	}
 	
-	public void setBoard(Set<Board> boards) {
+	public void setBoards(Set<Board> boards) {
 		this.boards = boards;
 	}
 }

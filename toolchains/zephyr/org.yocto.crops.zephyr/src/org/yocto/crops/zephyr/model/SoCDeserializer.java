@@ -8,15 +8,14 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-public class KernelTypeDeserializer implements JsonDeserializer<KernelType> {
+public class SoCDeserializer implements JsonDeserializer<SoC> {
 	@Override
-	public KernelType deserialize(final JsonElement json, final Type typeOf, final JsonDeserializationContext context)
-		throws JsonParseException {
-		
+	public SoC deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+			throws JsonParseException {
 		final JsonObject jsonObject = json.getAsJsonObject();
-		
 		// Delegate deserialization to the context
-		final KernelType kernelType = context.deserialize(jsonObject.getAsJsonObject(), KernelType.class);
-		return kernelType;
+		final SoC soc = context.deserialize(jsonObject.getAsJsonObject(), SoC.class);
+		return soc;
 	}
+
 }
