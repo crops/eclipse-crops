@@ -169,33 +169,6 @@
         </detail>
       </annotation>
     </setupTask>
-	<!--
-    <setupTask
-        xsi:type="setup:VariableTask"
-        name="eclipse.gerrit.uri.pattern"
-        value="(https|ssh)://([^@/]+@)?(git.eclipse.org:29418/.*|git.eclipse.org/r/.*)"/>
-    <setupTask
-        xsi:type="setup:VariableTask"
-        name="eclipse.gerrit.remoteURIs"
-        label="Eclipse Gerrit Repository">
-      <choice
-          value="https://git.eclipse.org/r/@{remoteURI}"
-          label="HTTPS (read-only, anonymous, Gerrit)"/>
-      <choice
-          value="ssh://${git.user.id|username}@git.eclipse.org:29418/@{remoteURI}"
-          label="SSH (read-write, Gerrit)">
-        <annotation
-            source="http://www.eclipse.org/oomph/setup/MatchChoice"/>
-      </choice>
-      <choice
-          value="https://${git.user.id|username}@git.eclipse.org/r/@{remoteURI}"
-          label="HTTPS (read-write, Gerrit)">
-        <annotation
-            source="http://www.eclipse.org/oomph/setup/MatchChoice"/>
-      </choice>
-      <description>Choose from the available remote Gerrit URIs</description>
-    </setupTask>
-	-->
     <setupTask
         xsi:type="setup:VariableTask"
         name="crops.git.remoteURIs"
@@ -288,8 +261,18 @@
         name="org.eclipse.swtbot.ide.feature.group"/>
     <requirement
         name="org.eclipse.swtbot.generator.feature.feature.group"/>
+    <requirement
+        name="com.google.gson"
+        versionRange="2.2.4.v201311231704"/>
+    <requirement
+        name="javax.inject"
+        versionRange="1.0.0.v20091030"/>
+    <requirement
+        name="org.eclipse.cdt.docker.launcher"/>
     <repository
         url="http://download.eclipse.org/technology/swtbot/releases/latest"/>
+    <repository
+        url="http://download.eclipse.org/tools/orbit/downloads/drops/S20160518051658/repository/"/>
     <description>Install the tools needed in the IDE to work with the source code for ${scope.project.label}</description>
   </setupTask>
   <setupTask
@@ -315,11 +298,11 @@
       encoding="UTF-8">
     <description>Initialize JDT's package explorer to show working sets as its root objects</description>
   </setupTask>
-  <!-- Eclipse Neon (4.6) will requires JRE-1.8. -->
+  <!-- Eclipse Neon (4.6) requires JRE-1.8. -->
   <setupTask
       xsi:type="jdt:JRETask"
       version="JavaSE-1.8"
-      location="${jre.location-1.7}">
+      location="${jre.location-1.8}">
     <description>Define the JRE needed to compile and run the Java projects of ${scope.project.label}</description>
   </setupTask>
   <setupTask
@@ -333,7 +316,7 @@
       name="CROPS"
       version="0.2"
       location="${workspace.location/../api.baseline}"
-      remoteURI="https://raw.githubusercontent.com/eclipse-crops/eclipse-crops-neon/releng/org.yocto.crops.target/crops.target"/>
+      remoteURI="https://crops.github.io/eclipse-crops/releases/0.2/eclipse-crops-0.2.1.zip"/>
   <setupTask
       xsi:type="setup:VariableTask"
       id="git.clone.crops.location"
@@ -401,34 +384,30 @@
             name="org.eclipse.remote.feature.group"/>
         <requirement
             name="org.eclipse.license.feature.group"/>
-	<requirement
-	    name="com.google.gson"/>
-	<requirement
-	    name="org.eclipse.remote.serial.feature.group"/>
         <requirement
-	    name="org.eclipse.remote.console.feature.group"/>
-	<requirement
-	    name="org.eclipse.tm.terminal.control"/>
-	<requirement
-	    name="org.eclipse.launchbar.feature.group"/>
-	<requirement
-	    name="org.eclipse.linuxtools.docker.feature.feature.group"/>
-	<requirement
-	    name="org.eclipse.m2e.feature.feature.group"/>
-	<requirement
-	    name="org.eclipse.jgit.feature.group"/>
+            name="com.google.gson"/>
+        <requirement
+            name="org.eclipse.remote.serial.feature.group"/>
+        <requirement
+            name="org.eclipse.remote.console.feature.group"/>
+        <requirement
+            name="org.eclipse.tm.terminal.control"/>
+        <requirement
+            name="org.eclipse.launchbar.feature.group"/>
+        <requirement
+            name="org.eclipse.linuxtools.docker.feature.feature.group"/>
+        <requirement
+            name="org.eclipse.m2e.feature.feature.group"/>
+        <requirement
+            name="org.eclipse.jgit.feature.group"/>
         <requirement
             name="org.eclipse.jgit.source.feature.group"/>
-	<requirement
-	    name="org.eclipse.cdt.feature.group"/>
-	<requirement
-	    name="org.eclipse.cdt.sdk.feature.group"/>
-<!--
-	<requirement
-	    name="org.freemarker" />
--->
-	<requirement
-	    name="org.antlr.runtime" />
+        <requirement
+            name="org.eclipse.cdt.feature.group"/>
+        <requirement
+            name="org.eclipse.cdt.sdk.feature.group"/>
+        <requirement
+            name="org.antlr.runtime"/>
         <sourceLocator
             rootFolder="${git.clone.crops.location}"
             locateNestedProjects="true"/>
@@ -440,17 +419,17 @@
               url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
           <repository
               url="http://download.eclipse.org/tm/updates/4.0/"/>
-	  <repository
-	      url="http://download.eclipse.org/releases/neon/"/>
+          <repository
+              url="http://download.eclipse.org/releases/neon/"/>
           <repository
               url="http://download.eclipse.org/eclipse/updates/4.6/"/>
           <repository
               url="http://download.eclipse.org/tools/ptp/builds/remote/2.0.0"/>
           <repository
               url="http://download.eclipse.org/cbi/updates/license"/>
-	  <repository
-	      url="http://download.eclipse.org/tm/terminal/builds/development/nightly/" />
-	  <repository
+          <repository
+              url="http://download.eclipse.org/tm/terminal/builds/development/nightly/"/>
+          <repository
               url="https://hudson.eclipse.org/cdt/job/launchbar-master/lastSuccessfulBuild/artifact/repo/target/repository/"/>
         </repositoryList>
       </targlet>
