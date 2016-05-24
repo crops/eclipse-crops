@@ -10,7 +10,7 @@
 
 	<groupId>org.yocto.crops</groupId>
 	<artifactId>crops-parent</artifactId>
-	<version>0.2.1-SNAPSHOT</version>
+	<version>0.3.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>CROPS Parent</name>
 
@@ -313,10 +313,6 @@
 			<id>cbi</id>
 			<url>https://repo.eclipse.org/content/repositories/cbi-releases/</url>
 		</pluginRepository>
-		<pluginRepository>
-			<id>cdt</id>
-			<url>http://download.eclipse.org/tools/cdt/releases/8.8.1/</url>
-		</pluginRepository>
   	</pluginRepositories>
 	<profiles>
 		<profile>
@@ -491,7 +487,7 @@
 							<groupId>org.yocto.crops</groupId>
 							<artifactId>org.yocto.crops.target</artifactId>
 							<classifier>${target-platform}</classifier>
-							<version>0.2.1</version>
+							<version>0.3.0</version>
 						</artifact>
 					</target>
 				</configuration>
