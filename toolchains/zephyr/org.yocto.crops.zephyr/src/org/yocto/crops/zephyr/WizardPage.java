@@ -152,13 +152,13 @@ public class WizardPage extends MBSCustomPage {
 		});
 
 		Label archLabel = new Label(composite, SWT.NONE);
-		boardLabel.setText(Messages.WizardPage_arch);
+		archLabel.setText(Messages.WizardPage_arch);
 		Combo archCombo = new Combo(composite, SWT.DROP_DOWN);
 		Arches arches = new Arches();
 		for( arch_id id : arches.getArches().keySet()) {
 			archCombo.add(arches.getArch(id).toString());
 		}
-		boardCombo.addModifyListener(new ModifyListener() {
+		archCombo.addModifyListener(new ModifyListener() {
 
 			@Override
 			public void modifyText(ModifyEvent e) {
