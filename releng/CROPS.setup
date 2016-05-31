@@ -174,7 +174,7 @@
         name="crops.git.remoteURIs"
         label="CROPS Git Repository">
       <choice
-          value="https://github.com/eclipse-crops/@{remoteURI}.git"
+          value="https://github.com/@{remoteURI}.git"
           label="HTTP (read-only, anonymous, direct)"/>
       <choice
           value="ssh://${git.user.id|username}@github.com/crops:@{remoteURI}.git"
@@ -254,26 +254,70 @@
     </setupTask>
   </setupTask>
   <setupTask
+      xsi:type="setup.p2:P2Task"
+      id="">
+    <requirement
+        name="org.eclipse.platform.ide"
+        versionRange="[4.6.0,5.0.0)"/>
+    <repository
+        url="http://download.eclipse.org/eclipse/updates/4.6milestones/"/>
+  </setupTask>
+  <setupTask
       xsi:type="setup.p2:P2Task">
     <requirement
         name="org.eclipse.pde.api.tools.ee.feature.feature.group"/>
     <requirement
+        name="org.eclipse.cdt.docker.launcher"/>
+    <requirement
+        name="org.eclipse.cdt.sdk.feature.group"/>
+    <requirement
+        name="org.eclipse.remote.serial.core"/>
+    <requirement
+        name="org.eclipse.cdt.native.serial"/>
+    <requirement
+        name="org.eclipse.launchbar.feature.group"/>
+    <repository
+        url="http://download.eclipse.org/releases/neon"/>
+    <description>Install the tools needed in the IDE to work with the source code for ${scope.project.label}</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task">
+    <requirement
         name="org.eclipse.swtbot.ide.feature.group"/>
     <requirement
         name="org.eclipse.swtbot.generator.feature.feature.group"/>
+    <repository
+        url="http://download.eclipse.org/technology/swtbot/releases/latest"/>
+  </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task">
+    <requirement
+        name="org.junit"
+        versionRange="4.12.0.v201504281640"/>
+    <requirement
+        name="com.spotify.docker.client"
+        versionRange="3.4.0.v20160411-1914"
+        filter=""/>
     <requirement
         name="com.google.gson"
         versionRange="2.2.4.v201311231704"/>
     <requirement
         name="javax.inject"
         versionRange="1.0.0.v20091030"/>
+    <repository
+        url="http://download.eclipse.org/tools/orbit/downloads/drops/R20160520211859/repository/"/>
+  </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task">
     <requirement
-        name="org.eclipse.cdt.docker.launcher"/>
+        name="org.eclipse.tools.templates.ui"/>
+    <requirement
+        name="org.eclipse.tools.templates.core"/>
+    <requirement
+        name="org.eclipse.tools.templates.freemarker"
+        filter=""/>
     <repository
-        url="http://download.eclipse.org/technology/swtbot/releases/latest"/>
-    <repository
-        url="http://download.eclipse.org/tools/orbit/downloads/drops/S20160518051658/repository/"/>
-    <description>Install the tools needed in the IDE to work with the source code for ${scope.project.label}</description>
+        url="https://hudson.eclipse.org/cdt/job/tools-templates-master/lastSuccessfulBuild/artifact/repo/target/repository/"/>
   </setupTask>
   <setupTask
       xsi:type="setup:EclipseIniTask"
@@ -298,7 +342,6 @@
       encoding="UTF-8">
     <description>Initialize JDT's package explorer to show working sets as its root objects</description>
   </setupTask>
-  <!-- Eclipse Neon (4.6) requires JRE-1.8. -->
   <setupTask
       xsi:type="jdt:JRETask"
       version="JavaSE-1.8"
@@ -352,86 +395,6 @@
       <targlet
           name="CROPS"
           activeRepositoryList="${eclipse.target.platform}">
-        <requirement
-            name="org.eclipse.platform.ide"/>
-        <requirement
-            name="org.apache.log4j"/>
-        <requirement
-            name="org.apache.log4j.source"/>
-        <requirement
-            name="org.apache.commons.compress"/>
-        <requirement
-            name="net.sourceforge.lpg.lpgjavaruntime"/>
-        <requirement
-            name="org.junit"/>
-        <requirement
-            name="org.junit.source"/>
-        <requirement
-            name="org.mockito"/>
-        <requirement
-            name="org.hamcrest.core"/>
-        <requirement
-            name="org.eclipse.swtbot.eclipse.feature.group"/>
-        <requirement
-            name="org.eclipse.swtbot.feature.group"/>
-        <requirement
-            name="org.eclipse.swtbot.eclipse.test.junit.feature.group"/>
-        <requirement
-            name="org.eclipse.rse.feature.group"/>
-        <requirement
-            name="org.eclipse.test.feature.group"/>
-        <requirement
-            name="org.eclipse.remote.feature.group"/>
-        <requirement
-            name="org.eclipse.license.feature.group"/>
-        <requirement
-            name="com.google.gson"/>
-        <requirement
-            name="org.eclipse.remote.serial.feature.group"/>
-        <requirement
-            name="org.eclipse.remote.console.feature.group"/>
-        <requirement
-            name="org.eclipse.tm.terminal.control"/>
-        <requirement
-            name="org.eclipse.launchbar.feature.group"/>
-        <requirement
-            name="org.eclipse.linuxtools.docker.feature.feature.group"/>
-        <requirement
-            name="org.eclipse.m2e.feature.feature.group"/>
-        <requirement
-            name="org.eclipse.jgit.feature.group"/>
-        <requirement
-            name="org.eclipse.jgit.source.feature.group"/>
-        <requirement
-            name="org.eclipse.cdt.feature.group"/>
-        <requirement
-            name="org.eclipse.cdt.sdk.feature.group"/>
-        <requirement
-            name="org.antlr.runtime"/>
-        <sourceLocator
-            rootFolder="${git.clone.crops.location}"
-            locateNestedProjects="true"/>
-        <repositoryList
-            name="Mars">
-          <repository
-              url="http://download.eclipse.org/tools/orbit/downloads/drops/S20160501200945/repository/"/>
-          <repository
-              url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
-          <repository
-              url="http://download.eclipse.org/tm/updates/4.0/"/>
-          <repository
-              url="http://download.eclipse.org/releases/neon/"/>
-          <repository
-              url="http://download.eclipse.org/eclipse/updates/4.6/"/>
-          <repository
-              url="http://download.eclipse.org/tools/ptp/builds/remote/2.0.0"/>
-          <repository
-              url="http://download.eclipse.org/cbi/updates/license"/>
-          <repository
-              url="http://download.eclipse.org/tm/terminal/builds/development/nightly/"/>
-          <repository
-              url="https://hudson.eclipse.org/cdt/job/launchbar-master/lastSuccessfulBuild/artifact/repo/target/repository/"/>
-        </repositoryList>
       </targlet>
     </setupTask>
     <setupTask
