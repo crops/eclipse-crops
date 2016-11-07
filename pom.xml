@@ -18,7 +18,7 @@
 	<base.test.vmargs>-Xms256m -Xmx512m -ea</base.test.vmargs>
     </properties>
 
-	<groupId>eclipse-crops</groupId>
+	<groupId>org.yocto.crops</groupId>
 	<artifactId>crops-parent</artifactId>
 	<version>${eclipse-crops-version}-SNAPSHOT</version>
 	<packaging>pom</packaging>
