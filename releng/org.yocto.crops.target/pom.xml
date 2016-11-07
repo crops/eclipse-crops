@@ -10,8 +10,8 @@
 		<relativePath>../../pom.xml</relativePath>
 	</parent>
 
-	<groupId>org.yocto.crops.target</groupId>
-	<artifactId>eclipse-crops-target</artifactId>
+	<groupId>org.yocto.crops</groupId>
+	<artifactId>org.yocto.crops.target</artifactId>
 	<version>${eclipse-crops-version}</version>
 	<packaging>pom</packaging>
 	
