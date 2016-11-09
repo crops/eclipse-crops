@@ -1,5 +1,6 @@
+.DS_Store
 RemoteSystemsTempFiles
 .recommenders
 .metadata
 */*/bin
-*/*/.DS_STORE
+*/*/.DS_Store
