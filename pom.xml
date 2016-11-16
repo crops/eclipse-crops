@@ -41,6 +41,7 @@
 	<modules>
 	
 		<module>releng/org.yocto.crops.target</module>
+		<module>releng/org.yocto.crops.target.ui.tests</module>
 <!--
 		<module>releng/org.yocto.crops</module>
 		<module>releng/org.yocto.crops-feature</module>

@@ -1,0 +1,71 @@
+--- RCPTT testcase ---
+Format-Version: 1.0
+Element-Name: 2_importProject
+Element-Type: testcase
+Element-Version: 3.0
+External-Reference: 
+Id: __aSV8KuJEeaYH6oxKtWBcg
+Runtime-Version: 2.1.0.201606221726
+Save-Time: 11/30/16 12:47 PM
+Testcase-Type: ecl
+Verifications: _lyiDMKuKEeaYH6oxKtWBcg
+
+------=_.content-0a7243a0-75d3-3d5f-9791-539de0e5b7ac
+Content-Type: text/ecl
+Entry-Name: .content
+
+// <p>Convenience method to escape given <b>path</b>
+// so it can be passed to other procedures.</p>
+// <p>Example:</p>
+// <pre>
+// escaped-path "/home/rcpttuser"
+// </pre>
+proc "escaped-path" [val path] {
+	// get a count of the number of nodes in the path
+	let [ val count [ $path | split -sep "/" -omitEmptyStrings | length ]] {
+		// get the nodes in the path as a list
+		let [val nodes [$path | split -sep "/" -omitEmptyStrings | to-list]] {
+			// recursively loop through the nodes
+			loop [val result ""] [val i 0] {
+				if [$i | lt $count] {
+					// for debugging:
+					// concat $result [concat "\\/" [get $nodes $i]] | show-alert
+					recur [concat $result [concat "\\/" [get $nodes $i]]] [$i | plus 1]
+				} -else {
+					// without this there is no output
+					emit $result
+				}
+			}
+		}
+	}
+}
+
+// <p>Convenience method to build given <b>home</b>
+// path and optional <b>tail</b> into a string so it can be used
+// to select an item from an EGit tree</p>
+// <p>Example:</p>
+// <pre>
+// get-working-tree -tail "/releng/org.yocto.crops.target"
+// </pre>
+proc "get-working-tree" [val home [get-java-property "user.home"]] [val tail] {
+		// for debugging:
+		// escaped-path $home | show-alert
+		concat "eclipse-crops [master] - " [escaped-path $home] "\\/git\\/eclipse-crops\\/.git/Working Tree - " [escaped-path $home] "\\/git\\/eclipse-crops"  $tail
+}
+
+get-view "Git Repositories" | get-tree 
+    | select [get-working-tree -tail "/releng/org.yocto.crops.target"] 
+    | get-menu "Import Projects..." | click
+with [get-window "Import Projects from Git Repository .*/git/eclipse-crops/.git"] {
+    get-button "Next >" | click
+    get-button Finish | click
+}
+get-button "Open Perspective" | click
+with [get-window "Open Perspective"] {
+    get-table | select "Plug-in Development"
+    get-button OK | click
+}
+// If the project import worked this item should be available
+// and the project-tree verification should succeed.
+get-view "Project Explorer" | get-tree | select "org.yocto.crops.target \\[eclipse-crops master\\]/crops.target"
+------=_.content-0a7243a0-75d3-3d5f-9791-539de0e5b7ac--
