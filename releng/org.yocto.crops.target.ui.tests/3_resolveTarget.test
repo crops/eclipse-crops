@@ -1,0 +1,48 @@
+--- RCPTT testcase ---
+Format-Version: 1.0
+Element-Name: 3_resolveTarget
+Element-Type: testcase
+Element-Version: 3.0
+External-Reference: 
+Id: _s6oHQKuKEeaYH6oxKtWBcg
+Runtime-Version: 2.1.0.201606221726
+Save-Time: 12/1/16 8:45 AM
+Testcase-Type: ecl
+Verifications: _Yp5sYLc4Eeamwte5E8lniQ
+
+------=_.content-0a7243a0-75d3-3d5f-9791-539de0e5b7ac
+Content-Type: text/ecl
+Entry-Name: .content
+
+get-view "Project Explorer" | get-tree | select "org.yocto.crops.target \\[eclipse-crops master\\]/crops.target" 
+    | double-click
+get-editor "crops.target" | get-button "Reload" | click
+// Wait for the target resolution to begin
+wait 1000
+// This is the status bar canvas
+// get-canvas -index 13 | double-click
+//
+// The above was brittle, so rather than use the UI shortcut,
+// get the Progress view explicitly via menus
+get-menu "Window/Show View/Other..." | click
+with [get-window "Show View"] {
+    get-tree | select "General/Progress"
+    get-button OK | click
+}
+// Give the target resolution some time to complete
+try -times 120 -delay 100 -command {
+	get-view Progress | get-control Any -after [get-label "Resolving Target Definition"] -index 2 
+    	| get-property "getSelection()" | equals 100 | verify-true
+} -catch {
+	// If the process has finished and the label is gone,
+	// the above test will throw:
+	//   'The Label "Resolving Target Definition" could not be found.'
+	// FIXME:
+	//   We probably need a better test than this.
+	//   For instance, what if the target resolution simply timed out
+	//   because of lack of network connectivity?
+	get-view Problems | get-tree | get-property "itemCount" | equals 0 | verify-true
+} -finally {
+	get-view Problems | get-tree | get-property "itemCount" | equals 0 | verify-true
+}
+------=_.content-0a7243a0-75d3-3d5f-9791-539de0e5b7ac--
