@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="eclipse-crops" sequenceNumber="7">
+<?pde version="3.8"?><target name="eclipse-crops" sequenceNumber="8">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <repository location="http://download.eclipse.org/tm/updates/4.0/"/>
@@ -78,11 +78,6 @@
 <unit id="org.antlr.runtime" version="4.5.1.v20160210-1233"/>
 <unit id="org.freemarker.source" version="2.3.22.v20160210-1233"/>
 <repository location="https://hudson.eclipse.org/orbit/job/orbit-recipes/lastSuccessfulBuild/artifact/releng/repository/target/repository/"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.launchbar.remote.feature.group" version="1.0.1.201611031744"/>
-<unit id="org.eclipse.launchbar.remote.source.feature.group" version="1.0.1.201611031744"/>
-<repository location="https://hudson.eclipse.org/cdt/job/launchbar-master/lastSuccessfulBuild/artifact/repo/target/repository/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.tm.terminal.view.rse.feature.feature.group" version="4.1.0.201606052351"/>
