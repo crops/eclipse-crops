@@ -9,9 +9,8 @@
 	</prerequisites>
 
     <properties>
-	<eclipse-crops-version>0.3.0</eclipse-crops-version>
-	<tycho-version>0.25.0</tycho-version>
-	<tycho-extras-version>0.25.0</tycho-extras-version>
+	<tycho-version>0.26.0</tycho-version>
+	<tycho-extras-version>0.26.0</tycho-extras-version>
 	<target-platform>crops</target-platform>
 	<help-docs-eclipserun-repo>http://download.eclipse.org/eclipse/updates/4.6</help-docs-eclipserun-repo>
 	<tycho.scmUrl>scm:git:https://github.com/crops/eclipse-crops.git</tycho.scmUrl>
@@ -248,7 +247,7 @@
 							<groupId>org.yocto.crops</groupId>
 							<artifactId>org.yocto.crops.target</artifactId>
 							<classifier>${target-platform}</classifier>
-							<version>${eclipse-crops-version}</version>
+							<version>0.3.0-SNAPSHOT</version>
 						</artifact>
 					</target>
 				</configuration>
