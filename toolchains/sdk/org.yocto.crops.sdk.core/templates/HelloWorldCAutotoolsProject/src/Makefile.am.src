@@ -1,0 +1,8 @@
+
+bin_PROGRAMS = $(projectName)
+$(projectName)_SOURCES = $(projectName).c
+
+AM_CFLAGS = @$(projectName)_CFLAGS@
+AM_LDFLAGS = @$(projectName)_LIBS@
+
+CLEANFILES = *~ 

@@ -1,0 +1,20 @@
+<templateManifest>
+  <file src="templates/HelloWorldCPPAutotoolsProject/src/autogen.sh"
+        dest="/${projectName}/autogen.sh"/>
+  <file src="templates/HelloWorldCPPAutotoolsProject/src/Basename.cpp"
+        dest="/${projectName}/${projectName}.cpp"/>
+  <file src="templates/HelloWorldCPPAutotoolsProject/src/ChangeLog"
+        dest="/${projectName}/ChangeLog"/>
+  <file src="templates/HelloWorldCPPAutotoolsProject/src/configure.ac.top"
+        dest="/${projectName}/configure.ac.top"/>
+  <file src="templates/HelloWorldCPPAutotoolsProject/src/INSTALL"
+        dest="/${projectName}/INSTALL"/>
+  <file src="templates/HelloWorldCPPAutotoolsProject/src/Makefile.am.src"
+        dest="/${projectName}/Makefile.am.src"/>
+  <file src="templates/HelloWorldCPPAutotoolsProject/src/Makefile.am.top"
+        dest="/${projectName}/Makefile.am.top"/>
+  <file src="templates/HelloWorldCPPAutotoolsProject/src/NEWS"
+        dest="/${projectName}/NEWS"/>
+  <file src="templates/HelloWorldCPPAutotoolsProject/src/README"
+        dest="/${projectName}/README"/>
+</templateManifest>

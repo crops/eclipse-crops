@@ -1,0 +1,22 @@
+<templateManifest>
+  <file src="templates/HelloWorldCAutotoolsProject/src/autogen.sh"
+        dest="/${projectName}/autogen.sh"/>
+  <file src="templates/HelloWorldCAutotoolsProject/src/Basename.c"
+        dest="/${projectName}/${projectName}.c"/>
+  <file src="templates/HelloWorldCAutotoolsProject/src/Basename.desktop.in.src"
+        dest="/${projectName}/${projectName}.desktop.in.src"/>
+  <file src="templates/HelloWorldCAutotoolsProject/src/ChangeLog"
+        dest="/${projectName}/ChangeLog"/>
+  <file src="templates/HelloWorldCAutotoolsProject/src/configure.ac.top"
+        dest="/${projectName}/configure.ac.top"/>
+  <file src="templates/HelloWorldCAutotoolsProject/src/INSTALL"
+        dest="/${projectName}/INSTALL"/>
+  <file src="templates/HelloWorldCAutotoolsProject/src/Makefile.am.src"
+        dest="/${projectName}/Makefile.am.src"/>
+  <file src="templates/HelloWorldCAutotoolsProject/src/Makefile.am.top"
+        dest="/${projectName}/Makefile.am.top"/>
+  <file src="templates/HelloWorldCAutotoolsProject/src/NEWS"
+        dest="/${projectName}/NEWS"/>
+  <file src="templates/HelloWorldCAutotoolsProject/src/README"
+        dest="/${projectName}/README"/>
+</templateManifest>
