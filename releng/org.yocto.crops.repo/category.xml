@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.yocto.crops.sdk_0.3.0.qualifier.jar" id="org.yocto.crops.sdk" version="0.3.0.qualifier">
+      <category name="crops_toolchains"/>
+   </feature>
+   <feature url="features/org.yocto.crops.sdk.source_0.3.0.qualifier.jar" id="org.yocto.crops.sdk.source" version="0.3.0.qualifier">
+      <category name="crops_sources"/>
+   </feature>
+   <category-def name="crops_core" label="CROPS Core"/>
+   <category-def name="crops_toolchains" label="CROPS Toolchains"/>
+   <category-def name="crops_sources" label="Source"/>
+</site>

@@ -1,0 +1,37 @@
+AC_PREREQ(2.61)
+
+# package version number (not shared library version)
+# odd micro numbers indicate in-progress development
+# even micro numbers indicate released versions
+m4_define($(projectName)_version_major, 0)
+m4_define($(projectName)_version_minor, 1)
+m4_define($(projectName)_version_micro, 0)
+
+m4_define([$(projectName)_version],
+          [$(projectName)_version_major.$(projectName)_version_minor.$(projectName)_version_micro])
+m4_define([$(projectName)_api_version],
+          [$(projectName)_version_major.$(projectName)_version_minor])
+
+AC_INIT($(projectName), $(projectName)_version)
+AM_INIT_AUTOMAKE($(projectName), $(projectName)_version)
+AC_CONFIG_HEADERS(config.h)
+
+# Checks for programs.
+AC_PROG_LIBTOOL
+AM_PROG_CC_C_O
+AC_PROG_INSTALL
+
+AC_SUBST($(projectName)_CFLAGS)
+AC_SUBST($(projectName)_LIBS)
+
+AC_OUTPUT([
+Makefile
+$(sourceDir)/Makefile
+])
+
+echo ""
+echo "   $(projectName) $VERSION"
+echo "   ====================="
+echo ""
+echo "   To build the project, run \"make\""
+echo ""

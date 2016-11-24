@@ -1,0 +1,24 @@
+<templateManifest>
+  <file src="templates/HelloWorldCGTKAutotoolsProject/src/autogen.sh"
+        dest="/${projectName}/autogen.sh"/>
+  <file src="templates/HelloWorldCGTKAutotoolsProject/src/Basename.c"
+        dest="/${projectName}/${projectName}.c"/>
+  <file src="templates/HelloWorldCGTKAutotoolsProject/src/Basename.desktop.in.src"
+        dest="/${projectName}/${projectName}.desktop.in.src"/>
+  <file src="templates/HelloWorldCGTKAutotoolsProject/src/ChangeLog"
+        dest="/${projectName}/ChangeLog"/>
+  <file src="templates/HelloWorldCGTKAutotoolsProject/src/configure.ac.top"
+        dest="/${projectName}/configure.ac.top"/>
+  <file src="templates/HelloWorldCGTKAutotoolsProject/src/configure.ac.top.old"
+        dest="/${projectName}/configure.ac.top.old"/>
+  <file src="templates/HelloWorldCGTKAutotoolsProject/src/INSTALL"
+        dest="/${projectName}/INSTALL"/>
+  <file src="templates/HelloWorldCGTKAutotoolsProject/src/Makefile.am.src"
+        dest="/${projectName}/Makefile.am.src"/>
+  <file src="templates/HelloWorldCGTKAutotoolsProject/src/Makefile.am.top"
+        dest="/${projectName}/Makefile.am.top"/>
+  <file src="templates/HelloWorldCGTKAutotoolsProject/src/NEWS"
+        dest="/${projectName}/NEWS"/>
+  <file src="templates/HelloWorldCGTKAutotoolsProject/src/README"
+        dest="/${projectName}/README"/>
+</templateManifest>

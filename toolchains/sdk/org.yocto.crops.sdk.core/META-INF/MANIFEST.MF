@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Yocto Project SDK Toolchain Core
+Bundle-SymbolicName: org.yocto.crops.sdk.core
+Bundle-Version: 0.3.0.qualifier
+Bundle-Activator: org.yocto.crops.sdk.core.Activator
+Bundle-Vendor: Yocto Project
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy

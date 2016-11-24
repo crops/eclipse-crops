@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=@VERSION@
+Encoding=UTF-8
+Name=$(projectName)
+Comment=A "$(message)"
+Type=Application
+Categories=Application
+Exec=$(projectName)
+Name[en_US]=$(message)
