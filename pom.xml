@@ -40,6 +40,7 @@
 
 	<modules>
 	
+		<module>releng/org.yocto.crops.target</module>
 <!--
 		<module>releng/org.yocto.crops</module>
 		<module>releng/org.yocto.crops-feature</module>
@@ -69,11 +70,12 @@
 		<module>toolchains/zephyr/org.yocto.crops.zephyr.source-feature</module>
 		<module>toolchains/zephyr/org.yocto.crops.zephyr-feature</module>
 -->
-		<module>releng/org.yocto.crops.target</module>
+		<module>toolchains/sdk/org.yocto.crops.sdk.core</module>
+		<module>toolchains/sdk/org.yocto.crops.sdk.ui</module>
+		<module>toolchains/sdk/org.yocto.crops.sdk.source-feature</module>
+		<module>toolchains/sdk/org.yocto.crops.sdk-feature</module>
 
-<!--
 		<module>releng/org.yocto.crops.repo</module>
--->
 	</modules>
 
 	<pluginRepositories>
@@ -244,8 +246,8 @@
 					</environments>
 					<target>
 						<artifact>
-							<groupId>org.yocto.crops</groupId>
-							<artifactId>org.yocto.crops.target</artifactId>
+							<groupId>org.yocto.crops.target</groupId>
+							<artifactId>crops</artifactId>
 							<classifier>${target-platform}</classifier>
 							<version>0.3.0-SNAPSHOT</version>
 						</artifact>
@@ -314,7 +316,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
-					<version>2.7</version>
+					<version>3.0.1</version>
 					<configuration>
 						<encoding>ISO-8859-1</encoding>
 					</configuration>
@@ -327,7 +329,7 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>findbugs-maven-plugin</artifactId>
-					<version>3.0.0</version>
+					<version>3.0.4</version>
 					<configuration>
 						<xmlOutput>true</xmlOutput>
 						<excludeFilterFile>releng/findbugs-exclude.xml</excludeFilterFile>
