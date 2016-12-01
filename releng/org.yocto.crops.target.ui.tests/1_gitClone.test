@@ -26,7 +26,7 @@ with [get-window "Clone Git Repository"] {
     // especially inside a container.
     // Assume we have previously cloned into /tmp/eclipse-crops
     get-group Location | get-editbox -after [get-label "URI:"]
-    | set-text "file:///~/workdir/eclipse-crops/"
+    | set-text "https://github.com/crops/eclipse-crops"
     get-button "Next >" | click
     get-button "Next >" | click
     get-button Finish | click

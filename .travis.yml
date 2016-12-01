@@ -22,5 +22,3 @@ before_script:
   - Xvfb :99.0 -extension RANDR > /dev/null &
   - fluxbox &
   - sleep 10
-  - mkdir ${HOME}/workdir
-  - git clone https://github.com/crops/eclipse-crops ${HOME}/workdir/eclipse-crops
