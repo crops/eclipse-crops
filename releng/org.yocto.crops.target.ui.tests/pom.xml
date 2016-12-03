@@ -48,10 +48,35 @@
     <ep_name>eclipse-committers</ep_name>
     <ep_release>neon</ep_release>
     <ep_version>1a</ep_version>
-    <os>linux</os>
-    <ws>gtk</ws>
-    <arch>x86_64</arch>
   </properties>
+
+  <!-- set platform specific properties to select AUT -->
+  <profiles>
+    <profile>
+      <id>macosx</id>
+        <activation><os><family>mac</family></os></activation>
+        <properties>
+          <flavor>macosx-cocoa-x86_64</flavor>
+          <extension>tar.gz</extension>
+        </properties>
+    </profile>
+    <profile>
+      <id>linux</id>
+	<activation><os><family>unix</family></os></activation>
+	<properties>
+          <flavor>linux-gtk-x86_64</flavor>
+          <extension>tar.gz</extension>
+	</properties>
+    </profile>
+    <profile>
+      <id>windows</id>
+	<activation><os><family>windows</family></os></activation>
+	<properties>
+	  <flavor>win32-x86_64</flavor>
+	  <extension>zip</extension>
+	</properties>
+    </profile>
+  </profiles>
 
   <!-- The main part of RCPTT Maven plugin -->
   <build>
@@ -62,10 +87,6 @@
         <version>${rcptt-maven-version}</version>
         <extensions>true</extensions>
         <configuration>
-			<profile>
-			  <id>verify</id>
-			        <echo>http://download.eclipse.org/technology/epp/downloads/release/${ep_release}/${ep_version}/${ep_name}-${ep_release}-${ep_version}-mac-cocoa-x86_64.tar.gz</echo>
-			</profile>
           <!-- This element describes where to get an AUT to run tests -->
           <aut>
             <!-- There are several ways to specify AUT location,
@@ -84,8 +105,7 @@
             -->
 
             <!-- As well AUT can be downloaded from HTTP -->
-            <!-- this will fail on windows since file extension should be .zip -->
-            <explicit>http://download.eclipse.org/technology/epp/downloads/release/${ep_release}/${ep_version}/${ep_name}-${ep_release}-${ep_version}-${os}-${ws}-${arch}.tar.gz</explicit>
+            <explicit>http://download.eclipse.org/technology/epp/downloads/release/${ep_release}/${ep_version}/${ep_name}-${ep_release}-${ep_version}-${flavor}.${extension}</explicit>
             
             <!-- AUT can be downloaded automatically from Maven repository -->
             <!-- 
