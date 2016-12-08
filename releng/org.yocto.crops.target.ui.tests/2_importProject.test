@@ -6,7 +6,7 @@ Element-Version: 3.0
 External-Reference: 
 Id: __aSV8KuJEeaYH6oxKtWBcg
 Runtime-Version: 2.1.0.201605312320
-Save-Time: 12/8/16 7:57 AM
+Save-Time: 12/8/16 8:32 AM
 Testcase-Type: ecl
 Verifications: _lyiDMKuKEeaYH6oxKtWBcg
 
@@ -19,7 +19,7 @@ Entry-Name: .content
 get-view "Git Repositories" | get-tree 
     | select "eclipse-crops.*/Working Tree.*/releng/org.yocto.crops.target" 
     | get-menu "Import Projects..." | click
-with [get-window "Import Projects from Git Repository .*/git/eclipse-crops/.git"] {
+with [get-window "Import Projects from Git Repository.*"] {
     get-button "Next >" | click
     get-button Finish | click
 }
