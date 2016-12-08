@@ -23,9 +23,8 @@ install:
   - cmd: java -version
 build_script:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -Dtycho.disableP2Mirrors=true -B -V
-  - mvn clean package --batch-mode -DskipTests=true
 test_script:
-  - mvn clean verify --batch-mode
+  - mvn test --batch-mode
 cache:
   - C:\maven\
 #  - C:\Users\appveyor\.m2
