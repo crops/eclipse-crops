@@ -30,7 +30,7 @@ with [get-window "Show View"] {
     get-button OK | click
 }
 // Give the target resolution some time to complete
-try -times 240 -delay 100 -command {
+try -times 300 -delay 100 -command {
 	get-view Progress | get-control Any -after [get-label "Resolving Target Definition"] -index 2 
     	| get-property "getSelection()" | equals 100 | verify-true
 } -catch {
