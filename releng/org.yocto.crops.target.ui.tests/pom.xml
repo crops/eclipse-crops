@@ -53,6 +53,7 @@
   <!-- set platform specific properties to select AUT -->
   <profiles>
     <profile>
+      <!-- only 64bit versions available for mac os x -->
       <id>macosx</id>
         <activation><os><family>mac</family></os></activation>
         <properties>
@@ -61,16 +62,52 @@
         </properties>
     </profile>
     <profile>
-      <id>linux</id>
-	<activation><os><family>unix</family></os></activation>
+      <id>linux32bit</id>
+	<activation>
+	  <os>
+            <family>unix</family>
+	    <arch>x86</arch>
+          </os>
+	</activation>
+	<properties>
+	  <flavor>linux-gtk</flavor>
+	  <extension>tar.gz</extension>
+	</properties>
+    </profile>
+    <profile>
+      <id>linux64bit</id>
+	<activation>
+	  <os>
+	    <family>unix</family>
+	    <arch>x86_64</arch>
+	  </os>
+        </activation>
 	<properties>
           <flavor>linux-gtk-x86_64</flavor>
           <extension>tar.gz</extension>
 	</properties>
     </profile>
     <profile>
-      <id>windows</id>
-	<activation><os><family>windows</family></os></activation>
+      <id>windows32bit</id>
+	<activation>
+          <os>
+            <family>windows</family>
+            <arch>x86</arch>
+          </os>
+        </activation>
+	<properties>
+	  <flavor>win32</flavor>
+	  <extension>zip</extension>
+	</properties>
+    </profile>
+    <profile>
+      <id>windows64bit</id>
+	<activation>
+	  <os>
+            <family>windows</family>
+	    <arch>x86_64</arch>
+          </os>
+	</activation>
 	<properties>
 	  <flavor>win32-x86_64</flavor>
 	  <extension>zip</extension>
