@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="eclipse-crops" sequenceNumber="8">
+<?pde version="3.8"?><target name="eclipse-crops" sequenceNumber="10">
 <locations>
-<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<repository location="http://download.eclipse.org/tm/updates/4.0/"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="com.google.gson" version="2.2.4.v201311231704"/>
-<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20160520211859/repository/"/>
-</location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.license.feature.group" version="0.0.0"/>
 <repository location="http://download.eclipse.org/cbi/updates/license"/>
@@ -51,9 +44,6 @@
 <repository location="http://download.eclipse.org/linuxtools/update-docker-2.1.0"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<repository location="http://download.eclipse.org/tools/ptp/builds/remote/neon/milestones"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.platform.ide" version="0.0.0"/>
 <unit id="org.eclipse.swt.tools.feature.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
@@ -61,23 +51,14 @@
 <repository location="http://download.eclipse.org/eclipse/updates/4.6/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.cdt.autotools.source.feature.group" version="9.1.0.201609121658"/>
-<unit id="org.eclipse.tools.templates.ui" version="1.1.0.201608240001"/>
+<unit id="org.eclipse.cdt.autotools.source.feature.group" version="9.2.0.201612061315"/>
+<unit id="org.eclipse.tools.templates.ui" version="1.1.1.201612052101"/>
 <unit id="com.google.gson" version="2.2.4.v201311231704"/>
-<unit id="org.eclipse.tools.templates.freemarker" version="1.0.0.201608240001"/>
+<unit id="org.eclipse.tools.templates.freemarker" version="1.0.0.201612052101"/>
 <unit id="org.freemarker" version="2.3.22.v20160210-1233"/>
-<unit id="org.eclipse.cdt.docker.launcher.source.feature.group" version="9.1.0.201609121658"/>
-<unit id="org.eclipse.tools.templates.core" version="1.1.0.201608240001"/>
-<repository location="http://download.eclipse.org/tools/cdt/releases/9.1"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<repository location="http://download.eclipse.org/tm/terminal/builds/development/nightly/"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.freemarker" version="2.3.22.v20160210-1233"/>
-<unit id="org.antlr.runtime" version="4.5.1.v20160210-1233"/>
-<unit id="org.freemarker.source" version="2.3.22.v20160210-1233"/>
-<repository location="https://hudson.eclipse.org/orbit/job/orbit-recipes/lastSuccessfulBuild/artifact/releng/repository/target/repository/"/>
+<unit id="org.eclipse.cdt.docker.launcher.source.feature.group" version="9.2.0.201612061315"/>
+<unit id="org.eclipse.tools.templates.core" version="1.1.0.201612052101"/>
+<repository location="http://download.eclipse.org/tools/cdt/releases/9.2"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.tm.terminal.view.rse.feature.feature.group" version="4.1.0.201606052351"/>
@@ -116,6 +97,12 @@
 <unit id="org.eclipse.remote.console.feature.group" version="2.1.1.201609011857"/>
 <unit id="org.eclipse.wst.xsl.feature.feature.group" version="1.3.401.v201509231858"/>
 <repository location="http://download.eclipse.org/releases/neon/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.antlr.runtime" version="4.5.1.v20160210-1233"/>
+<unit id="org.freemarker.source" version="2.3.22.v20160210-1233"/>
+<unit id="org.antlr.runtime.source" version="4.5.1.v20160210-1233"/>
+<repository location="https://hudson.eclipse.org/orbit/job/orbit-recipes/lastSuccessfulBuild/artifact/releng/repository/target/repository/"/>
 </location>
 </locations>
 </target>
