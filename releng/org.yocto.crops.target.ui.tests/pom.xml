@@ -47,7 +47,7 @@
     <rcptt-maven-version>2.1.0</rcptt-maven-version>
     <ep_name>eclipse-committers</ep_name>
     <ep_release>neon</ep_release>
-    <ep_version>1a</ep_version>
+    <ep_version>2</ep_version>
   </properties>
 
   <!-- set platform specific properties to select AUT -->
@@ -145,10 +145,11 @@
             <explicit>http://download.eclipse.org/technology/epp/downloads/release/${ep_release}/${ep_version}/${ep_name}-${ep_release}-${ep_version}-${flavor}.${extension}</explicit>
             
             <!-- AUT can be downloaded automatically from Maven repository -->
+	    <!-- However, Eclipse does not provide Maven artifacts -->
             <!-- 
             <groupId>org.eclipse</groupId>
             <artifactId>org.eclipse.epp.package.committers.product</artifactId>
-            <version>4.6.1</version>
+            <version>4.6.2</version>
             -->
 
             <!-- AUT Artifact classifier is based on a current platform:
