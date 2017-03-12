@@ -26,5 +26,46 @@
           type="org.yocto.crops.launch.ui.runYoctoDockerImageLaunchConfigurationType">
     </launchConfigurationTabGroup>
  </extension>
+        <extension
+         id="org.yocto.crops.container.docker.launch.ui.dockerCMakeNature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="org.yocto.crops.internal.container.docker.build.cmake.DockerCMakeNature">
+         </run>
+      </runtime>
+   </extension>
+    
+    <extension
+         point="org.eclipse.cdt.core.buildConfigProvider">
+      <provider
+            class="org.yocto.crops.internal.container.docker.build.cmake.DockerCMakeBuildConfigurationProvider"
+            id="org.yocto.crops.container.docker.launch.ui.provider"
+            natureId="org.yocto.crops.container.docker.launch.ui.dockerCMakeNature">
+      </provider>
+   </extension>
+      <extension
+         point="org.eclipse.tools.templates.ui.templates">
+      <tag
+            id="org.yocto.crops.container.docker.launch.ui.tag"
+            label="Docker CMake">
+      </tag>
+      <template
+            icon="icons/yocto_dot-48x48.png"
+            id="org.eclipse.cdt.cmake.ui.newProjectTemplate"
+            label="Docker CMake Project"
+            wizard="org.yocto.crops.internal.container.docker.build.cmake.NewDockerCMakeProjectWizard">
+         <description>
+            A Docker CMake project with a Hello World executable to get started.
+         </description>
+         <tagReference
+               id="org.eclipse.cdt.ui.cdtTag">
+         </tagReference>
+         <tagReference
+               id="org.yocto.crops.container.docker.launch.ui.tag">
+         </tagReference>
+      </template>
+   </extension>
+   
     
 </plugin>

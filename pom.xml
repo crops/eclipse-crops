@@ -77,6 +77,9 @@
 		<module>toolchains/sdk/org.yocto.crops.sdk-feature</module>
 
 		<module>releng/org.yocto.crops.repo</module>
+		<module>
+			toolchains/sdk/org.yocto.crops.container.docker.launch.ui
+		</module>
 	</modules>
 
 	<pluginRepositories>
