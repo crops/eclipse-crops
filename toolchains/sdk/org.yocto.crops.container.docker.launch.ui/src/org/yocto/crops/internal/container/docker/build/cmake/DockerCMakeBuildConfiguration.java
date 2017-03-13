@@ -14,6 +14,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +23,6 @@ import org.eclipse.cdt.cmake.core.ICMakeToolChainFile;
 import org.eclipse.cdt.cmake.core.ICMakeToolChainManager;
 import org.eclipse.cdt.core.ConsoleOutputStream;
 import org.eclipse.cdt.core.ErrorParserManager;
-import org.eclipse.cdt.core.IConsoleParser;
 import org.eclipse.cdt.core.build.CBuildConfiguration;
 import org.eclipse.cdt.core.build.IToolChain;
 import org.eclipse.cdt.core.model.ICModelMarker;
@@ -31,6 +32,13 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.linuxtools.docker.core.IDockerContainerInfo;
+import org.eclipse.linuxtools.docker.core.IDockerNetworkSettings;
+import org.eclipse.linuxtools.docker.ui.launch.ContainerLauncher;
+import org.eclipse.linuxtools.docker.ui.launch.IContainerLaunchListener;
 import org.osgi.service.prefs.BackingStoreException;
 import org.osgi.service.prefs.Preferences;
 
@@ -46,6 +54,64 @@ public class DockerCMakeBuildConfiguration extends CBuildConfiguration {
 	private static final String TOOLCHAIN_FILE = "cdt.cmake.toolchainfile"; //$NON-NLS-1$
 
 	private ICMakeToolChainFile toolChainFile;
+	private ContainerLauncher launcher;
+
+	private class StartCMakeServerJob extends Job implements IContainerLaunchListener {
+
+		private boolean started;
+		private boolean done;
+		private IDockerContainerInfo info;
+
+		public StartCMakeServerJob(String name) {
+			super(name);
+		}
+
+		@Override
+		protected IStatus run(IProgressMonitor monitor) {
+			monitor.beginTask(getName(), IProgressMonitor.UNKNOWN);
+
+			while (!done) {
+				if (monitor.isCanceled()) {
+					return Status.CANCEL_STATUS;
+				}
+				if (started && getIpAddress() != null)
+					done = true;
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					monitor.done();
+					return Status.CANCEL_STATUS;
+				}
+			}
+			monitor.done();
+			return Status.OK_STATUS;
+		}
+
+		@Override
+		public void newOutput(String output) {
+			// XXX this is for debugging/temporary
+			System.out.println("Docker CMake Output: "+output);
+			started = true;
+		}
+
+		public String getIpAddress() {
+			if (info != null) {
+				IDockerNetworkSettings networkSettings = info.networkSettings();
+				return networkSettings.ipAddress();
+			}
+			return null;
+		}
+
+		@Override
+		public void done() {
+			done = true;
+		}
+
+		@Override
+		public void containerInfo(IDockerContainerInfo info) {
+			this.info = info;
+		}
+	}
 
 	public DockerCMakeBuildConfiguration(IBuildConfiguration config, String name) throws CoreException {
 		super(config, name);
@@ -57,8 +123,9 @@ public class DockerCMakeBuildConfiguration extends CBuildConfiguration {
 			Path path = Paths.get(pathStr);
 			toolChainFile = manager.getToolChainFile(path);
 		}
+		launcher = new ContainerLauncher();
 	}
-	
+
 	public DockerCMakeBuildConfiguration(IBuildConfiguration config, String name, IToolChain toolChain) {
 		this(config, name, toolChain, null, "run"); //$NON-NLS-1$
 	}
@@ -77,6 +144,7 @@ public class DockerCMakeBuildConfiguration extends CBuildConfiguration {
 				Activator.log(e);
 			}
 		}
+		launcher = new ContainerLauncher();
 	}
 
 	@Override
@@ -112,11 +180,17 @@ public class DockerCMakeBuildConfiguration extends CBuildConfiguration {
 				command[0] = cmdPath.toString();
 			}
 
-			ProcessBuilder processBuilder = new ProcessBuilder(command).directory(buildDir.toFile());
-			Process process = processBuilder.start();
-			outStream.write(String.join(" ", command) + '\n'); //$NON-NLS-1$
-			watchProcess(process, new IConsoleParser[0], console);
+			StringBuffer cmd = new StringBuffer("");
+			for (String c : command) 
+				cmd.append(c).append(" ");
+		
+			launchAndWait("unix:///var/run/docker.sock","bavery/scott:ubuntu16.04","2345",cmd.toString(),project,buildDir.toString());
 
+//			ProcessBuilder processBuilder = new ProcessBuilder(command).directory(buildDir.toFile());
+//			Process process = processBuilder.start();
+//			outStream.write(String.join(" ", command) + '\n'); //$NON-NLS-1$
+//			watchProcess(process, new IConsoleParser[0], console);
+//
 			project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
 		} catch (IOException e) {
 			throw new CoreException(Activator.errorStatus(String.format("Cleaning %s", project.getName()), e));
@@ -160,21 +234,22 @@ public class DockerCMakeBuildConfiguration extends CBuildConfiguration {
 					command.add("-DCMAKE_TOOLCHAIN_FILE=" + toolChainFile.getPath().toString()); //$NON-NLS-1$
 				}
 
-				switch (getLaunchMode()) {
-				// TODO what to do with other modes
-				case "debug": //$NON-NLS-1$
-					command.add("-DCMAKE_BUILD_TYPE=Debug"); //$NON-NLS-1$
-					break;
-				}
-
 				command.add("-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"); //$NON-NLS-1$
 				command.add(new File(project.getLocationURI()).getAbsolutePath());
 
-				ProcessBuilder processBuilder = new ProcessBuilder(command).directory(buildDir.toFile());
-				setBuildEnvironment(processBuilder.environment());
-				Process process = processBuilder.start();
-				outStream.write(String.join(" ", command) + '\n'); //$NON-NLS-1$
-				watchProcess(process, new IConsoleParser[0], console);
+				StringBuffer cmd = new StringBuffer("");
+				for (String c : command) 
+					cmd.append(c).append(" ");
+			
+				launchAndWait("unix:///var/run/docker.sock","bavery/scott:ubuntu16.04","2345",cmd.toString(),project,buildDir.toString());
+
+//				 ProcessBuilder processBuilder = new
+//				 ProcessBuilder(command).directory(buildDir.toFile());
+//				 setBuildEnvironment(processBuilder.environment());
+//				 Process process = processBuilder.start();
+//				 outStream.write(String.join(" ", command) + '\n');
+//				 //$NON-NLS-1$
+//				 watchProcess(process, new IConsoleParser[0], console);
 			}
 
 			try (ErrorParserManager epm = new ErrorParserManager(project, getBuildDirectoryURI(), this,
@@ -194,11 +269,19 @@ public class DockerCMakeBuildConfiguration extends CBuildConfiguration {
 					command[0] = cmdPath.toString();
 				}
 
-				ProcessBuilder processBuilder = new ProcessBuilder(command).directory(buildDir.toFile());
-				setBuildEnvironment(processBuilder.environment());
-				Process process = processBuilder.start();
-				outStream.write(String.join(" ", command) + '\n'); //$NON-NLS-1$
-				watchProcess(process, new IConsoleParser[] { epm }, console);
+				StringBuffer cmd = new StringBuffer("");
+				for (String c : command) 
+					cmd.append(c).append(" ");
+
+				launchAndWait("unix:///var/run/docker.sock","bavery/scott:ubuntu16.04","2345",cmd.toString(),project,buildDir.toString());
+				
+//				 ProcessBuilder processBuilder = new
+//				 ProcessBuilder(command).directory(buildDir.toFile());
+//				 setBuildEnvironment(processBuilder.environment());
+//				 Process process = processBuilder.start();
+//				 outStream.write(String.join(" ", command) + '\n');
+//				 //$NON-NLS-1$
+//				 watchProcess(process, new IConsoleParser[] { epm }, console);
 			}
 
 			project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
@@ -209,7 +292,24 @@ public class DockerCMakeBuildConfiguration extends CBuildConfiguration {
 			return new IProject[] { project };
 		} catch (IOException e) {
 			throw new CoreException(Activator.errorStatus(String.format("Building %s", project.getName()), e));
-		}	}
+		}
+	}
+
+	private void launchAndWait(String connectionUri, String image, String dockerPort, String cmd, IProject project, String buildDir) {
+		StartCMakeServerJob job = new StartCMakeServerJob(
+				"Docker CMake server start");
+		job.schedule();
+
+		launcher.launch(Activator.PLUGIN_ID, job, connectionUri, image,
+				cmd.toString(), null, buildDir, Arrays.asList(new String[] { new File(project.getLocationURI()).getAbsolutePath() }), null, null,
+				Arrays.asList(new String[] { dockerPort }), true, true, true, new HashMap<String, String>());
+
+		try {
+			job.join();
+		} catch (InterruptedException e) {
+			// ignore
+		}
+	}
 	
 	private void processCompileCommandsFile(IProgressMonitor monitor) throws CoreException {
 		IProject project = getProject();
@@ -229,6 +329,5 @@ public class DockerCMakeBuildConfiguration extends CBuildConfiguration {
 			}
 		}
 	}
-
 
 }

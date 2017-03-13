@@ -9,6 +9,8 @@ import org.osgi.framework.ServiceReference;
 
 public class Activator extends Plugin {
 
+	public static final String PLUGIN_ID = "org.yocto.crops.container.docker.launch.ui";
+	
 	private static Activator plugin;
 
 	@Override
