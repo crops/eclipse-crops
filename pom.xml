@@ -82,6 +82,9 @@
 			toolchains/sdk/org.yocto.crops.container.docker.launch.ui
 		</module>
 		-->
+		<module>
+			toolchains/sdk/org.yocto.crops.container.docker.launch.ui
+		</module>
 	</modules>
 
 	<pluginRepositories>

@@ -302,7 +302,7 @@ public class DockerCMakeBuildConfiguration extends CBuildConfiguration {
 
 		launcher.launch(Activator.PLUGIN_ID, job, connectionUri, image,
 				cmd.toString(), null, buildDir, Arrays.asList(new String[] { new File(project.getLocationURI()).getAbsolutePath() }), null, null,
-				Arrays.asList(new String[] { dockerPort }), true, true, true, new HashMap<String, String>());
+				Arrays.asList(new String[] { dockerPort }), true, false, true, new HashMap<String, String>());
 
 		try {
 			job.join();
