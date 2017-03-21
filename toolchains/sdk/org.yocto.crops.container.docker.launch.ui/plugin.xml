@@ -66,6 +66,25 @@
          </tagReference>
       </template>
    </extension>
+      <extension
+            point="org.eclipse.ui.propertyPages">
+         <page
+               class="org.yocto.crops.container.docker.launch.ui.properties.YoctoPropertyPage"
+               id="org.yocto.crops.container.docker.launch.ui.properties.yoctoPropertyPage"
+               name="Yocto">
+         <enabledWhen>
+            <and>
+               <instanceof
+                     value="org.eclipse.core.resources.IProject">
+               </instanceof>
+               <test
+                     property="org.eclipse.core.resources.projectNature"
+                     value="org.yocto.crops.container.docker.launch.ui.dockerCMakeNature">
+               </test>
+            </and>
+         </enabledWhen>
+         </page>
+      </extension>
    
     
 </plugin>

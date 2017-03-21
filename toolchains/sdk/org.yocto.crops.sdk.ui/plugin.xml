@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+      <extension
+         point="org.eclipse.tools.templates.ui.templates">
+      <tag
+            id="org.yocto.crops.sdk.ui.tag"
+            label="Yocto CMake">
+      </tag>
+      <template
+            icon="icons/yocto_dot-48x48.png"
+            id="org.yocto.crops.sdk.ui.newProjectTemplate"
+            label="Yocto CMake Project"
+            wizard="org.yocto.crops.internal.sdk.ui.YoctoNewProjectWizard">
+         <description>
+            A Yocto CMake project with a Hello World executable to get started.
+         </description>
+         <tagReference
+               id="org.eclipse.cdt.ui.cdtTag">
+         </tagReference>
+         <tagReference
+               id="org.yocto.crops.sdk.ui.tag">
+         </tagReference>
+      </template>
+   </extension>
+      <extension
+            point="org.eclipse.ui.propertyPages">
+         <page
+               class="org.yocto.crops.internal.sdk.ui.YoctoProjectPropertyPage"
+               id="org.yocto.crops.sdk.ui.yoctoProjectPropertyPage"
+               name="Yocto">
+         <enabledWhen>
+            <and>
+               <instanceof
+                     value="org.eclipse.core.resources.IProject">
+               </instanceof>
+               <test
+                     property="org.eclipse.core.resources.projectNature"
+                     value="org.yocto.crops.sdk.core.yoctoProjectNature">
+               </test>
+            </and>
+         </enabledWhen>
+         </page>
+      </extension>
+   
+
+</plugin>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+        <extension
+         id="org.yocto.crops.sdk.core.yoctoProjectNature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="org.yocto.crops.internal.sdk.core.YoctoProjectNature">
+         </run>
+      </runtime>
+   </extension>
+    
+    <extension
+         point="org.eclipse.cdt.core.buildConfigProvider">
+      <provider
+            class="org.yocto.crops.sdk.core.build.YoctoBuildConfigurationProvider"
+            id="org.yocto.crops.sdk.core.yoctoBuildConfigurationProvider"
+            natureId="org.yocto.crops.sdk.core.yoctoProjectNature">
+      </provider>
+   </extension>
+
+</plugin>

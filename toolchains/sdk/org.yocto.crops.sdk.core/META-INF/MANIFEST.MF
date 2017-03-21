@@ -1,11 +1,24 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Yocto Project SDK Toolchain Core
-Bundle-SymbolicName: org.yocto.crops.sdk.core
+Bundle-SymbolicName: org.yocto.crops.sdk.core;singleton:=true
 Bundle-Version: 0.3.0.qualifier
-Bundle-Activator: org.yocto.crops.sdk.core.Activator
+Bundle-Activator: org.yocto.crops.internal.sdk.core.Activator
 Bundle-Vendor: Yocto Project
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.tools.templates.core;bundle-version="1.1.0",
+ org.eclipse.core.resources;bundle-version="3.11.1",
+ org.eclipse.tools.templates.freemarker;bundle-version="1.0.0",
+ org.eclipse.equinox.preferences
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
+Import-Package: com.google.gson;version="2.2.4",
+ org.eclipse.cdt.cmake.core,
+ org.eclipse.cdt.core,
+ org.eclipse.cdt.core.build,
+ org.eclipse.cdt.core.model,
+ org.eclipse.cdt.core.resources,
+ org.eclipse.linuxtools.docker.core,
+ org.eclipse.linuxtools.docker.ui.launch
+Export-Package: org.yocto.crops.sdk.core.build;version="1.0.0",
+ org.yocto.crops.sdk.core.model;version="1.0.0"
