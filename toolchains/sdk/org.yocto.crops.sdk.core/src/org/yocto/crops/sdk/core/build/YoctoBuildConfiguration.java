@@ -31,13 +31,13 @@ import org.eclipse.cdt.core.resources.IConsole;
 import org.eclipse.core.resources.IBuildConfiguration;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.linuxtools.docker.core.IDockerConnection;
 import org.eclipse.linuxtools.docker.core.IDockerContainerInfo;
 import org.eclipse.linuxtools.docker.core.IDockerImage;
@@ -153,9 +153,8 @@ public class YoctoBuildConfiguration extends CBuildConfiguration {
 			}
 		}
 		launcher = new ContainerLauncher();
-		ProjectScope projectScope = new ProjectScope(getProject());
 		try {
-			IEclipsePreferences pref = projectScope.getNode(Activator.PREFS_NODE_NAME);
+			IEclipsePreferences pref = InstanceScope.INSTANCE.getNode(Activator.PREFS_NODE_NAME);
 			if (!pref.nodeExists(Activator.PREFS_DOCKERURI_PREFIX_DEFAULT))
 				pref.put(Activator.PREFS_DOCKERURI_PREFIX_KEY,Activator.PREFS_DOCKERURI_PREFIX_DEFAULT);
 			if (!pref.nodeExists(Activator.PREFS_DOCKERIMAGEREPO_PREFIX_KEY))
@@ -359,7 +358,7 @@ public class YoctoBuildConfiguration extends CBuildConfiguration {
 
 	private void launchAndWait(String cmd, IProject project,
 			String buildDir) throws IOException {
-		IEclipsePreferences pref = new ProjectScope(project).getNode(Activator.PREFS_NODE_NAME);
+		IEclipsePreferences pref = InstanceScope.INSTANCE.getNode(Activator.PREFS_NODE_NAME);
 		String dockerConnectionUrlPrefix = pref.get(Activator.PREFS_DOCKERURI_PREFIX_KEY,null);
 		String dockerImageRepoPrefix = pref.get(Activator.PREFS_DOCKERIMAGEREPO_PREFIX_KEY, null);
 		String dockerPort = pref.get(Activator.PREFS_DOCKERPORT_KEY, null);
