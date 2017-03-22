@@ -265,7 +265,7 @@ public class YoctoBuildConfiguration extends CBuildConfiguration {
 			Map<String, String> properties = getProperties();
 			String generator = properties.get(CMAKE_GENERATOR);
 			if (generator == null) {
-				generator = "Unix Makefiles"; //$NON-NLS-1$
+				generator = "\"Unix Makefiles\""; //$NON-NLS-1$
 			}
 
 			project.deleteMarkers(ICModelMarker.C_MODEL_PROBLEM_MARKER, false, IResource.DEPTH_INFINITE);
