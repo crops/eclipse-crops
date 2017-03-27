@@ -372,7 +372,7 @@ public class YoctoBuildConfiguration extends CBuildConfiguration {
 
 		launcher.launch(Activator.PLUGIN_ID, job, image.getConnection().getUri(), image.repoTags().get(0), cmd.toString(), null, buildDir,
 				Arrays.asList(new String[] { new File(project.getLocationURI()).getAbsolutePath() }), null, null,
-				Arrays.asList(new String[] { dockerPort }), false, false, true, new HashMap<String, String>());
+				Arrays.asList(new String[] { dockerPort }), true, false, true, new HashMap<String, String>());
 
 		try {
 			job.join();
