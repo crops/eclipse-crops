@@ -395,6 +395,10 @@ public class ContainerLauncher {
 			hostBuilder = hostBuilder.binds(volumes);
 		}
 
+		// XXX
+		//String user = System.getenv("USER");
+		//builder.user(user);
+		
 		final DockerContainerConfig config = builder.build();
 
 		// add any port bindings if specified
