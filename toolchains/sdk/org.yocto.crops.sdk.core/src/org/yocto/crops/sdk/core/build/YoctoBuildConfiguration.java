@@ -156,8 +156,8 @@ public class YoctoBuildConfiguration extends CBuildConfiguration {
 			IEclipsePreferences pref = InstanceScope.INSTANCE.getNode(Activator.PREFS_NODE_NAME);
 			if (!pref.nodeExists(Activator.PREFS_DOCKERURI_PREFIX_DEFAULT))
 				pref.put(Activator.PREFS_DOCKERURI_PREFIX_KEY,Activator.PREFS_DOCKERURI_PREFIX_DEFAULT);
-			if (!pref.nodeExists(Activator.PREFS_DOCKERIMAGEREPO_PREFIX_KEY))
-				pref.put(Activator.PREFS_DOCKERIMAGEREPO_PREFIX_KEY, Activator.PREFS_DOCKERIMAGEREPO_PREFIX_DEFAULT);
+			if (!pref.nodeExists(Activator.PREFS_DOCKERIMAGE_FILTER_KEY))
+				pref.put(Activator.PREFS_DOCKERIMAGE_FILTER_KEY, Activator.PREFS_DOCKERIMAGE_FILTER_DEFAULT);
 			if (!pref.nodeExists(Activator.PREFS_DOCKERPORT_KEY))
 				pref.put(Activator.PREFS_DOCKERPORT_KEY, Activator.PREFS_DOCKERPORT_DEFAULT);
 			pref.flush();
@@ -359,10 +359,10 @@ public class YoctoBuildConfiguration extends CBuildConfiguration {
 			String buildDir) throws IOException {
 		IEclipsePreferences pref = InstanceScope.INSTANCE.getNode(Activator.PREFS_NODE_NAME);
 		String dockerConnectionUrlPrefix = pref.get(Activator.PREFS_DOCKERURI_PREFIX_KEY,null);
-		String dockerImageRepoPrefix = pref.get(Activator.PREFS_DOCKERIMAGEREPO_PREFIX_KEY, null);
+		String dockerImageFilter = pref.get(Activator.PREFS_DOCKERIMAGE_FILTER_KEY, null);
 		String dockerPort = pref.get(Activator.PREFS_DOCKERPORT_KEY, null);
 		
-		IDockerImage image = getDockerImage(dockerConnectionUrlPrefix,"(repo="+dockerImageRepoPrefix+")");
+		IDockerImage image = getDockerImage(dockerConnectionUrlPrefix,dockerImageFilter);
 		if (image == null)
 			throw new IOException("Could not build because image not found");
 		

@@ -48,6 +48,8 @@ public class ContainerLauncher {
 
 	private static RunConsole console;
 
+	private static final boolean CROPS = true;
+	
 	public static String getFormattedString(String key, String arg) {
 		return MessageFormat.format(getString(key), new Object[] { arg });
 	}
@@ -55,6 +57,7 @@ public class ContainerLauncher {
 	public static String getFormattedString(String key, String[] args) {
 		return MessageFormat.format(getString(key), (Object[]) args);
 	}
+
 	public static String getString(String key) {
 		try {
 			return key;
@@ -64,7 +67,6 @@ public class ContainerLauncher {
 			return '#' + key + '#';
 		}
 	}
-
 
 	private class CopyVolumesJob extends Job {
 
@@ -77,9 +79,7 @@ public class ContainerLauncher {
 		private final IDockerConnection connection;
 		private final String containerId;
 
-		public CopyVolumesJob(Set<String> volumes,
-				IDockerConnection connection,
-				String containerId) {
+		public CopyVolumesJob(Set<String> volumes, IDockerConnection connection, String containerId) {
 			super(getString(COPY_VOLUMES_JOB_TITLE));
 			this.volumes = volumes;
 			this.connection = connection;
@@ -88,9 +88,7 @@ public class ContainerLauncher {
 
 		@Override
 		protected IStatus run(IProgressMonitor monitor) {
-			monitor.beginTask(
-					getFormattedString(COPY_VOLUMES_DESC, containerId),
-					volumes.size());
+			monitor.beginTask(getFormattedString(COPY_VOLUMES_DESC, containerId), volumes.size());
 			Iterator<String> iterator = volumes.iterator();
 			IStatus status = Status.OK_STATUS;
 			// for each remote volume, copy from host to Container volume
@@ -105,21 +103,17 @@ public class ContainerLauncher {
 				}
 				monitor.setTaskName(getFormattedString(COPY_VOLUMES_TASK, directory));
 				try {
-					((DockerConnection) connection).copyToContainer(directory,
-							containerId, directory);
+					((DockerConnection) connection).copyToContainer(directory, containerId, directory);
 					monitor.worked(1);
-				} catch (DockerException | InterruptedException
-						| IOException e) {
+				} catch (DockerException | InterruptedException | IOException e) {
 					monitor.done();
 					final String dir = directory;
-					Display.getDefault().syncExec(() -> MessageDialog.openError(
-							PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-									.getShell(),
-							getFormattedString(ERROR_COPYING_VOLUME,
-									new String[] { dir, containerId }),
-							e.getMessage()));
-					status = new Status(IStatus.ERROR, Activator.PLUGIN_ID,
-							e.getMessage());
+					Display.getDefault()
+							.syncExec(() -> MessageDialog.openError(
+									PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), getFormattedString(
+											ERROR_COPYING_VOLUME, new String[] { dir, containerId }),
+									e.getMessage()));
+					status = new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage());
 				} finally {
 					monitor.done();
 				}
@@ -160,15 +154,12 @@ public class ContainerLauncher {
 	 * @param stdinSupport
 	 *            - true if stdin support is required, false otherwise
 	 */
-	public void launch(String id, IContainerLaunchListener listener,
-			final String connectionUri,
-			String image, String command, String commandDir, String workingDir,
-			List<String> additionalDirs, Map<String, String> origEnv,
-			Map<String, String> envMap, List<String> ports, boolean keep,
+	public void launch(String id, IContainerLaunchListener listener, final String connectionUri, String image,
+			String command, String commandDir, String workingDir, List<String> additionalDirs,
+			Map<String, String> origEnv, Map<String, String> envMap, List<String> ports, boolean keep,
 			boolean stdinSupport) {
-		launch(id, listener, connectionUri, image, command, commandDir,
-				workingDir, additionalDirs, origEnv, envMap, ports, keep,
-				stdinSupport, false);
+		launch(id, listener, connectionUri, image, command, commandDir, workingDir, additionalDirs, origEnv, envMap,
+				ports, keep, stdinSupport, false);
 	}
 
 	/**
@@ -205,15 +196,12 @@ public class ContainerLauncher {
 	 *            - true if privileged mode is required, false otherwise
 	 * @since 2.1
 	 */
-	public void launch(String id, IContainerLaunchListener listener,
-			final String connectionUri, String image, String command,
-			String commandDir, String workingDir, List<String> additionalDirs,
-			Map<String, String> origEnv, Map<String, String> envMap,
-			List<String> ports, boolean keep, boolean stdinSupport,
-			boolean privilegedMode) {
-		launch(id, listener, connectionUri, image, command, commandDir,
-				workingDir, additionalDirs, origEnv, envMap, ports, keep,
-				stdinSupport, privilegedMode, null);
+	public void launch(String id, IContainerLaunchListener listener, final String connectionUri, String image,
+			String command, String commandDir, String workingDir, List<String> additionalDirs,
+			Map<String, String> origEnv, Map<String, String> envMap, List<String> ports, boolean keep,
+			boolean stdinSupport, boolean privilegedMode) {
+		launch(id, listener, connectionUri, image, command, commandDir, workingDir, additionalDirs, origEnv, envMap,
+				ports, keep, stdinSupport, privilegedMode, null);
 	}
 
 	/**
@@ -252,12 +240,10 @@ public class ContainerLauncher {
 	 *            - Map of labels for the container
 	 * @since 2.2
 	 */
-	public void launch(String id, IContainerLaunchListener listener,
-			final String connectionUri, String image, String command,
-			String commandDir, String workingDir, List<String> additionalDirs,
-			Map<String, String> origEnv, Map<String, String> envMap,
-			List<String> ports, boolean keep, boolean stdinSupport,
-			boolean privilegedMode, Map<String, String> labels) {
+	public void launch(String id, IContainerLaunchListener listener, final String connectionUri, String image,
+			String command, String commandDir, String workingDir, List<String> additionalDirs,
+			Map<String, String> origEnv, Map<String, String> envMap, List<String> ports, boolean keep,
+			boolean stdinSupport, boolean privilegedMode, Map<String, String> labels) {
 
 		final String LAUNCH_TITLE = "ContainerLaunch.title"; //$NON-NLS-1$
 		final String LAUNCH_EXITED_TITLE = "ContainerLaunchExited.title"; //$NON-NLS-1$
@@ -265,7 +251,6 @@ public class ContainerLauncher {
 		final List<String> env = new ArrayList<>();
 		env.addAll(toList(origEnv));
 		env.addAll(toList(envMap));
-
 
 		final List<String> cmdList = getCmdList(command);
 
@@ -279,30 +264,23 @@ public class ContainerLauncher {
 					String[] segments = port.split(":"); //$NON-NLS-1$
 					if (segments.length == 1) { // containerPort
 						exposedPorts.add(segments[0]);
-						portBindingsMap
-								.put(segments[0],
-										Arrays.asList((IDockerPortBinding) new DockerPortBinding(
-												"", ""))); //$NON-NLS-1$ //$NON-NLS-2$
+						portBindingsMap.put(segments[0],
+								Arrays.asList((IDockerPortBinding) new DockerPortBinding("", ""))); //$NON-NLS-1$ //$NON-NLS-2$
 					} else if (segments.length == 2) { // hostPort:containerPort
 						exposedPorts.add(segments[1]);
-						portBindingsMap
-								.put(segments[1],
-										Arrays.asList((IDockerPortBinding) new DockerPortBinding(
-												"", segments[0]))); //$NON-NLS-1$ //$NON-NLS-2$
+						portBindingsMap.put(segments[1],
+								Arrays.asList((IDockerPortBinding) new DockerPortBinding("", segments[0]))); //$NON-NLS-1$ //$NON-NLS-2$
 					} else if (segments.length == 3) { // either
 						// ip:hostPort:containerPort
 						// or ip::containerPort
 						exposedPorts.add(segments[1]);
 						if (segments[1].isEmpty()) {
-							portBindingsMap
-									.put(segments[2],
-											Arrays.asList((IDockerPortBinding) new DockerPortBinding(
-													"", segments[0]))); //$NON-NLS-1$ //$NON-NLS-2$
+							portBindingsMap.put(segments[2],
+									Arrays.asList((IDockerPortBinding) new DockerPortBinding("", segments[0]))); //$NON-NLS-1$ //$NON-NLS-2$
 						} else {
-							portBindingsMap
-									.put(segments[2],
-											Arrays.asList((IDockerPortBinding) new DockerPortBinding(
-													segments[0], segments[1]))); //$NON-NLS-1$ //$NON-NLS-2$
+							portBindingsMap.put(segments[2], Arrays
+									.asList((IDockerPortBinding) new DockerPortBinding(segments[0], segments[1]))); // $NON-NLS-1$
+																													// //$NON-NLS-2$
 						}
 					}
 				}
@@ -314,11 +292,8 @@ public class ContainerLauncher {
 		// remote daemon. Local mounted volumes are passed
 		// via the HostConfig binds setting
 
-		DockerContainerConfig.Builder builder = new DockerContainerConfig.Builder()
-				.openStdin(stdinSupport)
-				.cmd(cmdList)
-				.image(image)
-				.workingDir(workingDir);
+		DockerContainerConfig.Builder builder = new DockerContainerConfig.Builder().openStdin(stdinSupport).cmd(cmdList)
+				.image(image).workingDir(workingDir);
 		// add any exposed ports as needed
 		if (exposedPorts.size() > 0)
 			builder = builder.exposedPorts(exposedPorts);
@@ -330,32 +305,24 @@ public class ContainerLauncher {
 		if (!DockerConnectionManager.getInstance().hasConnections()) {
 			Display.getDefault()
 					.syncExec(() -> MessageDialog.openError(
-							PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-									.getShell(),
-							getString(ERROR_LAUNCHING_CONTAINER),
-							getString(ERROR_NO_CONNECTIONS)));
+							PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
+							getString(ERROR_LAUNCHING_CONTAINER), getString(ERROR_NO_CONNECTIONS)));
 			return;
 		}
 
 		// Try and use the specified connection that was used before,
 		// otherwise, open an error
-		final IDockerConnection connection = DockerConnectionManager
-				.getInstance().getConnectionByUri(connectionUri);
+		final IDockerConnection connection = DockerConnectionManager.getInstance().getConnectionByUri(connectionUri);
 		if (connection == null) {
 			Display.getDefault()
 					.syncExec(() -> MessageDialog.openError(
-							PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-									.getShell(),
+							PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
 							getString(ERROR_LAUNCHING_CONTAINER),
-							getFormattedString(
-									ERROR_NO_CONNECTION_WITH_URI,
-									connectionUri)));
+							getFormattedString(ERROR_NO_CONNECTION_WITH_URI, connectionUri)));
 			return;
 		}
 
-		DockerHostConfig.Builder hostBuilder = new DockerHostConfig.Builder()
-				.privileged(privilegedMode);
-
+		DockerHostConfig.Builder hostBuilder = new DockerHostConfig.Builder().privileged(privilegedMode);
 
 		final Set<String> remoteVolumes = new TreeSet<>();
 		if (!((DockerConnection) connection).isLocal()) {
@@ -380,25 +347,41 @@ public class ContainerLauncher {
 			// hostname:mountname:Z.
 			// In our case, we want all directories mounted as-is so the
 			// executable will run as the user expects.
-			final List<String> volumes = new ArrayList<>();
-			if (additionalDirs != null) {
-				for (String dir : additionalDirs) {
-					volumes.add(dir + ":" + dir + ":Z"); //$NON-NLS-1$ //$NON-NLS-2$
+			if (CROPS) {
+				final List<String> volumes = new ArrayList<String>();
+				if (additionalDirs != null) {
+					for (String dir : additionalDirs) {
+						volumes.add(dir + ":" + dir + ":Z"); //$NON-NLS-1$ //$NON-NLS-2$
+					}
 				}
+				if (workingDir != null) {
+					volumes.add(workingDir + ":" + "/workdir" + ":Z"); //$NON-NLS-1$ //$NON-NLS-2$
+				}
+				if (commandDir != null) {
+					volumes.add(commandDir + ":" + commandDir + ":Z"); //$NON-NLS-1$ //$NON-NLS-2$
+				}
+				hostBuilder = hostBuilder.binds(volumes);
+			} else {
+				final List<String> volumes = new ArrayList<>();
+				if (additionalDirs != null) {
+					for (String dir : additionalDirs) {
+						volumes.add(dir + ":" + dir + ":Z"); //$NON-NLS-1$ //$NON-NLS-2$
+					}
+				}
+				if (workingDir != null) {
+					volumes.add(workingDir + ":" + workingDir + ":Z"); //$NON-NLS-1$ //$NON-NLS-2$
+				}
+				if (commandDir != null) {
+					volumes.add(commandDir + ":" + commandDir + ":Z"); //$NON-NLS-1$ //$NON-NLS-2$
+				}
+				hostBuilder = hostBuilder.binds(volumes);
 			}
-			if (workingDir != null) {
-				volumes.add(workingDir + ":" + workingDir + ":Z"); //$NON-NLS-1$ //$NON-NLS-2$
-			}
-			if (commandDir != null) {
-				volumes.add(commandDir + ":" + commandDir + ":Z"); //$NON-NLS-1$ //$NON-NLS-2$
-			}
-			hostBuilder = hostBuilder.binds(volumes);
 		}
 
 		// XXX
-		//String user = System.getenv("USER");
-		//builder.user(user);
-		
+		// String user = System.getenv("USER");
+		// builder.user(user);
+
 		final DockerContainerConfig config = builder.build();
 
 		// add any port bindings if specified
@@ -416,14 +399,12 @@ public class ContainerLauncher {
 			// create the container
 			String containerId = null;
 			try {
-				containerId = ((DockerConnection) connection)
-						.createContainer(config, hostConfig, null);
+				containerId = ((DockerConnection) connection).createContainer(config, hostConfig, null);
 				if (!((DockerConnection) connection).isLocal()) {
 					// if daemon is remote, we need to copy
 					// data over from the host.
 					if (!remoteVolumes.isEmpty()) {
-						CopyVolumesJob job = new CopyVolumesJob(remoteVolumes,
-								connection, containerId);
+						CopyVolumesJob job = new CopyVolumesJob(remoteVolumes, connection, containerId);
 						job.schedule();
 						job.join();
 						if (job.getResult() != Status.OK_STATUS)
@@ -432,48 +413,38 @@ public class ContainerLauncher {
 				}
 				OutputStream stream = null;
 				RunConsole oldConsole = getConsole();
-				final RunConsole rc = RunConsole.findConsole(containerId,
-						consoleId);
+				final RunConsole rc = RunConsole.findConsole(containerId, consoleId);
 				setConsole(rc);
 				rc.clearConsole();
 				if (oldConsole != null)
 					RunConsole.removeConsole(oldConsole);
-				Display.getDefault()
-						.syncExec(() -> rc.setTitle(getFormattedString(
-								LAUNCH_TITLE, new String[] { cmdList.get(0),
-										imageName })));
+				Display.getDefault().syncExec(() -> rc
+						.setTitle(getFormattedString(LAUNCH_TITLE, new String[] { cmdList.get(0), imageName })));
 				// if (!rc.isAttached()) {
 				rc.attachToConsole(connection, containerId);
 				// }
 				if (rc != null) {
 					stream = rc.getOutputStream();
 					if (containerListener != null) {
-						((ConsoleOutputStream) stream)
-								.addConsoleListener(containerListener);
+						((ConsoleOutputStream) stream).addConsoleListener(containerListener);
 					}
 				}
 				// Create a unique logging thread id which has container id
 				// and console id
 				String loggingId = containerId + "." + consoleId;
-				((DockerConnection) connection).startContainer(containerId,
-						loggingId, stream);
+				((DockerConnection) connection).startContainer(containerId, loggingId, stream);
 				if (rc != null)
 					rc.showConsole();
 				if (containerListener != null) {
-					IDockerContainerInfo info = ((DockerConnection) connection)
-							.getContainerInfo(containerId);
+					IDockerContainerInfo info = ((DockerConnection) connection).getContainerInfo(containerId);
 					containerListener.containerInfo(info);
 				}
 
 				// Wait for the container to finish
-				final IDockerContainerExit status = ((DockerConnection) connection)
-						.waitForContainer(containerId);
+				final IDockerContainerExit status = ((DockerConnection) connection).waitForContainer(containerId);
 				Display.getDefault().syncExec(() -> {
-					rc.setTitle(
-							getFormattedString(LAUNCH_EXITED_TITLE,
-									new String[] {
-											status.statusCode().toString(),
-											cmdList.get(0), imageName }));
+					rc.setTitle(getFormattedString(LAUNCH_EXITED_TITLE,
+							new String[] { status.statusCode().toString(), cmdList.get(0), imageName }));
 					rc.showConsole();
 				});
 
@@ -485,40 +456,33 @@ public class ContainerLauncher {
 				if (!keepContainer) {
 					// Drain the logging thread before we remove the
 					// container (we need to use the logging id)
-					((DockerConnection) connection)
-							.stopLoggingThread(loggingId);
-					while (((DockerConnection) connection).loggingStatus(
-							loggingId) == EnumDockerLoggingStatus.LOGGING_ACTIVE) {
+					((DockerConnection) connection).stopLoggingThread(loggingId);
+					while (((DockerConnection) connection)
+							.loggingStatus(loggingId) == EnumDockerLoggingStatus.LOGGING_ACTIVE) {
 						Thread.sleep(1000);
 					}
 					// Look for any Display Log console that the user may
 					// have opened which would be
 					// separate and make sure it is removed as well
-					RunConsole rc2 = RunConsole
-							.findConsole(((DockerConnection) connection)
-									.getContainer(containerId));
+					RunConsole rc2 = RunConsole.findConsole(((DockerConnection) connection).getContainer(containerId));
 					if (rc2 != null)
 						RunConsole.removeConsole(rc2);
-					((DockerConnection) connection)
-							.removeContainer(containerId);
+					((DockerConnection) connection).removeContainer(containerId);
 				}
 
 			} catch (final DockerException e2) {
 				// error in creation, try and remove Container if possible
 				if (!keepContainer && containerId != null) {
 					try {
-						((DockerConnection) connection)
-								.removeContainer(containerId);
+						((DockerConnection) connection).removeContainer(containerId);
 					} catch (DockerException | InterruptedException e1) {
 						// ignore exception
 					}
 				}
-				Display.getDefault().syncExec(() -> MessageDialog.openError(
-						PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-								.getShell(),
-						getFormattedString(ERROR_CREATING_CONTAINER,
-								imageName),
-						e2.getMessage()));
+				Display.getDefault()
+						.syncExec(() -> MessageDialog.openError(
+								PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
+								getFormattedString(ERROR_CREATING_CONTAINER, imageName), e2.getMessage()));
 			} catch (InterruptedException e3) {
 				// for now
 				// do nothing
@@ -542,8 +506,7 @@ public class ContainerLauncher {
 		}
 
 		// Try and find the specified connection
-		final IDockerConnection connection = DockerConnectionManager
-				.getInstance().getConnectionByUri(connectionUri);
+		final IDockerConnection connection = DockerConnectionManager.getInstance().getConnectionByUri(connectionUri);
 		if (connection == null) {
 			return;
 		}
@@ -578,6 +541,13 @@ public class ContainerLauncher {
 	 */
 	private List<String> getCmdList(String s) {
 		ArrayList<String> list = new ArrayList<>();
+		if (CROPS) {
+			list.add("--workdir");
+			list.add("/workdir");
+			list.add("--cmd");
+			list.add(s);
+			return list;
+		}
 		int length = s.length();
 		boolean insideQuote1 = false; // single-quote
 		boolean insideQuote2 = false; // double-quote
@@ -655,6 +625,5 @@ public class ContainerLauncher {
 		return result;
 
 	}
-
 
 }

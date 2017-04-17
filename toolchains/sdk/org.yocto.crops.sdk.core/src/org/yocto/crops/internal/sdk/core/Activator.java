@@ -35,8 +35,9 @@ public class Activator extends Plugin {
 	public static final String PREFS_NODE_NAME = "org.yocto.crops.sdk";
 	public static final String PREFS_DOCKERURI_PREFIX_KEY = "dockerConnectionUriPrefix";
 	public static final String PREFS_DOCKERURI_PREFIX_DEFAULT = "unix";
-	public static final String PREFS_DOCKERIMAGEREPO_PREFIX_KEY = "dockerImageRepoPrefix";
-	public static final String PREFS_DOCKERIMAGEREPO_PREFIX_DEFAULT = "bavery*";
+	public static final String PREFS_DOCKERIMAGE_FILTER_KEY = "dockerImageFilterKey";
+	public static final String PREFS_DOCKERIMAGE_FILTER_DEFAULT = "(&(repo=bavery/scott)(tags=cross))";
+
 	public static final String PREFS_DOCKERPORT_KEY = "dockerPort";
 	public static final String PREFS_DOCKERPORT_DEFAULT = "2345";
 	
