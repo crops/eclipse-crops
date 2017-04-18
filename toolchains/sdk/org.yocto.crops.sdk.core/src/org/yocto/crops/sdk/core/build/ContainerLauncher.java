@@ -348,6 +348,8 @@ public class ContainerLauncher {
 			// hostname:mountname:Z.
 			// In our case, we want all directories mounted as-is so the
 			// executable will run as the user expects.
+			// NOTE:  At some point we may want to allow user to config using :z rather than :Z
+			// See https://docs.docker.com/engine/reference/commandline/run/#mount-volumes-from-container---volumes-from
 			final List<String> volumes = new ArrayList<>();
 			if (additionalDirs != null) {
 				for (String dir : additionalDirs) {
