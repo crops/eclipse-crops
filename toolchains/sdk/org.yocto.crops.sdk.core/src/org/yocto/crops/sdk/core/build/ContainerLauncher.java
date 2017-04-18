@@ -46,10 +46,11 @@ public class ContainerLauncher {
 	private static final String ERROR_NO_CONNECTIONS = "There are no open connections to a Docker daemon.  Open one from the Docker Explorer View."; //$NON-NLS-1$
 	private static final String ERROR_NO_CONNECTION_WITH_URI = "There is no open connection with specified URI: {0}.  Use the Docker Explorer View to open it."; //$NON-NLS-1$
 
+	private static final String YOCTO_WORKDIR_PARAM = "--workdir";
+	private static final String YOCTO_CMD_PARAM = "--cmd";
+	
 	private static RunConsole console;
 
-	private static final boolean CROPS = true;
-	
 	public static String getFormattedString(String key, String arg) {
 		return MessageFormat.format(getString(key), new Object[] { arg });
 	}
@@ -187,7 +188,7 @@ public class ContainerLauncher {
 	 * @param envMap
 	 *            - map of environment variable settings
 	 * @param ports
-	 *            - ports to expose
+	 *            - ports to exposeGenerating
 	 * @param keep
 	 *            - keep container after running
 	 * @param stdinSupport
@@ -252,7 +253,7 @@ public class ContainerLauncher {
 		env.addAll(toList(origEnv));
 		env.addAll(toList(envMap));
 
-		final List<String> cmdList = getCmdList(command);
+		final List<String> cmdList = getYoctoCmd(command, workingDir);
 
 		final Set<String> exposedPorts = new HashSet<>();
 		final Map<String, List<IDockerPortBinding>> portBindingsMap = new HashMap<>();
@@ -347,35 +348,19 @@ public class ContainerLauncher {
 			// hostname:mountname:Z.
 			// In our case, we want all directories mounted as-is so the
 			// executable will run as the user expects.
-			if (CROPS) {
-				final List<String> volumes = new ArrayList<String>();
-				if (additionalDirs != null) {
-					for (String dir : additionalDirs) {
-						volumes.add(dir + ":" + dir + ":Z"); //$NON-NLS-1$ //$NON-NLS-2$
-					}
+			final List<String> volumes = new ArrayList<>();
+			if (additionalDirs != null) {
+				for (String dir : additionalDirs) {
+					volumes.add(dir + ":" + dir + ":Z"); //$NON-NLS-1$ //$NON-NLS-2$
 				}
-				if (workingDir != null) {
-					volumes.add(workingDir + ":" + "/workdir" + ":Z"); //$NON-NLS-1$ //$NON-NLS-2$
-				}
-				if (commandDir != null) {
-					volumes.add(commandDir + ":" + commandDir + ":Z"); //$NON-NLS-1$ //$NON-NLS-2$
-				}
-				hostBuilder = hostBuilder.binds(volumes);
-			} else {
-				final List<String> volumes = new ArrayList<>();
-				if (additionalDirs != null) {
-					for (String dir : additionalDirs) {
-						volumes.add(dir + ":" + dir + ":Z"); //$NON-NLS-1$ //$NON-NLS-2$
-					}
-				}
-				if (workingDir != null) {
-					volumes.add(workingDir + ":" + workingDir + ":Z"); //$NON-NLS-1$ //$NON-NLS-2$
-				}
-				if (commandDir != null) {
-					volumes.add(commandDir + ":" + commandDir + ":Z"); //$NON-NLS-1$ //$NON-NLS-2$
-				}
-				hostBuilder = hostBuilder.binds(volumes);
 			}
+			if (workingDir != null) {
+				volumes.add(workingDir + ":" + workingDir + ":Z"); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+			if (commandDir != null) {
+				volumes.add(commandDir + ":" + commandDir + ":Z"); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+			hostBuilder = hostBuilder.binds(volumes);
 		}
 
 		// XXX
@@ -537,17 +522,17 @@ public class ContainerLauncher {
 	 * Take the command string and parse it into a list of strings.
 	 * 
 	 * @param s
+	 * @param workingDir
 	 * @return list of strings
 	 */
-	private List<String> getCmdList(String s) {
+	private List<String> getYoctoCmd(String s, String workingDir) {
 		ArrayList<String> list = new ArrayList<>();
-		if (CROPS) {
-			list.add("--workdir");
-			list.add("/workdir");
-			list.add("--cmd");
-			list.add(s);
-			return list;
-		}
+		list.add(YOCTO_WORKDIR_PARAM);
+		list.add(workingDir);
+		list.add(YOCTO_CMD_PARAM);
+		list.add(s);
+		return list;
+		/*
 		int length = s.length();
 		boolean insideQuote1 = false; // single-quote
 		boolean insideQuote2 = false; // double-quote
@@ -601,6 +586,7 @@ public class ContainerLauncher {
 		if (item.length() > 0)
 			list.add(item);
 		return list;
+		*/
 	}
 
 	/**
