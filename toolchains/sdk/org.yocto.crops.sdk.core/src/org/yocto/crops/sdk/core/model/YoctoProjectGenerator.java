@@ -29,6 +29,7 @@ import org.eclipse.tools.templates.freemarker.FMProjectGenerator;
 import org.eclipse.tools.templates.freemarker.SourceRoot;
 import org.eclipse.tools.templates.freemarker.TemplateManifest;
 import org.osgi.framework.Bundle;
+import org.osgi.service.prefs.BackingStoreException;
 import org.yocto.crops.internal.sdk.core.Activator;
 import org.yocto.crops.internal.sdk.core.YoctoProjectNature;
 
@@ -80,6 +81,15 @@ public class YoctoProjectGenerator extends FMProjectGenerator implements IGenera
 				new IPath[] { new Path("**/CMakeFiles/**") })); //$NON-NLS-1$
 		CoreModel.getDefault().create(project).setRawPathEntries(entries.toArray(new IPathEntry[entries.size()]),
 				monitor);
+		
+		// Add the default preferences XXX
+		YoctoProjectPreferences yoctoPref = new YoctoProjectPreferences(getProject(),Activator.PREFS_DOCKERURI_PREFIX_DEFAULT, Activator.PREFS_DOCKERIMAGE_FILTER_DEFAULT, Activator.PREFS_DOCKERPORT_DEFAULT);
+		try {
+			yoctoPref.writePreferences();
+		} catch (BackingStoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

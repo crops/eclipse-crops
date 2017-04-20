@@ -36,8 +36,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.core.runtime.preferences.IEclipsePreferences;
-import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.linuxtools.docker.core.IDockerConnection;
 import org.eclipse.linuxtools.docker.core.IDockerContainerInfo;
 import org.eclipse.linuxtools.docker.core.IDockerImage;
@@ -48,6 +46,7 @@ import org.osgi.service.prefs.BackingStoreException;
 import org.osgi.service.prefs.Preferences;
 import org.yocto.crops.internal.sdk.core.Activator;
 import org.yocto.crops.sdk.core.docker.IYoctoDockerConnectionManager;
+import org.yocto.crops.sdk.core.model.YoctoProjectPreferences;
 
 import com.google.gson.Gson;
 
@@ -152,18 +151,6 @@ public class YoctoBuildConfiguration extends CBuildConfiguration {
 			}
 		}
 		launcher = new ContainerLauncher();
-		try {
-			IEclipsePreferences pref = InstanceScope.INSTANCE.getNode(Activator.PREFS_NODE_NAME);
-			if (!pref.nodeExists(Activator.PREFS_DOCKERURI_PREFIX_DEFAULT))
-				pref.put(Activator.PREFS_DOCKERURI_PREFIX_KEY,Activator.PREFS_DOCKERURI_PREFIX_DEFAULT);
-			if (!pref.nodeExists(Activator.PREFS_DOCKERIMAGE_FILTER_KEY))
-				pref.put(Activator.PREFS_DOCKERIMAGE_FILTER_KEY, Activator.PREFS_DOCKERIMAGE_FILTER_DEFAULT);
-			if (!pref.nodeExists(Activator.PREFS_DOCKERPORT_KEY))
-				pref.put(Activator.PREFS_DOCKERPORT_KEY, Activator.PREFS_DOCKERPORT_DEFAULT);
-			pref.flush();
-		} catch (BackingStoreException e) {
-			e.printStackTrace();
-		}
 	}
 
 	@Override
@@ -357,10 +344,12 @@ public class YoctoBuildConfiguration extends CBuildConfiguration {
 
 	private void launchAndWait(String cmd, IProject project,
 			String buildDir) throws IOException {
-		IEclipsePreferences pref = InstanceScope.INSTANCE.getNode(Activator.PREFS_NODE_NAME);
-		String dockerConnectionUrlPrefix = pref.get(Activator.PREFS_DOCKERURI_PREFIX_KEY,null);
-		String dockerImageFilter = pref.get(Activator.PREFS_DOCKERIMAGE_FILTER_KEY, null);
-		String dockerPort = pref.get(Activator.PREFS_DOCKERPORT_KEY, null);
+		
+		YoctoProjectPreferences pref = new YoctoProjectPreferences(getProject());
+		pref.readPreferences();
+		String dockerConnectionUrlPrefix = pref.getConnectionCriteria();
+		String dockerImageFilter = pref.getImageFilter();
+		String dockerPort = pref.getContainerPort();
 		
 		IDockerImage image = getDockerImage(dockerConnectionUrlPrefix,dockerImageFilter);
 		if (image == null)
