@@ -9,6 +9,7 @@ import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.layout.PixelConverter;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.linuxtools.docker.core.DockerConnectionManager;
 import org.eclipse.linuxtools.docker.core.IDockerConnection;
 import org.eclipse.linuxtools.docker.core.IDockerImage;
@@ -27,36 +28,61 @@ import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPropertyPage;
 import org.eclipse.ui.dialogs.PropertyPage;
+import org.yocto.crops.sdk.core.model.YoctoProjectPreferences;
 
 public class YoctoProjectPropertyPage extends PropertyPage {
 
 	public static final String NODE_NAME = "yoctoBuildContainerConfig";
 	
-	private Combo connectionSelector;
-	private IDockerConnection[] connections;
+	//private Combo connectionSelector;
+	//private Text connectionFilter;
+	//private IDockerConnection[] connections;
 	//private IDockerImageListener containerTab;
-	private String connectionUri = "";
-	private IDockerConnection connection;
-	private String connectionName;
-	private Combo imageCombo;
-	private List directoriesList;
-	private Button newButton;
-	private Button removeButton;
-	private Button privilegedButton;
-	private ProjectScope projectScope;
-
+	//private String connectionUri = "";
+	//private IDockerConnection connection;
+	//private String connectionName;
+	//private Combo imageCombo;
+	//private List directoriesList;
+	//private Button newButton;
+	//private Button removeButton;
+	//private Button privilegedButton;
+	private Text connectionPrefix;
+	private Text imageFilter;
+	private Text port;
+	private IProject project;
+	
 	public Control createContents(Composite parent) {
 		
-		IEclipsePreferences prefs = projectScope.getNode(NODE_NAME);
+		YoctoProjectPreferences prefs = new YoctoProjectPreferences(project);
+		
+		prefs.readPreferences();
+		
 		Composite mainComposite = new Composite(parent, SWT.NONE);
 		mainComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		mainComposite.setLayout(new GridLayout());
 
-		Label connectionSelectorLabel = new Label(mainComposite, SWT.NULL);
-		connectionSelectorLabel.setText("Connection:");
+		Label connectionPrefixLabel = new Label(mainComposite, SWT.NULL);
+		connectionPrefixLabel.setText("Connection Prefix:");
 
+		connectionPrefix = new Text(mainComposite,SWT.SINGLE);
+		connectionPrefix.setText(prefs.getConnectionCriteria());
+		
+		Label imageLabel = new Label(mainComposite, SWT.NULL);
+		imageLabel.setText("Image Filter:");
+
+		imageFilter = new Text(mainComposite,SWT.SINGLE);
+		imageFilter.setText(prefs.getImageFilter());
+
+		Label portLabel = new Label(mainComposite, SWT.NULL);
+		portLabel.setText("Port:");
+
+		port = new Text(mainComposite,SWT.SINGLE);
+		port.setText(prefs.getContainerPort());
+
+		/*
 		connectionSelector = new Combo(mainComposite, SWT.BORDER | SWT.READ_ONLY);
 		int defaultIndex = -1;
 		connections = DockerConnectionManager.getInstance().getConnections();
@@ -77,12 +103,13 @@ public class YoctoProjectPropertyPage extends PropertyPage {
 			connectionUri = connection.getUri();
 		}
 		connectionSelector.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-
-		Label imageSelectorLabel = new Label(mainComposite, SWT.NULL);
-		imageSelectorLabel.setText("Image:");
+		*/
+		
+		/*
 		imageCombo = new Combo(mainComposite, SWT.DROP_DOWN);
 		imageCombo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
+		/*
 		if (connection != null) {
 			java.util.List<IDockerImage> images = connection.getImages();
 			ArrayList<String> imageNames = new ArrayList<String>();
@@ -97,6 +124,10 @@ public class YoctoProjectPropertyPage extends PropertyPage {
 			}
 			imageCombo.setItems(imageNames.toArray(new String[0]));
 		}
+		*/
+		
+		
+		/*
 
 		Composite comp1 = createComposite(mainComposite, 1, 2, GridData.FILL_BOTH);
 		
@@ -163,6 +194,7 @@ public class YoctoProjectPropertyPage extends PropertyPage {
 		privilegedButton.setSelection(true);
 		privilegedButton.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		setButtonDimensionHint(privilegedButton);
+		*/
 		return mainComposite;
 	}
 
@@ -204,7 +236,7 @@ public class YoctoProjectPropertyPage extends PropertyPage {
 	@Override
 	public void setElement(IAdaptable element) {
 		super.setElement(element);
-		this.projectScope = new ProjectScope((IProject) element);
+		this.project = (IProject) element;
 	}
 	
 	private Composite createComposite(Composite parent, int columns, int hspan, int fill) {
@@ -221,5 +253,9 @@ public class YoctoProjectPropertyPage extends PropertyPage {
 		System.out.println("Ok");
 		return true;
 	}
-
+	@Override
+	protected void performDefaults() {
+		super.performDefaults();
+		
+	}
 }

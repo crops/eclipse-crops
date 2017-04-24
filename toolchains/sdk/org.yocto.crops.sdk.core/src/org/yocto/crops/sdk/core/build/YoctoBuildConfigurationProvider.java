@@ -28,7 +28,7 @@ import org.yocto.crops.internal.sdk.core.Activator;
 public class YoctoBuildConfigurationProvider implements ICBuildConfigurationProvider {
 
 	public static final String ID = Activator.PLUGIN_ID + ".yoctoBuildConfigurationProvider";
-	
+
 	private ICMakeToolChainManager manager = Activator.getService(ICMakeToolChainManager.class);
 	private ICBuildConfigurationManager configManager = Activator.getService(ICBuildConfigurationManager.class);
 
@@ -54,7 +54,7 @@ public class YoctoBuildConfigurationProvider implements ICBuildConfigurationProv
 
 			// local didn't work, try and find one that does
 			if (toolChain == null) {
-				for (IToolChain tc : toolChainManager.getToolChainsMatching(new HashMap<String,String>())) {
+				for (IToolChain tc : toolChainManager.getToolChainsMatching(new HashMap<String, String>())) {
 					toolChain = tc;
 					break;
 				}

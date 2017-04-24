@@ -5,6 +5,7 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.IWorkbench;
 import org.yocto.crops.internal.sdk.ui.Activator;
 import org.yocto.crops.sdk.core.model.IYoctoInstancePreferences;
+import org.yocto.crops.sdk.core.model.YoctoProjectPreferences;
 
 /**
  * This class represents a preference page that
@@ -26,7 +27,7 @@ public class YoctoWorkspaceInstancePreferencePage
 
 	public YoctoWorkspaceInstancePreferencePage() {
 		super(GRID);
-		setPreferenceStore(Activator.getDefault().getPreferenceStore());
+		setPreferenceStore(YoctoProjectPreferences.getDefaultPreferenceStore());
 		setDescription("A demonstration of a preference page implementation");
 	}
 	

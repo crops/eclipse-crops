@@ -50,10 +50,4 @@
                name="Yocto">
          </page>
       </extension>
-      <extension
-            point="org.eclipse.core.runtime.preferences">
-         <initializer
-               class="org.yocto.crops.sdk.ui.preferences.YoctoWorkspaceInstancePreferenceInitializer">
-         </initializer>
-      </extension> 
 </plugin>

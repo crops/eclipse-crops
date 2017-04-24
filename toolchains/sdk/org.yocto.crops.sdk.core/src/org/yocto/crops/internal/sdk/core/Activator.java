@@ -21,12 +21,12 @@ import org.eclipse.linuxtools.docker.core.DockerConnectionManager;
 import org.eclipse.linuxtools.docker.core.IDockerConnection;
 import org.eclipse.linuxtools.docker.core.IDockerConnectionManagerListener2;
 import org.eclipse.linuxtools.docker.core.IDockerImage;
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Filter;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
-import org.osgi.service.prefs.Preferences;
 import org.yocto.crops.sdk.core.docker.IYoctoDockerConnectionManager;
 import org.yocto.crops.sdk.core.model.IYoctoInstancePreferences;
 
@@ -34,7 +34,7 @@ import org.yocto.crops.sdk.core.model.IYoctoInstancePreferences;
  * The activator class controls the plug-in life cycle
  */
 public class Activator extends Plugin {
-	
+
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.yocto.crops.sdk.core"; //$NON-NLS-1$
 
@@ -45,6 +45,8 @@ public class Activator extends Plugin {
 
 	private ServiceRegistration<IYoctoDockerConnectionManager> reg;
 
+	private ScopedPreferenceStore defaultPreferenceStore;
+	
 	public Filter createFilter(String filter) throws InvalidSyntaxException {
 		return plugin.getBundle().getBundleContext().createFilter(filter);
 	}
@@ -115,6 +117,7 @@ public class Activator extends Plugin {
 			}
 		}
 	};
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -136,10 +139,35 @@ public class Activator extends Plugin {
 		}
 		// register yocto connection manager service
 		reg = context.registerService(IYoctoDockerConnectionManager.class, cm, null);
+
+		// setup default preferences at workspace instance scope if they are not already set
+		defaultPreferenceStore = new ScopedPreferenceStore(InstanceScope.INSTANCE,context.getBundle().getSymbolicName());
+		String val = defaultPreferenceStore.getDefaultString(IYoctoInstancePreferences.INSTPREFS_URIPREFIX_NODE_NAME);
+		if (val == null || "".equals(val)) 
+			defaultPreferenceStore.setDefault(IYoctoInstancePreferences.INSTPREFS_URIPREFIX_NODE_NAME, IYoctoInstancePreferences.INSTPREFS_URIPREFIX_NODE_DEFAULT);
+		val = defaultPreferenceStore.getString(IYoctoInstancePreferences.INSTPREFS_URIPREFIX_NODE_NAME);
+		if (val == null || "".equals(val))
+			defaultPreferenceStore.setValue(IYoctoInstancePreferences.INSTPREFS_URIPREFIX_NODE_NAME, IYoctoInstancePreferences.INSTPREFS_URIPREFIX_NODE_DEFAULT);
 		
+		val = defaultPreferenceStore.getDefaultString(IYoctoInstancePreferences.INSTPREFS_IMAGE_FILTER_NAME);
+		if (val == null || "".equals(val))
+			defaultPreferenceStore.setDefault(IYoctoInstancePreferences.INSTPREFS_IMAGE_FILTER_NAME, IYoctoInstancePreferences.INSTPREFS_IMAGE_FILTER_DEFAULT);
+		val = defaultPreferenceStore.getString(IYoctoInstancePreferences.INSTPREFS_IMAGE_FILTER_NAME);
+		if (val == null || "".equals(val))
+			defaultPreferenceStore.setValue(IYoctoInstancePreferences.INSTPREFS_IMAGE_FILTER_NAME, IYoctoInstancePreferences.INSTPREFS_IMAGE_FILTER_DEFAULT);
+		
+		val = defaultPreferenceStore.getDefaultString(IYoctoInstancePreferences.INSTPREFS_PORT_NAME);
+		if (val == null || "".equals(val))
+			defaultPreferenceStore.setDefault(IYoctoInstancePreferences.INSTPREFS_PORT_NAME, IYoctoInstancePreferences.INSTPREFS_PORT_DEFAULT);
+		val = defaultPreferenceStore.getString(IYoctoInstancePreferences.INSTPREFS_PORT_NAME);
+		if (val == null || "".equals(val))
+			defaultPreferenceStore.setValue(IYoctoInstancePreferences.INSTPREFS_PORT_NAME, IYoctoInstancePreferences.INSTPREFS_PORT_DEFAULT);
+	
 	}
 
-	
+	public ScopedPreferenceStore getDefaultPreferences() {
+		return defaultPreferenceStore;
+	}
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -158,6 +186,8 @@ public class Activator extends Plugin {
 		}
 		plugin = null;
 	}
+	
+	
 
 	/**
 	 * Returns the shared instance

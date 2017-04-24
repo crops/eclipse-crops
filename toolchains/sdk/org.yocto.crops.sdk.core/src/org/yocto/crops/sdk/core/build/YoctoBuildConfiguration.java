@@ -190,8 +190,7 @@ public class YoctoBuildConfiguration extends CBuildConfiguration {
 			for (String c : command)
 				cmd.append(c).append(" ");
 
-			launchAndWait(cmd.toString(), project,
-					buildDir.toString());
+			launchAndWait(cmd.toString(), project, buildDir.toString());
 
 			// ProcessBuilder processBuilder = new
 			// ProcessBuilder(command).directory(buildDir.toFile());
@@ -218,7 +217,7 @@ public class YoctoBuildConfiguration extends CBuildConfiguration {
 		else {
 			try {
 				IDockerConnection conn = null;
-				for(IDockerConnection c: conns) 
+				for (IDockerConnection c : conns)
 					if (c.getUri().startsWith(connectionUriStartsWith))
 						conn = c;
 				if (conn == null)
@@ -232,16 +231,15 @@ public class YoctoBuildConfiguration extends CBuildConfiguration {
 	}
 
 	private IDockerImage selectDockerImage(List<IDockerImage> images) {
-		if (images.isEmpty()) 
+		if (images.isEmpty())
 			return null;
 		return images.get(0);
 	}
-	
+
 	private IDockerImage getDockerImage(String connectionUriStartsWith, String imageFilter) {
 		return selectDockerImage(getDockerImages(connectionUriStartsWith, imageFilter));
 	}
-	
-	
+
 	@Override
 	public IProject[] build(int kind, Map<String, String> args, IConsole console, IProgressMonitor monitor)
 			throws CoreException {
@@ -286,8 +284,7 @@ public class YoctoBuildConfiguration extends CBuildConfiguration {
 				for (String c : command)
 					cmd.append(c).append(" ");
 
-				launchAndWait(cmd.toString(),
-						project, buildDir.toString());
+				launchAndWait(cmd.toString(), project, buildDir.toString());
 
 				// ProcessBuilder processBuilder = new
 				// ProcessBuilder(command).directory(buildDir.toFile());
@@ -319,8 +316,7 @@ public class YoctoBuildConfiguration extends CBuildConfiguration {
 				for (String c : command)
 					cmd.append(c).append(" ");
 
-				launchAndWait(cmd.toString(),
-						project, buildDir.toString());
+				launchAndWait(cmd.toString(), project, buildDir.toString());
 
 				// ProcessBuilder processBuilder = new
 				// ProcessBuilder(command).directory(buildDir.toFile());
@@ -342,23 +338,23 @@ public class YoctoBuildConfiguration extends CBuildConfiguration {
 		}
 	}
 
-	private void launchAndWait(String cmd, IProject project,
-			String buildDir) throws IOException {
-		
+	private void launchAndWait(String cmd, IProject project, String buildDir) throws IOException {
+
 		YoctoProjectPreferences pref = new YoctoProjectPreferences(getProject());
 		pref.readPreferences();
 		String dockerConnectionUrlPrefix = pref.getConnectionCriteria();
 		String dockerImageFilter = pref.getImageFilter();
 		String dockerPort = pref.getContainerPort();
-		
-		IDockerImage image = getDockerImage(dockerConnectionUrlPrefix,dockerImageFilter);
+
+		IDockerImage image = getDockerImage(dockerConnectionUrlPrefix, dockerImageFilter);
 		if (image == null)
 			throw new IOException("Could not build because image not found");
-		
+
 		StartCMakeServerJob job = new StartCMakeServerJob("Yocto CMake server start");
 		job.schedule();
 
-		launcher.launch(Activator.PLUGIN_ID, job, image.getConnection().getUri(), image.repoTags().get(0), cmd.toString(), null, buildDir,
+		launcher.launch(Activator.PLUGIN_ID, job, image.getConnection().getUri(), image.repoTags().get(0),
+				cmd.toString(), null, buildDir,
 				Arrays.asList(new String[] { new File(project.getLocationURI()).getAbsolutePath() }), null, null,
 				Arrays.asList(new String[] { dockerPort }), true, false, true, new HashMap<String, String>());
 

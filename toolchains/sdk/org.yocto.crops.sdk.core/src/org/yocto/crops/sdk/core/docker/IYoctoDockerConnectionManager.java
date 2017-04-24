@@ -16,6 +16,7 @@ import org.osgi.framework.Filter;
 public interface IYoctoDockerConnectionManager {
 
 	List<IDockerConnection> getConnections();
+
 	List<IDockerImage> getImagesForConnection(IDockerConnection connection, Filter repoTagsFilter);
-	
+
 }

@@ -26,14 +26,13 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.tools.templates.core.IGenerator;
 import org.eclipse.tools.templates.freemarker.FMProjectGenerator;
 import org.eclipse.tools.templates.freemarker.SourceRoot;
 import org.eclipse.tools.templates.freemarker.TemplateManifest;
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.osgi.framework.Bundle;
 import org.osgi.service.prefs.BackingStoreException;
-import org.osgi.service.prefs.Preferences;
 import org.yocto.crops.internal.sdk.core.Activator;
 import org.yocto.crops.internal.sdk.core.YoctoProjectNature;
 
@@ -88,12 +87,20 @@ public class YoctoProjectGenerator extends FMProjectGenerator implements IGenera
 
 		// Add the default preferences XXX
 		// We will load default project preferences from instance preferences
-		Preferences prefs = InstanceScope.INSTANCE.getNode(Activator.PLUGIN_ID);
-		String defaultURIPrefix = prefs.get(IYoctoInstancePreferences.INSTPREFS_URIPREFIX_NODE_NAME,
-				IYoctoInstancePreferences.INSTPREFS_URIPREFIX_NODE_DEFAULT);
-		String defaultImageFilter = prefs.get(IYoctoInstancePreferences.INSTPREFS_IMAGE_FILTER_NAME,
-				IYoctoInstancePreferences.INSTPREFS_IMAGE_FILTER_DEFAULT);
-		String defaultPort = prefs.get(IYoctoInstancePreferences.INSTPREFS_PORT_NAME, IYoctoInstancePreferences.INSTPREFS_PORT_DEFAULT);
+		ScopedPreferenceStore scopedPreferenceStore = Activator.getDefault().getDefaultPreferences();
+
+		String defaultURIPrefix = scopedPreferenceStore.getString(IYoctoInstancePreferences.INSTPREFS_URIPREFIX_NODE_NAME);
+		if (defaultURIPrefix == null)
+			defaultURIPrefix = scopedPreferenceStore.getDefaultString(IYoctoInstancePreferences.INSTPREFS_URIPREFIX_NODE_NAME);
+		
+		String defaultImageFilter = scopedPreferenceStore.getString(IYoctoInstancePreferences.INSTPREFS_IMAGE_FILTER_NAME);
+		if (defaultImageFilter == null)
+			defaultImageFilter = scopedPreferenceStore.getDefaultString(IYoctoInstancePreferences.INSTPREFS_IMAGE_FILTER_NAME);
+
+		String defaultPort = scopedPreferenceStore.getString(IYoctoInstancePreferences.INSTPREFS_PORT_NAME);
+		if (defaultPort == null)
+			defaultPort = scopedPreferenceStore.getDefaultString(IYoctoInstancePreferences.INSTPREFS_PORT_NAME);
+
 		YoctoProjectPreferences yoctoPref = new YoctoProjectPreferences(getProject(), defaultURIPrefix,
 				defaultImageFilter, defaultPort);
 		try {

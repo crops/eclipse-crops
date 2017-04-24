@@ -12,18 +12,13 @@ import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IProjectNature;
-import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.preferences.IEclipsePreferences;
-import org.osgi.service.prefs.BackingStoreException;
 
 public class YoctoProjectNature implements IProjectNature {
 
 	public static final String ID = Activator.PLUGIN_ID + ".yoctoProjectNature";
-	
+
 	private IProject project;
 
 	public static void setupBuilder(IProjectDescription projDesc) throws CoreException {
@@ -31,7 +26,7 @@ public class YoctoProjectNature implements IProjectNature {
 		CBuilder.setupBuilder(command);
 		projDesc.setBuildSpec(new ICommand[] { command });
 	}
-	
+
 	@Override
 	public void configure() throws CoreException {
 		IProjectDescription projDesc = project.getDescription();
@@ -52,6 +47,5 @@ public class YoctoProjectNature implements IProjectNature {
 	public void setProject(IProject project) {
 		this.project = project;
 	}
-
 
 }

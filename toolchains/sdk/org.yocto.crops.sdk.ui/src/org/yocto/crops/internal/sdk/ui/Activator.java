@@ -1,9 +1,7 @@
 package org.yocto.crops.internal.sdk.ui;
 
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
-import org.yocto.crops.sdk.core.model.IYoctoInstancePreferences;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -29,7 +27,6 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		initializeDefaultPluginPreferences();
 	}
 
 	/*
@@ -50,27 +47,4 @@ public class Activator extends AbstractUIPlugin {
 		return plugin;
 	}
 
-	@Override
-	protected void initializeDefaultPreferences(IPreferenceStore store) {
-		String val = store.getDefaultString(IYoctoInstancePreferences.INSTPREFS_URIPREFIX_NODE_NAME);
-		if (val == null || "".equals(val)) 
-			store.setDefault(IYoctoInstancePreferences.INSTPREFS_URIPREFIX_NODE_NAME, IYoctoInstancePreferences.INSTPREFS_URIPREFIX_NODE_DEFAULT);
-		val = store.getString(IYoctoInstancePreferences.INSTPREFS_URIPREFIX_NODE_NAME);
-		if (val == null || "".equals(val))
-			store.setValue(IYoctoInstancePreferences.INSTPREFS_URIPREFIX_NODE_NAME, IYoctoInstancePreferences.INSTPREFS_URIPREFIX_NODE_DEFAULT);
-		
-		val = store.getDefaultString(IYoctoInstancePreferences.INSTPREFS_IMAGE_FILTER_NAME);
-		if (val == null || "".equals(val))
-			store.setDefault(IYoctoInstancePreferences.INSTPREFS_IMAGE_FILTER_NAME, IYoctoInstancePreferences.INSTPREFS_IMAGE_FILTER_DEFAULT);
-		val = store.getString(IYoctoInstancePreferences.INSTPREFS_IMAGE_FILTER_NAME);
-		if (val == null || "".equals(val))
-			store.setValue(IYoctoInstancePreferences.INSTPREFS_IMAGE_FILTER_NAME, IYoctoInstancePreferences.INSTPREFS_IMAGE_FILTER_DEFAULT);
-		
-		val = store.getDefaultString(IYoctoInstancePreferences.INSTPREFS_PORT_NAME);
-		if (val == null || "".equals(val))
-			store.setDefault(IYoctoInstancePreferences.INSTPREFS_PORT_NAME, IYoctoInstancePreferences.INSTPREFS_PORT_DEFAULT);
-		val = store.getString(IYoctoInstancePreferences.INSTPREFS_PORT_NAME);
-		if (val == null || "".equals(val))
-			store.setValue(IYoctoInstancePreferences.INSTPREFS_PORT_NAME, IYoctoInstancePreferences.INSTPREFS_PORT_DEFAULT);
-	}
 }
