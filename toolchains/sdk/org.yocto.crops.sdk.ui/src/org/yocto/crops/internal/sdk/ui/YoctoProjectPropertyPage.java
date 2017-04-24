@@ -61,26 +61,31 @@ public class YoctoProjectPropertyPage extends PropertyPage {
 		prefs.readPreferences();
 		
 		Composite mainComposite = new Composite(parent, SWT.NONE);
-		mainComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		mainComposite.setLayout(new GridLayout());
-
+		mainComposite.setLayout(new GridLayout(2,false));
+		GridData gridData = new GridData();
+		gridData.horizontalAlignment = SWT.FILL;
+		gridData.grabExcessHorizontalSpace = true;
+		
 		Label connectionPrefixLabel = new Label(mainComposite, SWT.NULL);
 		connectionPrefixLabel.setText("Connection Prefix:");
-
+		
 		connectionPrefix = new Text(mainComposite,SWT.SINGLE);
 		connectionPrefix.setText(prefs.getConnectionCriteria());
+		connectionPrefix.setLayoutData(gridData);
 		
 		Label imageLabel = new Label(mainComposite, SWT.NULL);
 		imageLabel.setText("Image Filter:");
 
 		imageFilter = new Text(mainComposite,SWT.SINGLE);
 		imageFilter.setText(prefs.getImageFilter());
+		imageFilter.setLayoutData(gridData);
 
 		Label portLabel = new Label(mainComposite, SWT.NULL);
 		portLabel.setText("Port:");
 
 		port = new Text(mainComposite,SWT.SINGLE);
 		port.setText(prefs.getContainerPort());
+		port.setLayoutData(gridData);
 
 		/*
 		connectionSelector = new Combo(mainComposite, SWT.BORDER | SWT.READ_ONLY);
