@@ -16,6 +16,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.linuxtools.docker.core.DockerConnectionManager;
 import org.eclipse.linuxtools.docker.core.IDockerConnection;
 import org.eclipse.linuxtools.docker.core.IDockerConnectionManagerListener2;
@@ -25,16 +26,14 @@ import org.osgi.framework.Filter;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
+import org.osgi.service.prefs.Preferences;
 import org.yocto.crops.sdk.core.docker.IYoctoDockerConnectionManager;
+import org.yocto.crops.sdk.core.model.IYoctoInstancePreferences;
 
 /**
  * The activator class controls the plug-in life cycle
  */
 public class Activator extends Plugin {
-
-	public static final String PREFS_DOCKERURI_PREFIX_DEFAULT = "unix";
-	public static final String PREFS_DOCKERIMAGE_FILTER_DEFAULT = "(&(repo=bavery/scott)(tags=cross))";
-	public static final String PREFS_DOCKERPORT_DEFAULT = "2345";
 	
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.yocto.crops.sdk.core"; //$NON-NLS-1$
@@ -135,10 +134,12 @@ public class Activator extends Plugin {
 			for (IDockerConnection c : connections)
 				cm.getImagesForConnection(c, null);
 		}
-		// register service
+		// register yocto connection manager service
 		reg = context.registerService(IYoctoDockerConnectionManager.class, cm, null);
+		
 	}
 
+	
 	/*
 	 * (non-Javadoc)
 	 * 

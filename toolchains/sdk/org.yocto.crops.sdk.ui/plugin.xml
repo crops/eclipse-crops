@@ -42,6 +42,18 @@
          </enabledWhen>
          </page>
       </extension>
-   
-
+      <extension
+            point="org.eclipse.ui.preferencePages">
+         <page
+               class="org.yocto.crops.sdk.ui.preferences.YoctoWorkspaceInstancePreferencePage"
+               id="org.yocto.crops.sdk.ui.preferences.YoctoInstancePreferencePage"
+               name="Yocto">
+         </page>
+      </extension>
+      <extension
+            point="org.eclipse.core.runtime.preferences">
+         <initializer
+               class="org.yocto.crops.sdk.ui.preferences.YoctoWorkspaceInstancePreferenceInitializer">
+         </initializer>
+      </extension> 
 </plugin>

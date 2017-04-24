@@ -23,13 +23,17 @@ import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.tools.templates.core.IGenerator;
 import org.eclipse.tools.templates.freemarker.FMProjectGenerator;
 import org.eclipse.tools.templates.freemarker.SourceRoot;
 import org.eclipse.tools.templates.freemarker.TemplateManifest;
 import org.osgi.framework.Bundle;
 import org.osgi.service.prefs.BackingStoreException;
+import org.osgi.service.prefs.Preferences;
 import org.yocto.crops.internal.sdk.core.Activator;
 import org.yocto.crops.internal.sdk.core.YoctoProjectNature;
 
@@ -51,7 +55,7 @@ public class YoctoProjectGenerator extends FMProjectGenerator implements IGenera
 		CBuilder.setupBuilder(command);
 		description.setBuildSpec(new ICommand[] { command });
 	}
-	
+
 	@Override
 	public void generate(Map<String, Object> model, IProgressMonitor monitor) throws CoreException {
 		super.generate(model, monitor);
@@ -81,14 +85,22 @@ public class YoctoProjectGenerator extends FMProjectGenerator implements IGenera
 				new IPath[] { new Path("**/CMakeFiles/**") })); //$NON-NLS-1$
 		CoreModel.getDefault().create(project).setRawPathEntries(entries.toArray(new IPathEntry[entries.size()]),
 				monitor);
-		
+
 		// Add the default preferences XXX
-		YoctoProjectPreferences yoctoPref = new YoctoProjectPreferences(getProject(),Activator.PREFS_DOCKERURI_PREFIX_DEFAULT, Activator.PREFS_DOCKERIMAGE_FILTER_DEFAULT, Activator.PREFS_DOCKERPORT_DEFAULT);
+		// We will load default project preferences from instance preferences
+		Preferences prefs = InstanceScope.INSTANCE.getNode(Activator.PLUGIN_ID);
+		String defaultURIPrefix = prefs.get(IYoctoInstancePreferences.INSTPREFS_URIPREFIX_NODE_NAME,
+				IYoctoInstancePreferences.INSTPREFS_URIPREFIX_NODE_DEFAULT);
+		String defaultImageFilter = prefs.get(IYoctoInstancePreferences.INSTPREFS_IMAGE_FILTER_NAME,
+				IYoctoInstancePreferences.INSTPREFS_IMAGE_FILTER_DEFAULT);
+		String defaultPort = prefs.get(IYoctoInstancePreferences.INSTPREFS_PORT_NAME, IYoctoInstancePreferences.INSTPREFS_PORT_DEFAULT);
+		YoctoProjectPreferences yoctoPref = new YoctoProjectPreferences(getProject(), defaultURIPrefix,
+				defaultImageFilter, defaultPort);
 		try {
 			yoctoPref.writePreferences();
 		} catch (BackingStoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new CoreException(
+					new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Could not write project preferences"));
 		}
 	}
 
