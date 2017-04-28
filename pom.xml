@@ -310,7 +310,7 @@
 				         </filter>
 				         <filter>
 				            <type>p2-installable-unit</type>
-				            <id>org.eclipse.linuxtools.oprofile.remote.launch</id>
+				            <id>org.eclipse.linuxtools.oprofile.ui</id>
 				            <removeAll />
 				         </filter>				         
 					</filters>
