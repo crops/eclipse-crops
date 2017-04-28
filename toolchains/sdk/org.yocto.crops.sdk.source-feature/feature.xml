@@ -2,7 +2,7 @@
 <feature
       id="org.yocto.crops.sdk.source"
       label="Yocto Project SDK Toolchain Source"
-      version="0.3.0.qualifier"
+      version="0.4.0.qualifier"
       provider-name="Yocto Project">
 
    <description url="http://www.example.com/description">

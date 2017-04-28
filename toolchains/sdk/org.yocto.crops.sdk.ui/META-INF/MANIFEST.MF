@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.yocto.crops.sdk.ui;singleton:=true
 Bundle-Version: 0.4.0.qualifier
 Bundle-Activator: org.yocto.crops.internal.sdk.ui.Activator
 Bundle-Vendor: Yocto Project
-Require-Bundle: org.yocto.crops.sdk.core;bundle-version="0.3.0",
+Require-Bundle: org.yocto.crops.sdk.core,
  org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.ui.workbench,
