@@ -247,6 +247,73 @@
 							<arch>ppc</arch>
 						</environment>
 					</environments>
+					<filters>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.core</id>
+				            <removeAll />
+				         </filter>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.doc</id>
+				            <removeAll />
+				         </filter>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.feature</id>
+				            <removeAll />
+				         </filter>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.feature.feature.group</id>
+				            <removeAll />
+				         </filter>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.feature.source</id>
+				            <removeAll />
+				         </filter>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.feature.source.feature.group</id>
+				            <removeAll />
+				         </filter>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.launch</id>
+				            <removeAll />
+				         </filter>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.remote.feature</id>
+				            <removeAll />
+				         </filter>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.remote.feature.feature.group</id>
+				            <removeAll />
+				         </filter>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.remote.feature.source</id>
+				            <removeAll />
+				         </filter>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.remote.feature.source.feature.group</id>
+				            <removeAll />
+				         </filter>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.remote.launch</id>
+				            <removeAll />
+				         </filter>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.remote.launch</id>
+				            <removeAll />
+				         </filter>				         
+					</filters>
 					<target>
 						<artifact>
 							<groupId>org.yocto.crops.target</groupId>
