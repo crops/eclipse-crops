@@ -46,6 +46,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 import org.yocto.crops.internal.sdk.core.Activator;
 
+@SuppressWarnings("restriction")
 public class ContainerLauncher {
 
 	private static final String ERROR_CREATING_CONTAINER = "Error creating container from image<{0}>"; //$NON-NLS-1$

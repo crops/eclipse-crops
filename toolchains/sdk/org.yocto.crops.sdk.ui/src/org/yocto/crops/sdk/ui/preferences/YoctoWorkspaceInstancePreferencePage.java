@@ -7,10 +7,10 @@
  *******************************************************************************/
 package org.yocto.crops.sdk.ui.preferences;
 
-import org.eclipse.jface.preference.*;
-import org.eclipse.ui.IWorkbenchPreferencePage;
+import org.eclipse.jface.preference.FieldEditorPreferencePage;
+import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.ui.IWorkbench;
-import org.yocto.crops.internal.sdk.ui.Activator;
+import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.yocto.crops.sdk.core.model.IYoctoInstancePreferences;
 import org.yocto.crops.sdk.core.model.YoctoProjectPreferences;
 
