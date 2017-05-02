@@ -1,4 +1,11 @@
-package org.yocto.crops.sdk.core;
+/*******************************************************************************
+ * Copyright (c) 2017 Intel, Inc. and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.yocto.crops.internal.sdk.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -9,7 +16,7 @@ import org.osgi.framework.BundleContext;
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "org.yocto.crops.sdk.core"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "org.yocto.crops.internal.sdk.ui"; //$NON-NLS-1$
 
 	// The shared instance
 	private static Activator plugin;

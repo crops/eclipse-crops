@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>org.yocto.crops.sdk.ui</name>
+	<name>org.yocto.crops.internal.sdk.ui</name>
 	<comment></comment>
 	<projects>
 	</projects>
