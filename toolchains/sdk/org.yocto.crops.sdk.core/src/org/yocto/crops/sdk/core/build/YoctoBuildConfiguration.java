@@ -263,12 +263,7 @@ public class YoctoBuildConfiguration extends CBuildConfiguration {
 				List<String> command = new ArrayList<>();
 
 				// TODO location of CMake out of preferences if not found here
-				Path cmakePath = findCommand("cmake"); //$NON-NLS-1$
-				if (cmakePath != null) {
-					command.add(cmakePath.toString());
-				} else {
-					command.add("cmake"); //$NON-NLS-1$
-				}
+				command.add("cmake");
 
 				command.add("-G"); //$NON-NLS-1$
 				command.add(generator);

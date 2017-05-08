@@ -36,10 +36,10 @@ import org.osgi.service.prefs.BackingStoreException;
 import org.yocto.crops.internal.sdk.core.Activator;
 import org.yocto.crops.internal.sdk.core.YoctoProjectNature;
 
-public class YoctoProjectGenerator extends FMProjectGenerator implements IGenerator {
+public class CMakeProjectGenerator extends FMProjectGenerator implements IGenerator {
 
-	public YoctoProjectGenerator(String manifestFile) {
-		super(manifestFile);
+	public CMakeProjectGenerator() {
+		super("templates/simple/manifest.xml");
 	}
 
 	public Bundle getSourceBundle() {

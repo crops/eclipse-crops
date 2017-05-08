@@ -1,36 +1,34 @@
-/*******************************************************************************
- * Copyright (c) 2017 Intel, Inc. and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *******************************************************************************/
-package org.yocto.crops.internal.sdk.ui;
+package org.yocto.crops.internal.sdk.ui.wizards;
 
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.tools.templates.core.IGenerator;
 import org.eclipse.tools.templates.ui.TemplateWizard;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
+import org.yocto.crops.internal.sdk.ui.Activator;
 import org.yocto.crops.sdk.core.model.CMakeProjectGenerator;
 
-public class YoctoNewProjectWizard extends TemplateWizard {
+public class CMakeNewProjectWizard extends TemplateWizard {
 
+	private static final String WIZARD_IMAGE_FILE = "icons/yocto_dot-64x64.png";
+	
 	private WizardNewProjectCreationPage mainPage;
 
-	@Override
-	public void addPages() {
+	public CMakeNewProjectWizard() {
 		mainPage = new WizardNewProjectCreationPage("basicNewProjectPage") { //$NON-NLS-1$
 			@Override
 			public void createControl(Composite parent) {
 				super.createControl(parent);
-				createWorkingSetGroup((Composite) getControl(), getSelection(),
+				createWorkingSetGroup((Composite) getControl(), null,
 						new String[] { "org.eclipse.ui.resourceWorkingSetPage" }); //$NON-NLS-1$
 				Dialog.applyDialogFont(getControl());
+				ImageDescriptor id = Activator.imageDescriptorFromPlugin(Activator.PLUGIN_ID, WIZARD_IMAGE_FILE);
+				setImageDescriptor(id);
 			}
 		};
-		mainPage.setTitle("New Yocto Project"); //$NON-NLS-1$
-		mainPage.setDescription("Specify properties of new Docker CMake project."); //$NON-NLS-1$
+		mainPage.setTitle("New Yocto CMake Project"); //$NON-NLS-1$
+		mainPage.setDescription("Specify properties for Yocto CMake project"); //$NON-NLS-1$
 		this.addPage(mainPage);
 	}
 
@@ -38,11 +36,9 @@ public class YoctoNewProjectWizard extends TemplateWizard {
 	protected IGenerator getGenerator() {
 		CMakeProjectGenerator generator = new CMakeProjectGenerator(); //$NON-NLS-1$
 		generator.setProjectName(mainPage.getProjectName());
-		if (!mainPage.useDefaults()) {
+		if (!mainPage.useDefaults()) 
 			generator.setLocationURI(mainPage.getLocationURI());
-		}
 		return generator;
 	}
-
 
 }

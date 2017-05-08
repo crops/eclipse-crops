@@ -2,28 +2,6 @@
 <?eclipse version="3.4"?>
 <plugin>
       <extension
-         point="org.eclipse.tools.templates.ui.templates">
-      <tag
-            id="org.yocto.crops.sdk.ui.tag"
-            label="Yocto CMake">
-      </tag>
-      <template
-            icon="icons/yocto_dot-48x48.png"
-            id="org.yocto.crops.sdk.ui.newProjectTemplate"
-            label="Yocto CMake Project"
-            wizard="org.yocto.crops.internal.sdk.ui.YoctoNewProjectWizard">
-         <description>
-            A Yocto CMake project with a Hello World executable to get started.
-         </description>
-         <tagReference
-               id="org.eclipse.cdt.ui.cdtTag">
-         </tagReference>
-         <tagReference
-               id="org.yocto.crops.sdk.ui.tag">
-         </tagReference>
-      </template>
-   </extension>
-      <extension
             point="org.eclipse.ui.propertyPages">
          <page
                class="org.yocto.crops.internal.sdk.ui.YoctoProjectPropertyPage"
@@ -49,5 +27,21 @@
                id="org.yocto.crops.sdk.ui.preferences.YoctoInstancePreferencePage"
                name="Yocto">
          </page>
+      </extension>
+      <extension
+            point="org.eclipse.ui.newWizards">
+         <wizard
+               category="org.yocto.crops.sdk.ui.yoctoCategory"
+               class="org.yocto.crops.internal.sdk.ui.wizards.CMakeNewProjectWizard"
+               hasPages="true"
+               icon="icons/yocto_dot-16x16.png"
+               id="org.yocto.crops.sdk.ui.cmakeprojectwizard"
+               name="CMake Project"
+               project="true">
+         </wizard>
+         <category
+               id="org.yocto.crops.sdk.ui.yoctoCategory"
+               name="Yocto">
+         </category>
       </extension>
 </plugin>
