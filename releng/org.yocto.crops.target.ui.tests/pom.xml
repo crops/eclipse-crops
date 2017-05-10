@@ -12,7 +12,6 @@
   <!-- Set artifact id according to a RCPTT project name  -->
   <artifactId>org.yocto.crops.target.ui.tests</artifactId>
   <!-- Set group id based on application under test name -->
-  <groupId>org.yocto.crops</groupId>
   <name>Yocto Project CROPS Target UI Tests</name>
   <version>0.4.0-SNAPSHOT</version>
   
