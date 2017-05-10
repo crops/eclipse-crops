@@ -12,10 +12,17 @@ import org.yocto.crops.sdk.core.model.CMakeProjectGenerator;
 public class CMakeNewProjectWizard extends TemplateWizard {
 
 	private static final String WIZARD_IMAGE_FILE = "icons/yocto_dot-64x64.png";
+	private static final String WIZARD_MAIN_PAGE_TITLE = "New Yocto CMake Project";
+	private static final String WIZARD_MAIN_PAGE_DESC = "Specify properties for Yocto CMake project";
+	
+	private static final String WIZARD_DOCKER_PAGE_TITLE = "Docker Options";
+	private static final String WIZARD_DOCKER_PAGE_DESC = "Specify Docker Options for Yocto CMake project";
 	
 	private WizardNewProjectCreationPage mainPage;
-
+	private CMakeProjectDockerOptionsWizardPage dockerOptionsPage;
+	
 	public CMakeNewProjectWizard() {
+		ImageDescriptor id = Activator.imageDescriptorFromPlugin(Activator.PLUGIN_ID, WIZARD_IMAGE_FILE);
 		mainPage = new WizardNewProjectCreationPage("basicNewProjectPage") { //$NON-NLS-1$
 			@Override
 			public void createControl(Composite parent) {
@@ -23,13 +30,17 @@ public class CMakeNewProjectWizard extends TemplateWizard {
 				createWorkingSetGroup((Composite) getControl(), null,
 						new String[] { "org.eclipse.ui.resourceWorkingSetPage" }); //$NON-NLS-1$
 				Dialog.applyDialogFont(getControl());
-				ImageDescriptor id = Activator.imageDescriptorFromPlugin(Activator.PLUGIN_ID, WIZARD_IMAGE_FILE);
 				setImageDescriptor(id);
 			}
 		};
-		mainPage.setTitle("New Yocto CMake Project"); //$NON-NLS-1$
-		mainPage.setDescription("Specify properties for Yocto CMake project"); //$NON-NLS-1$
+		mainPage.setTitle(WIZARD_MAIN_PAGE_TITLE); //$NON-NLS-1$
+		mainPage.setDescription(WIZARD_MAIN_PAGE_DESC); //$NON-NLS-1$
 		this.addPage(mainPage);
+		dockerOptionsPage = new CMakeProjectDockerOptionsWizardPage("dockerOptionsPage");
+		dockerOptionsPage.setTitle(WIZARD_DOCKER_PAGE_TITLE);
+		dockerOptionsPage.setDescription(WIZARD_DOCKER_PAGE_DESC);
+		dockerOptionsPage.setImageDescriptor(id);
+		this.addPage(dockerOptionsPage);
 	}
 
 	@Override
