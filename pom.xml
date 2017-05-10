@@ -19,7 +19,7 @@
 
 	<groupId>org.yocto.crops</groupId>
 	<artifactId>crops-parent</artifactId>
-	<version>0.3.0-SNAPSHOT</version>
+	<version>0.4.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>CROPS Parent</name>
 
@@ -41,7 +41,9 @@
 	<modules>
 	
 		<module>releng/org.yocto.crops.target</module>
+<!-- 
 		<module>releng/org.yocto.crops.target.ui.tests</module>
+-->
 <!--
 		<module>releng/org.yocto.crops</module>
 		<module>releng/org.yocto.crops-feature</module>
@@ -245,12 +247,79 @@
 							<arch>ppc</arch>
 						</environment>
 					</environments>
+					<filters>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.core</id>
+				            <removeAll />
+				         </filter>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.doc</id>
+				            <removeAll />
+				         </filter>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.feature</id>
+				            <removeAll />
+				         </filter>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.feature.feature.group</id>
+				            <removeAll />
+				         </filter>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.feature.source</id>
+				            <removeAll />
+				         </filter>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.feature.source.feature.group</id>
+				            <removeAll />
+				         </filter>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.launch</id>
+				            <removeAll />
+				         </filter>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.remote.feature</id>
+				            <removeAll />
+				         </filter>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.remote.feature.feature.group</id>
+				            <removeAll />
+				         </filter>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.remote.feature.source</id>
+				            <removeAll />
+				         </filter>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.remote.feature.source.feature.group</id>
+				            <removeAll />
+				         </filter>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.remote.launch</id>
+				            <removeAll />
+				         </filter>
+				         <filter>
+				            <type>p2-installable-unit</type>
+				            <id>org.eclipse.linuxtools.oprofile.ui</id>
+				            <removeAll />
+				         </filter>				         
+					</filters>
 					<target>
 						<artifact>
 							<groupId>org.yocto.crops.target</groupId>
 							<artifactId>crops</artifactId>
 							<classifier>${target-platform}</classifier>
-							<version>0.3.0-SNAPSHOT</version>
+							<version>0.4.0-SNAPSHOT</version>
 						</artifact>
 					</target>
 				</configuration>
@@ -258,7 +327,6 @@
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-source-plugin</artifactId>
-				<version>${tycho-version}</version>
 				<configuration>
 					<encoding>UTF-8</encoding>
 				</configuration>

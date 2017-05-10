@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+      <extension
+            point="org.eclipse.ui.propertyPages">
+         <page
+               class="org.yocto.crops.internal.sdk.ui.YoctoProjectPropertyPage"
+               id="org.yocto.crops.sdk.ui.yoctoProjectPropertyPage"
+               name="Yocto">
+         <enabledWhen>
+            <and>
+               <instanceof
+                     value="org.eclipse.core.resources.IProject">
+               </instanceof>
+               <test
+                     property="org.eclipse.core.resources.projectNature"
+                     value="org.yocto.crops.sdk.core.yoctoProjectNature">
+               </test>
+            </and>
+         </enabledWhen>
+         </page>
+      </extension>
+      <extension
+            point="org.eclipse.ui.preferencePages">
+         <page
+               class="org.yocto.crops.sdk.ui.preferences.YoctoWorkspaceInstancePreferencePage"
+               id="org.yocto.crops.sdk.ui.preferences.YoctoInstancePreferencePage"
+               name="Yocto">
+         </page>
+      </extension>
+      <extension
+            point="org.eclipse.ui.newWizards">
+         <wizard
+               category="org.yocto.crops.sdk.ui.yoctoCategory"
+               class="org.yocto.crops.internal.sdk.ui.wizards.CMakeNewProjectWizard"
+               hasPages="true"
+               icon="icons/yocto_dot-16x16.png"
+               id="org.yocto.crops.sdk.ui.cmakeprojectwizard"
+               name="CMake Project"
+               project="true">
+         </wizard>
+         <category
+               id="org.yocto.crops.sdk.ui.yoctoCategory"
+               name="Yocto">
+         </category>
+      </extension>
+</plugin>
