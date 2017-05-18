@@ -93,7 +93,8 @@ public class Activator extends Plugin {
 						results.add(image);
 				}
 			} else
-				results.addAll(images);
+				if (images != null)
+					results.addAll(images);
 			return results;
 		}
 
