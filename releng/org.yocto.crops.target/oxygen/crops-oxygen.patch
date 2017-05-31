@@ -1,0 +1,26 @@
+diff --git a/toolchains/sdk/org.yocto.crops.sdk.core/src/org/yocto/crops/internal/sdk/core/Activator.java b/toolchains/sdk/org.yocto.crops.sdk.core/src/org/yocto/crops/internal/sdk/core/Activator.java
+index 020e97e..0da1f9d 100755
+--- a/toolchains/sdk/org.yocto.crops.sdk.core/src/org/yocto/crops/internal/sdk/core/Activator.java
++++ b/toolchains/sdk/org.yocto.crops.sdk.core/src/org/yocto/crops/internal/sdk/core/Activator.java
+@@ -19,7 +19,7 @@
+ import org.eclipse.core.runtime.preferences.InstanceScope;
+ import org.eclipse.linuxtools.docker.core.DockerConnectionManager;
+ import org.eclipse.linuxtools.docker.core.IDockerConnection;
+-import org.eclipse.linuxtools.docker.core.IDockerConnectionManagerListener2;
++import org.eclipse.linuxtools.docker.core.IDockerConnectionManagerListener;
+ import org.eclipse.linuxtools.docker.core.IDockerImage;
+ import org.eclipse.ui.preferences.ScopedPreferenceStore;
+ import org.osgi.framework.BundleContext;
+@@ -99,11 +99,7 @@
+ 
+ 	}
+ 
+-	private IDockerConnectionManagerListener2 listener = new IDockerConnectionManagerListener2() {
+-		@Override
+-		public void changeEvent(int type) {
+-		}
+-
++	private IDockerConnectionManagerListener listener = new IDockerConnectionManagerListener() {
+ 		@Override
+ 		public void changeEvent(IDockerConnection connection, int type) {
+ 			synchronized (connections) {
