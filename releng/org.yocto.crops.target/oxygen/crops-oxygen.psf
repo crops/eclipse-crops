@@ -4,7 +4,6 @@
 <project reference="1.0,https://github.com/crops/eclipse-crops,slewis,releng/org.yocto.crops.target"/>
 <project reference="1.0,https://github.com/crops/eclipse-crops,slewis,."/>
 <project reference="1.0,https://github.com/jjohnstn/cdt.git,containerBuild,core/org.eclipse.cdt.core"/>
-<project reference="1.0,https://github.com/jjohnstn/cdt.git,containerBuild,core/org.eclipse.cdt.core.linux.x86_64"/>
 <project reference="1.0,https://github.com/jjohnstn/cdt.git,containerBuild,launch/org.eclipse.cdt.docker.launcher"/>
 <project reference="1.0,https://github.com/jjohnstn/cdt.git,containerBuild,build/org.eclipse.cdt.managedbuilder.core"/>
 <project reference="1.0,https://github.com/crops/eclipse-crops,slewis,releng/org.yocto.crops.repo"/>
