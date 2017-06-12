@@ -6,6 +6,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.tools.templates.core.IGenerator;
 import org.eclipse.tools.templates.ui.TemplateWizard;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
+import org.eclipse.ui.dialogs.WizardNewProjectReferencePage;
 import org.yocto.crops.internal.sdk.ui.Activator;
 import org.yocto.crops.sdk.core.model.CMakeProjectGenerator;
 
@@ -19,6 +20,7 @@ public class CMakeNewProjectWizard extends TemplateWizard {
 	private static final String WIZARD_DOCKER_PAGE_DESC = "Specify Docker Options for Yocto CMake project";
 	
 	private WizardNewProjectCreationPage mainPage;
+	private WizardNewProjectReferencePage referencePage;
 	private CMakeProjectDockerOptionsWizardPage dockerOptionsPage;
 	
 	public CMakeNewProjectWizard() {
@@ -36,11 +38,16 @@ public class CMakeNewProjectWizard extends TemplateWizard {
 		mainPage.setTitle(WIZARD_MAIN_PAGE_TITLE); //$NON-NLS-1$
 		mainPage.setDescription(WIZARD_MAIN_PAGE_DESC); //$NON-NLS-1$
 		this.addPage(mainPage);
+		referencePage = new WizardNewProjectReferencePage("yoctoProjectReferencePage");
+		referencePage.setTitle("Yocto Project References");
+		referencePage.setDescription("Select projects that this new project will depend upon");
+		referencePage.setImageDescriptor(id);
+		this.addPage(this.referencePage);
 		dockerOptionsPage = new CMakeProjectDockerOptionsWizardPage("dockerOptionsPage");
 		dockerOptionsPage.setTitle(WIZARD_DOCKER_PAGE_TITLE);
 		dockerOptionsPage.setDescription(WIZARD_DOCKER_PAGE_DESC);
 		dockerOptionsPage.setImageDescriptor(id);
-		this.addPage(dockerOptionsPage);
+		//this.addPage(dockerOptionsPage);
 	}
 
 	@Override
