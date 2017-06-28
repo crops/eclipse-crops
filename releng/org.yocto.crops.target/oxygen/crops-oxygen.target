@@ -1,84 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target includeMode="feature" name="eclipse-crops-oxygen" sequenceNumber="53">
+<?pde version="3.8"?><target name="eclipse-crops-oxygen" sequenceNumber="58">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.platform.sdk" version="4.7.0.I20170524-2000"/>
-<unit id="org.eclipse.sdk.ide" version="4.7.0.I20170524-2000"/>
-<repository location="http://download.eclipse.org/eclipse/updates/4.7milestones"/>
+<unit id="org.eclipse.platform.sdk" version="4.7.0.I20170612-0950"/>
+<unit id="org.eclipse.sdk.ide" version="4.7.0.I20170612-0950"/>
+<repository location="http://download.eclipse.org/eclipse/updates/4.7/R-4.7-201706120950"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.cdt.docker.launcher.feature.group" version="9.3.0.201705232201"/>
-<unit id="org.eclipse.cdt.feature.group" version="9.3.0.201705232201"/>
-<unit id="org.eclipse.cdt.sdk.feature.group" version="9.3.0.201705232201"/>
-<repository location="http://download.eclipse.org/releases/oxygen/"/>
+<unit id="org.eclipse.cdt.docker.launcher.feature.group" version="9.3.0.201706122201"/>
+<unit id="org.eclipse.cdt.feature.group" version="9.3.0.201706122201"/>
+<unit id="org.eclipse.cdt.sdk.feature.group" version="9.3.0.201706122201"/>
+<repository location="http://download.eclipse.org/tools/cdt/releases/9.3/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.cdt.arduino.feature.group" version="9.3.0.201705301432"/>
-<unit id="org.eclipse.cdt.arduino.source.feature.group" version="9.3.0.201705301432"/>
-<unit id="org.eclipse.cdt.autotools.feature.group" version="9.3.0.201705301432"/>
-<unit id="org.eclipse.cdt.autotools.source.feature.group" version="9.3.0.201705301432"/>
-<unit id="org.eclipse.cdt.cmake.feature.group" version="9.3.0.201705301432"/>
-<unit id="org.eclipse.cdt.cmake.source.feature.group" version="9.3.0.201705301432"/>
-<repository location="http://download.eclipse.org/tools/cdt/builds/oxygen/milestones"/>
+<unit id="org.eclipse.cdt.arduino.feature.group" version="9.3.0.201706122201"/>
+<unit id="org.eclipse.cdt.arduino.source.feature.group" version="9.3.0.201706122201"/>
+<unit id="org.eclipse.cdt.autotools.feature.group" version="9.3.0.201706122201"/>
+<unit id="org.eclipse.cdt.autotools.source.feature.group" version="9.3.0.201706122201"/>
+<unit id="org.eclipse.cdt.cmake.feature.group" version="9.3.0.201706122201"/>
+<unit id="org.eclipse.cdt.cmake.source.feature.group" version="9.3.0.201706122201"/>
+<repository location="http://download.eclipse.org/tools/cdt/releases/9.3/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="javax.xml" version="1.3.4.v201005080400"/>
 <unit id="org.apache.xerces" version="2.9.0.v201101211617"/>
 <unit id="org.apache.xml.resolver" version="1.2.0.v201005080400"/>
 <unit id="org.apache.xml.serializer" version="2.7.1.v201005080400"/>
-<unit id="org.cyberneko.html" version="1.9.14.v201105210654"/>
-<unit id="org.eclipse.linuxtools.callgraph.feature.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.callgraph.feature.source.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.cdt.libhover.devhelp.feature.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.cdt.libhover.devhelp.feature.source.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.cdt.libhover.feature.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.cdt.libhover.feature.source.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.cdt.libhover.newlib.feature.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.cdt.libhover.newlib.feature.source.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.changelog.c.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.changelog.c.source.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.changelog.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.changelog.java.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.changelog.java.source.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.changelog.source.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.dataviewers.feature.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.dataviewers.feature.source.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.gcov.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.gcov.source.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.gprof.feature.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.gprof.feature.source.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.javadocs.feature.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.javadocs.feature.source.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.man.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.man.source.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.oprofile.feature.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.oprofile.feature.source.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.oprofile.remote.feature.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.oprofile.remote.feature.source.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.perf.feature.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.perf.feature.source.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.perf.remote.feature.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.perf.remote.feature.source.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.profiling.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.profiling.remote.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.profiling.remote.source.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.profiling.source.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.rpm.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.rpm.source.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.systemtap.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.systemtap.source.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.valgrind.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.valgrind.remote.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.valgrind.remote.source.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.valgrind.source.feature.group" version="6.0.0.201705232131"/>
-<unit id="org.swtchart" version="0.10.0.v201605200358"/>
-<repository location="http://download.eclipse.org/linuxtools/update-oxygen-rc1"/>
+<unit id="org.eclipse.linuxtools.dataviewers.feature.feature.group" version="6.0.0.201706141541"/>
+<repository location="http://download.eclipse.org/linuxtools/update-oxygen"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.linuxtools.docker.feature.feature.group" version="3.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.docker.feature.source.feature.group" version="3.0.0.201705232131"/>
-<unit id="org.eclipse.linuxtools.vagrant.feature.feature.group" version="3.0.0.201705232131"/>
-<repository location="http://download.eclipse.org/linuxtools/update-oxygen-docker-rc1"/>
+<unit id="org.eclipse.linuxtools.docker.feature.feature.group" version="3.0.0.201706141541"/>
+<unit id="org.eclipse.linuxtools.docker.feature.source.feature.group" version="3.0.0.201706141541"/>
+<unit id="org.eclipse.linuxtools.vagrant.feature.feature.group" version="3.0.0.201706141541"/>
+<unit id="org.eclipse.linuxtools.vagrant.feature.source.feature.group" version="3.0.0.201706141541"/>
+<repository location="http://download.eclipse.org/linuxtools/update-oxygen-docker"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.tm.terminal.feature.feature.group" version="4.3.0.201706140544"/>
+<repository location="http://download.eclipse.org/releases/oxygen/"/>
 </location>
 </locations>
 </target>
