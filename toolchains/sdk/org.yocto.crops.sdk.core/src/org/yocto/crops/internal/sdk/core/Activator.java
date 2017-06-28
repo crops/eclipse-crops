@@ -19,7 +19,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.linuxtools.docker.core.DockerConnectionManager;
 import org.eclipse.linuxtools.docker.core.IDockerConnection;
-import org.eclipse.linuxtools.docker.core.IDockerConnectionManagerListener2;
+import org.eclipse.linuxtools.docker.core.IDockerConnectionManagerListener;
 import org.eclipse.linuxtools.docker.core.IDockerImage;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.osgi.framework.BundleContext;
@@ -100,11 +100,7 @@ public class Activator extends Plugin {
 
 	}
 
-	private IDockerConnectionManagerListener2 listener = new IDockerConnectionManagerListener2() {
-		@Override
-		public void changeEvent(int type) {
-		}
-
+	private IDockerConnectionManagerListener listener = new IDockerConnectionManagerListener() {
 		@Override
 		public void changeEvent(IDockerConnection connection, int type) {
 			synchronized (connections) {
