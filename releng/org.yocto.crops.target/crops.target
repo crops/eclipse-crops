@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="eclipse-crops-oxygen" sequenceNumber="60">
+<?pde version="3.8"?><target name="eclipse-crops-oxygen" sequenceNumber="63">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.cdt.autotools.feature.group" version="9.3.0.201706122201"/>
 <unit id="org.eclipse.cdt.docker.launcher.feature.group" version="9.3.0.201706122201"/>
 <unit id="org.eclipse.cdt.feature.group" version="9.3.0.201706122201"/>
 <unit id="org.eclipse.cdt.sdk.feature.group" version="9.3.0.201706122201"/>
-<repository location="http://download.eclipse.org/tools/cdt/releases/9.3/"/>
+<unit id="org.eclipse.tm.terminal.connector.cdtserial.feature.feature.group" version="4.3.0.201706140544"/>
+<unit id="org.eclipse.tm.terminal.feature.feature.group" version="4.3.0.201706140544"/>
+<repository location="http://download.eclipse.org/releases/oxygen/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.linuxtools.docker.feature.feature.group" version="3.0.0.201706141541"/>
@@ -29,16 +32,9 @@
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.cdt.arduino.feature.group" version="9.3.0.201706122201"/>
 <unit id="org.eclipse.cdt.arduino.source.feature.group" version="9.3.0.201706122201"/>
-<unit id="org.eclipse.cdt.autotools.feature.group" version="9.3.0.201706122201"/>
-<unit id="org.eclipse.cdt.autotools.source.feature.group" version="9.3.0.201706122201"/>
 <unit id="org.eclipse.cdt.cmake.feature.group" version="9.3.0.201706122201"/>
 <unit id="org.eclipse.cdt.cmake.source.feature.group" version="9.3.0.201706122201"/>
 <repository location="http://download.eclipse.org/tools/cdt/releases/9.3/"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.tm.terminal.connector.cdtserial.feature.feature.group" version="4.3.0.201706140544"/>
-<unit id="org.eclipse.tm.terminal.feature.feature.group" version="4.3.0.201706140544"/>
-<repository location="http://download.eclipse.org/releases/oxygen/"/>
 </location>
 </locations>
 </target>
