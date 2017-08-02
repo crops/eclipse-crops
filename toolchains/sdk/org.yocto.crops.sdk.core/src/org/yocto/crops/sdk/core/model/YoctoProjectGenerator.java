@@ -14,6 +14,10 @@ import org.yocto.crops.internal.sdk.core.Activator;
 
 public abstract class YoctoProjectGenerator extends FMProjectGenerator implements IGenerator {
 
+	public YoctoProjectGenerator() {
+		super(null);
+	}
+	
 	public YoctoProjectGenerator(String string) {
 		super(string);
 	}
