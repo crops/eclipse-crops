@@ -44,4 +44,11 @@
                name="Yocto">
          </category>
       </extension>
+      <extension
+            point="org.eclipse.tools.templates.ui.templates">
+         <tag
+               id="org.yocto.crops.internal.sdk.ui.tag"
+               label="Yocto Project">
+         </tag>
+      </extension>
 </plugin>
