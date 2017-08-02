@@ -1,0 +1,8 @@
+<templateManifest>
+	<file src="/templates/make/README"
+		dest="/${projectName}/README"/>
+	<file src="/templates/make/Makefile"
+		dest="/${projectName}/Makefile"/>
+	<file src="/templates/make/hello.c"
+		dest="/${projectName}/hello.c"/>				
+</templateManifest>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.tools.templates.ui.templates">
+      <template
+            icon="icons/yocto_dot-48x48.png"
+            id="org.yocto.crops.make.ui.makeTemplate"
+            label="Makefile Project"
+            wizard="org.yocto.crops.make.ui.NewSampleMakeProjectWizard">
+         <tagReference
+               id="org.eclipse.cdt.ui.cdtTag">
+         </tagReference>
+         <description>
+            A Makefile project with a Hello World executable to get started with container support.
+         </description>
+         <tagReference
+               id="org.yocto.crops.internal.sdk.ui.tag">
+         </tagReference>
+      </template>
+      <template
+            icon="icons/yocto_dot-48x48.png"
+            id="org.yocto.crops.make.ui.emptyTemplate"
+            label="Empty or Existing Makefile Project"
+            wizard="org.yocto.crops.make.ui.NewEmptyMakeProjectWizard">
+         <tagReference
+               id="org.eclipse.cdt.ui.cdtTag">
+         </tagReference>
+         <description>
+            Create a Makefile project with no files. Can be used to create one over existing content.
+         </description>
+         <tagReference
+               id="org.yocto.crops.internal.sdk.ui.tag">
+         </tagReference>
+      </template>
+   </extension>
+
+</plugin>

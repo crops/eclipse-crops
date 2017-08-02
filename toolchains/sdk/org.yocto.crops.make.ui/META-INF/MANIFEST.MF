@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Make UI
+Bundle-SymbolicName: org.yocto.crops.make.ui;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.yocto.crops.make.ui.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.ui.ide;bundle-version="3.13.0",
+ org.eclipse.tools.templates.ui;bundle-version="1.1.1",
+ org.eclipse.tools.templates.freemarker;bundle-version="1.0.0",
+ org.yocto.crops.sdk.core;bundle-version="0.4.0",
+ org.yocto.crops.make;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: Yocto Project
+Export-Package: org.yocto.crops.make.ui
