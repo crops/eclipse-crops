@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.tools.templates.ui.templates">
+      <template
+            icon="icons/yocto_dot-48x48.png"
+            id="org.yocto.crops.autotools.ui.template1"
+            label="Autotools Project"
+            wizard="org.yocto.crops.autotools.ui.NewAutotoolsProjectWizard">
+         <tagReference
+               id="org.eclipse.cdt.ui.cdtTag">
+         </tagReference>
+         <description>
+            Autotools project with container support
+         </description>
+      </template>
+   </extension>
+
+</plugin>
