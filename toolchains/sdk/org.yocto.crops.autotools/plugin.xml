@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         id="autotoolsNature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="org.yocto.crops.autotools.AutotoolsNature">
+         </run>
+      </runtime>
+   </extension>
+   <extension
+         point="org.eclipse.cdt.core.buildConfigProvider">
+      <provider
+            class="org.yocto.crops.autotools.AutotoolsBuildConfigurationProvider"
+            id="org.yocto.crops.autotools.provider"
+            natureId="org.yocto.crops.autotools.autotoolsNature">
+      </provider>
+   </extension>
+
+</plugin>
