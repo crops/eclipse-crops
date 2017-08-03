@@ -57,7 +57,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 import org.yocto.crops.internal.sdk.core.Activator;
 
-@SuppressWarnings("restriction")
 public class ContainerLauncher {
 
 	private static final String ERROR_CREATING_CONTAINER = "Error creating container from image<{0}>"; //$NON-NLS-1$
@@ -704,7 +703,7 @@ public class ContainerLauncher {
 		// remote daemon. Local mounted volumes are passed
 		// via the HostConfig binds setting
 		final Set<String> remoteVolumes = new TreeSet<>();
-		final Map<String, String> remoteDataVolumes = new HashMap<>();
+//		final Map<String, String> remoteDataVolumes = new HashMap<>();
 		final Set<String> readOnlyVolumes = new TreeSet<>();
 		if (!((DockerConnection) connection).isLocal()) {
 			// if using remote daemon, we have to
@@ -718,7 +717,7 @@ public class ContainerLauncher {
 						switch (dvm.getMountType()) {
 						case HOST_FILE_SYSTEM:
 							dir = dvm.getHostPathMount();
-							remoteDataVolumes.put(dir, dvm.getContainerMount());
+//							remoteDataVolumes.put(dir, dvm.getContainerMount());
 							// keep track of read-only volumes so we don't copy
 							// these
 							// back after command completion
@@ -817,33 +816,15 @@ public class ContainerLauncher {
 		
 		final String id = containerId;
 		final IDockerConnection conn = connection;
-		if (!((DockerConnection) conn).isLocal()) {
-			// if daemon is remote, we need to copy
-			// data over from the host.
-			if (!remoteVolumes.isEmpty()) {
-//				CopyVolumesJob job = new CopyVolumesJob(remoteDataVolumes, conn,
-//						id);
-//				job.schedule();
-//				try {
-//					job.join();
-//				} catch (InterruptedException e) {
-//					// ignore
-//				}
-			}
-		}
+
 		try {
 			((DockerConnection) conn).startContainer(id, null);
 		} catch (DockerException | InterruptedException e) {
 			Activator.log(e);
 		}
 
-		// remove all read-only remote volumes from our list of remote
-		// volumes so they won't be copied back on command completion
-		for (String readonly : readOnlyVolumes) {
-			remoteDataVolumes.remove(readonly);
-		}
 		return new ContainerCommandProcess(connection, imageName, containerId,
-				remoteDataVolumes,
+				remoteVolumes,
 				keepContainer);
 	}
 }
