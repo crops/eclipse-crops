@@ -5,14 +5,14 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<prerequisites>
-		<maven>3.0.5</maven>
+		<maven>3.3</maven>
 	</prerequisites>
 
     <properties>
-	<tycho-version>0.26.0</tycho-version>
-	<tycho-extras-version>0.26.0</tycho-extras-version>
+	<tycho-version>1.0.0</tycho-version>
+	<tycho-extras-version>1.0.0</tycho-extras-version>
 	<target-platform>crops</target-platform>
-	<help-docs-eclipserun-repo>http://download.eclipse.org/eclipse/updates/4.6</help-docs-eclipserun-repo>
+	<help-docs-eclipserun-repo>http://download.eclipse.org/eclipse/updates/4.7</help-docs-eclipserun-repo>
 	<tycho.scmUrl>scm:git:https://github.com/crops/eclipse-crops.git</tycho.scmUrl>
 	<base.test.vmargs>-Xms256m -Xmx512m -ea</base.test.vmargs>
     </properties>
@@ -149,7 +149,7 @@
 					<plugin>
 						<groupId>org.eclipse.cbi.maven.plugins</groupId>
 						<artifactId>eclipse-jarsigner-plugin</artifactId>
-						<version>1.1.2</version>
+						<version>1.1.3</version>
 						<executions>
 							<execution>
 								<id>sign</id>
@@ -385,7 +385,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
-					<version>3.0.1</version>
+					<version>3.0.2</version>
 					<configuration>
 						<encoding>ISO-8859-1</encoding>
 					</configuration>
@@ -415,11 +415,11 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-pmd-plugin</artifactId>
-					<version>3.4</version>
+					<version>3.8</version>
 					<configuration>
 						<sourceEncoding>utf-8</sourceEncoding>
 						<minimumTokens>100</minimumTokens>
-						<targetJdk>1.7</targetJdk>
+						<targetJdk>1.8</targetJdk>
 						<format>xml</format>
 						<failOnViolation>false</failOnViolation>
 					</configuration>
