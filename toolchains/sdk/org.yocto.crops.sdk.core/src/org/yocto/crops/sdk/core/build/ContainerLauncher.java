@@ -703,7 +703,7 @@ public class ContainerLauncher {
 		// remote daemon. Local mounted volumes are passed
 		// via the HostConfig binds setting
 		final Set<String> remoteVolumes = new TreeSet<>();
-//		final Map<String, String> remoteDataVolumes = new HashMap<>();
+		final Map<String, String> remoteDataVolumes = new HashMap<>();
 		final Set<String> readOnlyVolumes = new TreeSet<>();
 		if (!((DockerConnection) connection).isLocal()) {
 			// if using remote daemon, we have to
@@ -717,7 +717,7 @@ public class ContainerLauncher {
 						switch (dvm.getMountType()) {
 						case HOST_FILE_SYSTEM:
 							dir = dvm.getHostPathMount();
-//							remoteDataVolumes.put(dir, dvm.getContainerMount());
+							remoteDataVolumes.put(dir, dvm.getContainerMount());
 							// keep track of read-only volumes so we don't copy
 							// these
 							// back after command completion
@@ -824,7 +824,7 @@ public class ContainerLauncher {
 		}
 
 		return new ContainerCommandProcess(connection, imageName, containerId,
-				remoteVolumes,
+				remoteDataVolumes,
 				keepContainer);
 	}
 }
