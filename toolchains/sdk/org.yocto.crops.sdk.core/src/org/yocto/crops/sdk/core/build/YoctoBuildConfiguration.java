@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -87,6 +88,7 @@ public class YoctoBuildConfiguration extends ContainerCBuildConfiguration {
 			ConsoleOutputStream outStream = console.getOutputStream();
 
 			Path buildDir = getBuildDirectory();
+			org.eclipse.core.runtime.Path buildDir2 = new org.eclipse.core.runtime.Path(buildDir.toString());
 
 			if (!Files.exists(buildDir.resolve("CMakeFiles"))) { //$NON-NLS-1$
 				outStream.write("CMakeFiles not found. Assuming clean.");
@@ -101,26 +103,11 @@ public class YoctoBuildConfiguration extends ContainerCBuildConfiguration {
 					cleanCommand = "make clean"; //$NON-NLS-1$
 				}
 			}
-			String[] command = cleanCommand.split(" "); //$NON-NLS-1$
 
-			Path cmdPath = findCommand(command[0]);
-			if (cmdPath != null) {
-				command[0] = cmdPath.toString();
-			}
-
-			StringBuffer cmd = new StringBuffer("");
-			for (String c : command)
-				cmd.append(c).append(" ");
-
-			launchAndWait(cmd.toString(), project, buildDir.toString());
-
-			// ProcessBuilder processBuilder = new
-			// ProcessBuilder(command).directory(buildDir.toFile());
-			// Process process = processBuilder.start();
-			// outStream.write(String.join(" ", command) + '\n'); //$NON-NLS-1$
-			// watchProcess(process, new IConsoleParser[0], console);
-			//
+			launchAndWait(Arrays.asList(cleanCommand.split(" ")), buildDir2, console, monitor);
+			
 			project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
+			
 		} catch (IOException e) {
 			throw new CoreException(Activator.errorStatus(String.format("Cleaning %s", project.getName()), e));
 		}
@@ -142,6 +129,7 @@ public class YoctoBuildConfiguration extends ContainerCBuildConfiguration {
 			ConsoleOutputStream outStream = console.getOutputStream();
 
 			Path buildDir = getBuildDirectory();
+			org.eclipse.core.runtime.Path buildDir2 = new org.eclipse.core.runtime.Path(buildDir.toString());
 
 			outStream.write(String.format("Building in: %s\n", buildDir.toString()));
 
@@ -161,19 +149,8 @@ public class YoctoBuildConfiguration extends ContainerCBuildConfiguration {
 				command.add("-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"); //$NON-NLS-1$
 				command.add(new File(project.getLocationURI()).getAbsolutePath());
 
-				StringBuffer cmd = new StringBuffer("");
-				for (String c : command)
-					cmd.append(c).append(" ");
+				launchAndWait(command, buildDir2, console, monitor);
 
-				launchAndWait(cmd.toString(), project, buildDir.toString());
-
-				// ProcessBuilder processBuilder = new
-				// ProcessBuilder(command).directory(buildDir.toFile());
-				// setBuildEnvironment(processBuilder.environment());
-				// Process process = processBuilder.start();
-				// outStream.write(String.join(" ", command) + '\n');
-				// //$NON-NLS-1$
-				// watchProcess(process, new IConsoleParser[0], console);
 			}
 
 			try (ErrorParserManager epm = new ErrorParserManager(project, getBuildDirectoryURI(), this,
@@ -186,26 +163,9 @@ public class YoctoBuildConfiguration extends ContainerCBuildConfiguration {
 						buildCommand = "make"; //$NON-NLS-1$
 					}
 				}
-				String[] command = buildCommand.split(" "); //$NON-NLS-1$
 
-				Path cmdPath = findCommand(command[0]);
-				if (cmdPath != null) {
-					command[0] = cmdPath.toString();
-				}
-
-				StringBuffer cmd = new StringBuffer("");
-				for (String c : command)
-					cmd.append(c).append(" ");
-
-				launchAndWait(cmd.toString(), project, buildDir.toString());
-
-				// ProcessBuilder processBuilder = new
-				// ProcessBuilder(command).directory(buildDir.toFile());
-				// setBuildEnvironment(processBuilder.environment());
-				// Process process = processBuilder.start();
-				// outStream.write(String.join(" ", command) + '\n');
-				// //$NON-NLS-1$
-				// watchProcess(process, new IConsoleParser[] { epm }, console);
+				launchAndWait(Arrays.asList(buildCommand.split(" ")), buildDir2, console, monitor);
+				
 			}
 
 			project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
