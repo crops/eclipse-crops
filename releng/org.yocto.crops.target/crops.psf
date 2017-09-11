@@ -19,11 +19,11 @@
 <project reference="1.0,https://github.com/crops/cdt.git,containerbuild,core/org.eclipse.cdt.ui"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/linuxtools/org.eclipse.linuxtools.git,master,containers/org.eclipse.linuxtools.docker.core"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/linuxtools/org.eclipse.linuxtools.git,master,containers/org.eclipse.linuxtools.docker.ui"/>
-<project reference="1.0,https://github.com/crops/eclipse-crops,slewis,toolchains/sdk/org.yocto.crops.sdk.ui"/>
-<project reference="1.0,https://github.com/crops/eclipse-crops,slewis,releng/org.yocto.crops.repo"/>
-<project reference="1.0,https://github.com/crops/eclipse-crops,slewis,toolchains/sdk/org.yocto.crops.sdk-feature"/>
-<project reference="1.0,https://github.com/crops/eclipse-crops,slewis,toolchains/sdk/org.yocto.crops.sdk.core"/>
-<project reference="1.0,https://github.com/crops/eclipse-crops,slewis,toolchains/sdk/org.yocto.crops.sdk.source-feature"/>
-<project reference="1.0,https://github.com/crops/eclipse-crops,slewis,releng/org.yocto.crops.target"/>
+<project reference="1.0,https://github.com/crops/eclipse-crops,master,toolchains/sdk/org.yocto.crops.sdk.ui"/>
+<project reference="1.0,https://github.com/crops/eclipse-crops,master,releng/org.yocto.crops.repo"/>
+<project reference="1.0,https://github.com/crops/eclipse-crops,master,toolchains/sdk/org.yocto.crops.sdk-feature"/>
+<project reference="1.0,https://github.com/crops/eclipse-crops,master,toolchains/sdk/org.yocto.crops.sdk.core"/>
+<project reference="1.0,https://github.com/crops/eclipse-crops,master,toolchains/sdk/org.yocto.crops.sdk.source-feature"/>
+<project reference="1.0,https://github.com/crops/eclipse-crops,master,releng/org.yocto.crops.target"/>
 </provider>
 </psf>
